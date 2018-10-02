@@ -1,4 +1,5 @@
-const BASE_URL = 'https://balance-backend.herokuapp.com/'
+// const BASE_URL = 'https://balance-backend.herokuapp.com'
+const BASE_URL = 'localhost:3000/'
 
 const initialState = {
 	users: [],
@@ -11,12 +12,22 @@ const setUsers = (users) => {
 
 export const getAllUsers = () => dispatch => {
 	return fetch(`${BASE_URL}/users.json`, {mode: 'cors', creditials: 'include'})
-		.then(res => {return res.json()})
+		.then(res => res.json())
 		.then(json => dispatch(setUsers(json)))
 }
 
 export const setCurrentUser = (user) => {
 	return { type: "SET_CURRENT_USER", user }
+}
+
+export const loginUser = (email, password) => dispatch => {
+	fetch(`${BASE_URL}/login`, {
+		method: "POST",
+		body: JSON.stringify({login_user: {email: email, password: password}})
+	})
+	.then(res => res.json())
+	.then(json => dispatch(setCurrentUser()))
+	.catch(res => console.log(res))
 }
 
 export const createUser = (name, location) => dispatch => {
@@ -28,9 +39,9 @@ export const createUser = (name, location) => dispatch => {
 	      method: "POST",
 	      body: JSON.stringify({new_user: {name: name, location: location}})
 	    })
-	    .then(res => { return res.json() })
-	    .then(json =>{ dispatch(setCurrentUser(json)) })
-	    .catch((res) =>{ console.log(res) })
+	    .then(res => res.json() )
+	    .then(json => dispatch(setCurrentUser(json)))
+	    .catch(res => console.log(res))
 }
 
 export const deleteCurrentUser = () => {

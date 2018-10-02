@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import UserSelect from '../components/UserSelect';
-import { getAllUsers, setCurrentUser } from '../reducers/usersReducer';
-import UserForm from '../components/UserForm';
+import { setCurrentUser } from '../reducers/usersReducer';
+import LoginUserForm from '../components/LoginUserForm';
+import CreateUserForm from '../components/CreateUserForm';
 import UserContainer from './UserContainer';
 
 class UserLoginContainer extends Component {
@@ -10,14 +10,14 @@ class UserLoginContainer extends Component {
 		super(props);
 
     	this.state = {
-    	  userSelection: null,
-    	  displayNewUser: false,
+    	  displayCreateUser: false,
+    	  displayLoginUser: false
     	}
 	}
 
-  	componentDidMount() {
-		this.props.getAllUsers();
-    }
+  	// componentDidMount() {
+		// this.props.getAllUsers();
+    // }
 
 	handleUserSelect = (e) => {
 		this.setState({ 
@@ -30,15 +30,24 @@ class UserLoginContainer extends Component {
 		this.props.setCurrentUser(currentUser[0]); // filter returns an array, so don't remove this index reference
 	}
 
-	removeNewUserForm = () => {
+	removeUserForm = () => {
 		this.setState({
-			displayNewUser: false,
+			displayCreateUser: false,
+			displayLoginUser: false
 		})
 	}
 
-	showNewUserForm = () => {
+	displayCreateUserForm = () => {
 		this.setState({
-			displayNewUser: true,
+			displayCreateUser: true,
+			displayLoginUser: false
+		})
+	}
+
+	displayLoginUserForm = () => {
+		this.setState({
+			displayLoginUser: true,
+			displayCreateUser: false
 		})
 	}
 
@@ -48,9 +57,11 @@ class UserLoginContainer extends Component {
 			<div className="App-component">
 				<h2>Find Balance!</h2>
 			  	<div>Balance is a simple app to track your daily meditation, find inspiration through quotes and resources, and track progress.</div>
-			  	<p>Select User to Track Progress</p>
-			  	<div>Login or Sign Up</div>
-			  	<UserForm />
+			  	<br />
+				<button onClick={this.displayLoginUserForm}>Login</button>  <button onClick={this.displayCreateUserForm}>Sign Up</button>
+				<br /><br />
+			  	{ this.state.displayLoginUser && <LoginUserForm /> }
+			  	{ this.state.displayCreateUser && <CreateUserForm /> }
 			</div>
 		); } else {
 			return (
@@ -66,14 +77,12 @@ class UserLoginContainer extends Component {
 
 const mapStateToProps = state => {
   return { 
-  	  users: state.usersReducer.users,
   	  currentUser: state.usersReducer.currentUser,
   	}
 }
 
 const mapDispatchToProps = dispatch => {
-	return { 
-		getAllUsers: () => dispatch(getAllUsers()),
+	return {
 		setCurrentUser: (user) => dispatch(setCurrentUser(user))
 	}
 }

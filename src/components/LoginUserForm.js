@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createUser } from '../reducers/usersReducer';
+import { loginUser } from '../reducers/usersReducer';
 import { connect } from 'react-redux';
 
 class LoginUserForm extends Component {
@@ -14,11 +14,10 @@ class LoginUserForm extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		// this.props.removeForm();
-		this.props.LoginUser(this.state.name, this.state.location);
+		this.props.loginUser(this.state.name, this.state.location);
 		this.setState({
-			name: "",
-			location: "",
+			email: "",
+			password: "",
 		})
 	}
 
@@ -31,10 +30,9 @@ class LoginUserForm extends Component {
 	render() {
 		return (
 			<div>
-				<h2>Log In to Track Progress</h2>
 				<form onSubmit={(e) => this.handleSubmit(e)} >
-					E-mail: <input onChange={this.handleChange} name="email" value={this.state.email} /><br />
-					Password: <input onChange={this.handleChange} name="password" value={this.state.password} /><br />
+					E-mail: <input onChange={this.handleChange} name="email" type="email" value={this.state.email} required /><br />
+					Password: <input onChange={this.handleChange} name="password" type="password" value={this.state.password} required /><br />
 					<button type="submit">Log In!</button>
 				</form>
 			</div>
@@ -44,7 +42,7 @@ class LoginUserForm extends Component {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		LoginUser: (email, password) => dispatch(LoginUser(email, password)),
+		loginUser: (email, password) => dispatch(loginUser(email, password)),
 	}
 }
 
