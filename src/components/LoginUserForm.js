@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { createUser } from '../reducers/usersReducer';
 import { connect } from 'react-redux';
 
-class NewUserForm extends Component {
+class LoginUserForm extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			name: "",
-			location: "",
+			password: ""
 		}
 	}
 
@@ -33,7 +33,7 @@ class NewUserForm extends Component {
 			<div>
 				<form onSubmit={(e) => this.handleSubmit(e)} >
 					Username: <input onChange={this.handleChange} name="name" value={this.state.name} /><br />
-					Location: <input onChange={this.handleChange} name="location" value={this.state.location} /><br />
+					Password: <input onChange={this.handleChange} name="location" value={this.state.location} /><br />
 					<button type="submit">Create User!</button>
 				</form>
 			</div>
@@ -47,4 +47,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(NewUserForm);
+export default connect(null, mapDispatchToProps)(LoginUserForm);

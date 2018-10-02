@@ -5,7 +5,7 @@ import TitleBar from './components/TitleBar.js';
 import QuoteContainer from './containers/QuoteContainer';
 import MeditationSessionsContainer from './containers/MeditationSessionsContainer';
 import TimerContainer from './containers/TimerContainer';
-import UserSelectContainer from './containers/UserSelectContainer';
+import UserLoginContainer from './containers/UserLoginContainer';
 import ResourcesContainer from './containers/ResourcesContainer';
 import SketchBoard from './components/SketchBoard';
 import './App.css';
@@ -23,7 +23,7 @@ class App extends Component {
               <Link to="/timer" className="menuTile">Timer</Link>
               <Link to="/resources" className="menuTile">Resources</Link>
               <Link to="/sketchboard" className="menuTile"></Link>
-              <Route exact path="/" component={UserSelectContainer} />
+              <Route exact path="/" component={UserLoginContainer} />
               <Route exact path="/meditation_sessions" component={MeditationSessionsContainer} />
               <Route path="/timer" component={TimerContainer} />
               <Route path="/resources" component={ResourcesContainer} />
