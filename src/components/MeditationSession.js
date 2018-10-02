@@ -12,10 +12,9 @@ const MeditationSession = props => {
 				{hours >= 10 ? " " + hours : " 0" + hours}: 
 				{minutes >= 10 ? minutes : "0" + minutes}:
 				{seconds >= 10 ? seconds : "0" + seconds}
-				<span><button onClick={() => { if (window.confirm("Are you sure?")) props.deleteSession(props.currentUser, props.session.id) }}>X</button></span>
+				<span><button onClick={() => { if (window.confirm("Are you sure you want to delete this session?")) props.deleteSession(props.currentUser, props.session.id) }}>X</button></span>
 			</p>
 			<p>Date: {props.session.date}</p>
-			
 		</div>
 	)
 };

@@ -7,15 +7,15 @@ class LoginUserForm extends Component {
 		super(props);
 
 		this.state = {
-			name: "",
+			email: "",
 			password: ""
 		}
 	}
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.props.removeForm();
-		this.props.createUser(this.state.name, this.state.location);
+		// this.props.removeForm();
+		this.props.LoginUser(this.state.name, this.state.location);
 		this.setState({
 			name: "",
 			location: "",
@@ -31,10 +31,11 @@ class LoginUserForm extends Component {
 	render() {
 		return (
 			<div>
+				<h2>Log In to Track Progress</h2>
 				<form onSubmit={(e) => this.handleSubmit(e)} >
-					Username: <input onChange={this.handleChange} name="name" value={this.state.name} /><br />
-					Password: <input onChange={this.handleChange} name="location" value={this.state.location} /><br />
-					<button type="submit">Create User!</button>
+					E-mail: <input onChange={this.handleChange} name="email" value={this.state.email} /><br />
+					Password: <input onChange={this.handleChange} name="password" value={this.state.password} /><br />
+					<button type="submit">Log In!</button>
 				</form>
 			</div>
 		)
@@ -43,7 +44,7 @@ class LoginUserForm extends Component {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		createUser: (name, location) => dispatch(createUser(name, location)),
+		LoginUser: (email, password) => dispatch(LoginUser(email, password)),
 	}
 }
 

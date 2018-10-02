@@ -7,7 +7,9 @@ class CreateUserForm extends Component {
 		super(props);
 
 		this.state = {
-			name: "",
+			firstName: "",
+			lastName: "",
+			password: "",
 			location: "",
 			password: ""
 		}
@@ -16,7 +18,7 @@ class CreateUserForm extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.props.removeForm();
-		this.props.createUser(this.state.name, this.state.location);
+		this.props.createUser(this.state.firstName, this.state.lastName, this.state.password, this.state.email, this.state.location, );
 		this.setState({
 			name: "",
 			location: "",
@@ -33,7 +35,10 @@ class CreateUserForm extends Component {
 		return (
 			<div>
 				<form onSubmit={(e) => this.handleSubmit(e)} >
-					Username: <input onChange={this.handleChange} name="name" value={this.state.name} /><br />
+					First Name: <input onChange={this.handleChange} name="firstName" value={this.state.firstName} /><br />
+					Last Name: <input onChange={this.handleChange} name="lastName" value={this.state.lastName} />
+					Password: <input onChange={this.handleChange} name="password" value={this.state.password} /> <br />
+					Email: <input onChange={this.handleChange} name="email" value={this.state.email} />
 					Location: <input onChange={this.handleChange} name="location" value={this.state.location} /><br />
 					<button type="submit">Create User!</button>
 				</form>
@@ -44,7 +49,7 @@ class CreateUserForm extends Component {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		createUser: (name, location) => dispatch(createUser(name, location)),
+		createUser: (firstName, lastName, password, email, location) => dispatch(createUser(firstName, lastName, password, email, location)),
 	}
 }
 
