@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setCurrentUser } from '../reducers/usersReducer';
+import { setCurrentUser, checkCurrentUserStorage } from '../reducers/usersReducer';
 import LoginUserForm from '../components/LoginUserForm';
 import CreateUserForm from '../components/CreateUserForm';
 import UserContainer from './UserContainer';
@@ -13,6 +13,10 @@ class UserLoginContainer extends Component {
     	  displayCreateUser: false,
     	  displayLoginUser: false
     	}
+	}
+
+	componentDidMount() {
+		this.props.checkCurrentUserStorage();
 	}
 
 	removeUserForm = () => {
@@ -68,6 +72,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
+		checkCurrentUserStorage: () => dispatch(checkCurrentUserStorage()),
 		setCurrentUser: (user) => dispatch(setCurrentUser(user))
 	}
 }

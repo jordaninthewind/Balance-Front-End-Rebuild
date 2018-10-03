@@ -23,6 +23,7 @@ export const loginUser = (email, password) => dispatch => {
 	.then(json => {
 		if (json.name) {
 			dispatch(setCurrentUser(json));
+			setUserInLocalStorage(json);
 			dispatch(userErrorMessage({error_message: ""}))
 		} else {
 			dispatch(userErrorMessage(json));
@@ -37,20 +38,39 @@ const userErrorMessage = json => {
 }
 
 export const createUser = (name, lastName, email, password, location) => dispatch => {
+	let last_name = lastName;
 	fetch(`${BASE_URL}/users`, {
 	      headers: {
 	        'Accept': 'application/json',
 	        'Content-Type': 'application/json'
 	      },
 	      method: "POST",
-	      body: JSON.stringify({new_user: {name, location, email, password, location}})
+	      body: JSON.stringify( { new_user: { name, last_name, email, password, location } } )
 	    })
-	    .then(res => res.json() )
-	    .then(json => dispatch(setCurrentUser(json)))
+	    .then( res => res.json() )
+	    .then( json => {
+	    	if (json.name) {
+	    		dispatch(setCurrentUser(json));
+	    		setUserInLocalStorage(json);
+	    	} else {
+	    		dispatch(userErrorMessage(json));
+	    	}
+	    })
 	    .catch(res => console.log(res))
 }
 
+const setUserInLocalStorage = (user) => {
+	localStorage.setItem('currentUser', JSON.stringify(user) );
+}
+
+export const checkCurrentUserStorage = () => dispatch => {
+	if (localStorage.currentUser) {
+		dispatch(setCurrentUser(JSON.parse(localStorage.currentUser)))
+	}
+}
+
 export const deleteCurrentUser = () => {
+	localStorage.removeItem('currentUser');
 	return { type: "DELETE_USER" }
 }
 
@@ -59,7 +79,7 @@ export const deleteUser = user => dispatch => {
 		headers: {'Content-Type': 'application/json'},
 		method: "DELETE"
 		})
-		.then(res => { return res.json() })
+		.then(res => res.json() )
 		.then(json => dispatch(deleteCurrentUser()))
 }
 

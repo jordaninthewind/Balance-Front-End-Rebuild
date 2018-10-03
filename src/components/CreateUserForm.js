@@ -17,8 +17,7 @@ class CreateUserForm extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.props.removeForm();
-		this.props.createUser(this.state.firstName, this.state.lastName, this.state.password, this.state.email, this.state.location, );
+		this.props.createUser(this.state.firstName, this.state.lastName, this.state.email, this.state.password, this.state.location);
 		this.setState({
 			firstName: "",
 			lastName: "",
@@ -52,7 +51,7 @@ class CreateUserForm extends Component {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		createUser: (firstName, lastName, password, email, location) => dispatch(createUser(firstName, lastName, password, email, location)),
+		createUser: (firstName, lastName, email, password, location) => dispatch(createUser(firstName, lastName, email, password, location)),
 	}
 }
 
