@@ -1,43 +1,49 @@
 // const BASE_URL = 'https://balance-backend.herokuapp.com'
-const BASE_URL = 'localhost:3000/'
+const BASE_URL = 'http://localhost:3000'
 
 const initialState = {
-	users: [],
 	currentUser: null,
+	errorMessage: "",
 }
 
-const setUsers = (users) => {
-	return { type: "GET_ALL_USERS", users }
-}
-
-export const getAllUsers = () => dispatch => {
-	return fetch(`${BASE_URL}/users.json`, {mode: 'cors', creditials: 'include'})
-		.then(res => res.json())
-		.then(json => dispatch(setUsers(json)))
-}
-
-export const setCurrentUser = (user) => {
+export const setCurrentUser = user => {
 	return { type: "SET_CURRENT_USER", user }
 }
 
 export const loginUser = (email, password) => dispatch => {
 	fetch(`${BASE_URL}/login`, {
+		headers: {
+	        'Accept': 'application/json',
+	        'Content-Type': 'application/json'
+	      },
 		method: "POST",
-		body: JSON.stringify({login_user: {email: email, password: password}})
+		body: JSON.stringify( { login_user: { email, password } } )
 	})
 	.then(res => res.json())
-	.then(json => dispatch(setCurrentUser()))
+	.then(json => {
+		if (json.name) {
+			dispatch(setCurrentUser(json));
+			dispatch(userErrorMessage({error_message: ""}))
+		} else {
+			dispatch(userErrorMessage(json));
+		}
+	})
 	.catch(res => console.log(res))
 }
 
-export const createUser = (name, location) => dispatch => {
+const userErrorMessage = json => {
+	let errorMessage = json.error_message;
+	return { type: "SET_ERROR_MESSAGE", errorMessage }
+}
+
+export const createUser = (name, lastName, email, password, location) => dispatch => {
 	fetch(`${BASE_URL}/users`, {
 	      headers: {
 	        'Accept': 'application/json',
 	        'Content-Type': 'application/json'
 	      },
 	      method: "POST",
-	      body: JSON.stringify({new_user: {name: name, location: location}})
+	      body: JSON.stringify({new_user: {name, location, email, password, location}})
 	    })
 	    .then(res => res.json() )
 	    .then(json => dispatch(setCurrentUser(json)))
@@ -48,7 +54,7 @@ export const deleteCurrentUser = () => {
 	return { type: "DELETE_USER" }
 }
 
-export const deleteUser = (user) => dispatch => {
+export const deleteUser = user => dispatch => {
 	fetch(`${BASE_URL}/users/${user.id}`, {
 		headers: {'Content-Type': 'application/json'},
 		method: "DELETE"
@@ -59,11 +65,6 @@ export const deleteUser = (user) => dispatch => {
 
 export default function usersReducer(state = initialState, action) {
 	switch (action.type) {
-		case "GET_ALL_USERS":
-			return {
-				...state,
-				users: action.users,
-			}
 		case "SET_CURRENT_USER":
 			return { 
 				...state,
@@ -73,6 +74,11 @@ export default function usersReducer(state = initialState, action) {
 			return {
 				...state,
 				currentUser: null,
+			}
+		case "SET_ERROR_MESSAGE":
+			return {
+				...state,
+				errorMessage: action.errorMessage,
 			}
 		default:
 			return state;

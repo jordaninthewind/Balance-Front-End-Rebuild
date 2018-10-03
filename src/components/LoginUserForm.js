@@ -8,17 +8,13 @@ class LoginUserForm extends Component {
 
 		this.state = {
 			email: "",
-			password: ""
+			password: "",
 		}
 	}
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.props.loginUser(this.state.name, this.state.location);
-		this.setState({
-			email: "",
-			password: "",
-		})
+		this.props.loginUser(this.state.email, this.state.password);
 	}
 
 	handleChange = (e) => {
@@ -30,6 +26,7 @@ class LoginUserForm extends Component {
 	render() {
 		return (
 			<div>
+				<div>{this.props.errorMessage}</div>
 				<form onSubmit={(e) => this.handleSubmit(e)} >
 					E-mail: <input onChange={this.handleChange} name="email" type="email" value={this.state.email} required /><br />
 					Password: <input onChange={this.handleChange} name="password" type="password" value={this.state.password} required /><br />
@@ -40,10 +37,16 @@ class LoginUserForm extends Component {
 	}
 };
 
+const mapStateToProps = state => {
+	return {
+		errorMessage: state.usersReducer.errorMessage,
+	}
+}
+
 const mapDispatchToProps = dispatch => {
 	return {
 		loginUser: (email, password) => dispatch(loginUser(email, password)),
 	}
 }
 
-export default connect(null, mapDispatchToProps)(LoginUserForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginUserForm);

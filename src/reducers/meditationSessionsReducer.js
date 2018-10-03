@@ -1,4 +1,5 @@
-const BASE_URL = 'https://balance-backend.herokuapp.com/'
+// const BASE_URL = 'https://balance-backend.herokuapp.com/'
+const BASE_URL = 'http://localhost:3000'
 
 const initialState = {
 	meditationSessions: [],
@@ -13,7 +14,7 @@ export const resetMeditationSessions = () => {
 }
 
 export const getUserMeditationSessions = (currentUser) => dispatch => {
-	fetch(`${BASE_URL}/users/${currentUser.id}/meditation_sessions.json`) // , {mode: 'cors', creditials: 'include' })
+	fetch(`${BASE_URL}/users/${currentUser.id}/meditation_sessions.json`)
 		.then(res => { return res.json() })
 		.then(json => { dispatch(setMeditationSessions(json))})
 }
@@ -28,8 +29,6 @@ export const deleteMeditationSession = (currentUser, session) => dispatch => {
 		})
 		.then(() => { dispatch(removeMeditationSession(session))})
 }
-
-
 
 export default function meditationSessionsReducer(state = initialState, action) {
 	switch (action.type) {
