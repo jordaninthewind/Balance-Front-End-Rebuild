@@ -13,13 +13,13 @@ export const resetMeditationSessions = () => {
 	return { type: "RESET_USER_MEDITATION_SESSIONS" }
 }
 
-export const getUserMeditationSessions = (currentUser) => dispatch => {
+export const getUserMeditationSessions = currentUser => dispatch => {
 	fetch(`${BASE_URL}/users/${currentUser.id}/meditation_sessions.json`)
 		.then(res => { return res.json() })
 		.then(json => { dispatch(setMeditationSessions(json))})
 }
 
-const removeMeditationSession = (session) => {
+const removeMeditationSession = session => {
 	return { type: "REMOVE_MEDITATION_SESSION", session}
 }
 
