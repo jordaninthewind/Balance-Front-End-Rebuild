@@ -1,4 +1,4 @@
-const BASE_URL = 'https://balance-backend.herokuapp.com/'
+const BASE_URL = 'https://balance-backend-v2.herokuapp.com'
 
 const setQuotes = (quotes) => {
 	return { type: "GET_ALL_QUOTES", quotes }

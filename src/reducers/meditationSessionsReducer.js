@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://balance-backend.herokuapp.com/'
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'https://balance-backend-v2.herokuapp.com/'
+// const BASE_URL = 'http://localhost:3000'
 
 const initialState = {
 	meditationSessions: [],

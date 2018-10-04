@@ -44,7 +44,7 @@ class Clock extends Component {
 
   saveSession = (e) => {
     if (this.props.currentUser && this.state.timeCount > 0) {
-      fetch(`https://balance-backend.herokuapp.com/users/${this.props.currentUser.id}/meditation_sessions`, {
+      fetch(`https://balance-backend-v2.herokuapp.com/users/${this.props.currentUser.id}/meditation_sessions`, {
         headers: {
           'Content-Type': 'application/json'
         },
