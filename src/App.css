@@ -74,6 +74,14 @@
   z-index: -1;
 }
 
+button {
+  /*color: red;*/
+  border: 1px solid rgba(100,20,255,.2);
+  border-radius: 10px;
+  font-size: .5em;
+  font-family: Raleway;
+}
+
 /* Handles landscape mode on most phones*/
 @media screen and (max-width: 800px) and (max-height: 500px) {
   .App-navbar {

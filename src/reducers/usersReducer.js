@@ -10,6 +10,7 @@ export const setCurrentUser = user => {
 }
 
 export const loginUser = (email, password) => dispatch => {
+	dispatch(userErrorMessage({ error_message: "Logging in user..."}));
 	fetch(`${BASE_URL}/login`, {
 		headers: {
 	        'Accept': 'application/json',
@@ -37,6 +38,7 @@ const userErrorMessage = json => {
 }
 
 export const createUser = (name, lastName, email, password, location) => dispatch => {
+	dispatch(userErrorMessage({ error_message: "Registering user..."}));
 	let last_name = lastName;
 	fetch(`${BASE_URL}/users`, {
 	      headers: {
@@ -46,6 +48,7 @@ export const createUser = (name, lastName, email, password, location) => dispatc
 	      method: "POST",
 	      body: JSON.stringify( { new_user: { name, last_name, email, password, location } } )
 	    })
+
 	    .then( res => res.json() )
 	    .then( json => {
 	    	if (json.name) {

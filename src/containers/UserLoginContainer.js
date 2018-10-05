@@ -15,9 +15,9 @@ class UserLoginContainer extends Component {
     	}
 	}
 
-	componentDidMount() {
-		this.props.checkCurrentUserStorage();
-	}
+	// componentDidMount() {
+	// 	this.props.checkCurrentUserStorage();
+	// }
 
 	removeUserForm = () => {
 		this.setState({
@@ -51,15 +51,14 @@ class UserLoginContainer extends Component {
 				<br /><br />
 			  	{ this.state.displayLoginUser && <LoginUserForm /> }
 			  	{ this.state.displayCreateUser && <CreateUserForm /> }
-			</div>
-		); } else {
+			</div>);
+	   } else {
 			return (
 				<div>
 					<br /><br />
 					<img src="shambhala sun.png" className="responsiveImage" alt="" />
 					<UserContainer />
-				</div>
-			);
+				</div>);
 		}
 	}
 }

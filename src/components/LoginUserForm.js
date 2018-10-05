@@ -28,8 +28,8 @@ class LoginUserForm extends Component {
 			<div>
 				<div>{this.props.errorMessage}</div>
 				<form onSubmit={(e) => this.handleSubmit(e)} >
-					E-mail: <input onChange={this.handleChange} name="email" type="email" value={this.state.email} required /><br />
-					Password: <input onChange={this.handleChange} name="password" type="password" value={this.state.password} required /><br />
+					E-mail: <br /><input onChange={this.handleChange} name="email" type="email" value={this.state.email} required /><br />
+					Password: <br /><input onChange={this.handleChange} name="password" type="password" value={this.state.password} required /><br />
 					<button type="submit">Log In!</button>
 				</form>
 			</div>

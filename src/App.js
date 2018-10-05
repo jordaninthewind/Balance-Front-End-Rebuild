@@ -7,10 +7,15 @@ import MeditationSessionsContainer from './containers/MeditationSessionsContaine
 import TimerContainer from './containers/TimerContainer';
 import UserLoginContainer from './containers/UserLoginContainer';
 import ResourcesContainer from './containers/ResourcesContainer';
+import { checkCurrentUserStorage } from './reducers/usersReducer';
 import SketchBoard from './components/SketchBoard';
 import './App.css';
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.checkCurrentUserStorage();
+  }
 
   render() {
     return (
@@ -42,4 +47,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = dispatch => {
+  return {
+    checkCurrentUserStorage: () => dispatch(checkCurrentUserStorage()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
