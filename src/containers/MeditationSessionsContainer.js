@@ -29,7 +29,7 @@ class MeditationSessionsContainer extends Component {
 	 			sessions = <div>There are no sessions yet!</div>
 	 		}
 	 	} else {
-	 		sessions = <div>Select User to see sessions!</div>;
+	 		sessions = <div>Log in to see sessions!</div>;
 	 	}
 
 		return (
