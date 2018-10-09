@@ -9,6 +9,10 @@ const UserInfo = props => {
 	
 	return (
 		<div>
+			<div>
+				<img className="profile" src={props.currentUserData.profile_url} />
+				<div className="link">Update</div>
+			</div>
 			<h3>User Name: {props.currentUserData.name}</h3>
 				<div>Total Time: 
 					{" " + hours}

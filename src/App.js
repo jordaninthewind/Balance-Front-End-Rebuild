@@ -8,7 +8,6 @@ import TimerContainer from './containers/TimerContainer';
 import UserLoginContainer from './containers/UserLoginContainer';
 import ResourcesContainer from './containers/ResourcesContainer';
 import { checkCurrentUserStorage } from './reducers/usersReducer';
-import SketchBoard from './components/SketchBoard';
 import './App.css';
 
 class App extends Component {
@@ -27,12 +26,10 @@ class App extends Component {
               <Link to="/meditation_sessions" className="menuTile">Sessions</Link>
               <Link to="/timer" className="menuTile">Timer</Link>
               <Link to="/resources" className="menuTile">Resources</Link>
-              <Link to="/sketchboard" className="menuTile"></Link>
               <Route exact path="/" component={UserLoginContainer} />
               <Route exact path="/meditation_sessions" component={MeditationSessionsContainer} />
               <Route path="/timer" component={TimerContainer} />
               <Route path="/resources" component={ResourcesContainer} />
-              <Route path="/sketchboard" component={SketchBoard} />
             </div>
           </BrowserRouter>
         <QuoteContainer />

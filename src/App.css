@@ -29,9 +29,14 @@
 }
 
 .App-navbar {
-  position: relative;
-  font-size: 18px;
+  position: fixed;
   top: 70px;
+  left: 0;
+  width: 100vw;
+  background-color: rgba(100,20,255,.1);
+  height: 1.2em;
+  padding-bottom: 5px;
+  z-index: 1;
 }
 
 .App-component {
@@ -56,17 +61,22 @@
 }
 /*menu tiles are as yet unused*/
 .menuTile {
-  color: rgba(100,20,255,.3);
-  padding: 10px;
+  color: rgba(100,20,255,.6);
+  margin: 10px;
+  /*padding: 10px;*/
+  z-index: 0;
+  text-decoration: none;
+  font-size: 1.2em;
 }
 
 .title {
   text-shadow: 1px 1px rgba(100,20,255,.2);
+  z-index: 1000;
 }
 
 .responsiveImage {
   display: inline-block;
-  position: fixed;
+  position: absolute;
   left: -20px;
   top: -30px;
   height: 150px;
@@ -76,10 +86,17 @@
 
 button {
   /*color: red;*/
-  border: 1px solid rgba(100,20,255,.2);
+  border: 2px solid rgba(100,20,255,.2);
   border-radius: 10px;
-  font-size: .5em;
+  margin: 5px;
+  font-size: 1.2em;
   font-family: Raleway;
+}
+
+.profile {
+  border: 1px solid black;
+  border-radius: 50%;
+  max-width: 30vw;
 }
 
 /* Handles landscape mode on most phones*/

@@ -3,8 +3,8 @@ import React from 'react';
 const MeditationSession = props => {
 	let seconds = props.session.duration % 60;
 	let minutes = Math.floor(props.session.duration / 60);
-		if (minutes > 10) { minutes = minutes / 10};
 	let hours = Math.floor(props.session.duration / 3600);
+		if (minutes > 60) { minutes = minutes - (hours * 60) };
 
 	return (
 		<div className="tile">

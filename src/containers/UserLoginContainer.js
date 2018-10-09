@@ -56,7 +56,6 @@ class UserLoginContainer extends Component {
 			return (
 				<div>
 					<br /><br />
-					<img src="shambhala sun.png" className="responsiveImage" alt="" />
 					<UserContainer />
 				</div>);
 		}
