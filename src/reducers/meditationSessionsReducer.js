@@ -30,7 +30,6 @@ export const deleteMeditationSession = (currentUser, session) => dispatch => {
 
 // reducer
 
-
 const initialState = {
 	meditationSessions: [],
 }

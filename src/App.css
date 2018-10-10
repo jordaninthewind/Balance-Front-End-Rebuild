@@ -25,6 +25,7 @@
 
 .App-body {
   top: 70px;
+  font-size: 16px;
   position: relative;
 }
 
@@ -36,7 +37,7 @@
   background-color: rgba(100,20,255,.1);
   height: 1.2em;
   padding-bottom: 5px;
-  z-index: 1;
+  z-index: -1;
 }
 
 .App-component {
@@ -53,25 +54,28 @@
 }
 
 .tile {
-  border: 2px solid rgba(255,234,0,.4 );
-  padding-top: 1%;
+  border: 1px solid rgba(255,234,0,.4);
+  width: 20vw;
+  padding-top: 1vh;
   margin: 2%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   border-radius: 5px; 
   background-color: rgba(255,234,0,.05);
 }
-/*menu tiles are as yet unused*/
+
 .menuTile {
   color: rgba(100,20,255,.6);
   margin: 10px;
-  /*padding: 10px;*/
-  z-index: 0;
+  z-index: 1000;
   text-decoration: none;
   font-size: 1.2em;
 }
 
 .title {
   text-shadow: 1px 1px rgba(100,20,255,.2);
-  z-index: 1000;
+  z-index: 2;
 }
 
 .responsiveImage {
@@ -81,15 +85,14 @@
   top: -30px;
   height: 150px;
   width: 150px;
-  z-index: -1;
+  z-index: 3;
 }
 
 button {
-  /*color: red;*/
   border: 2px solid rgba(100,20,255,.2);
   border-radius: 10px;
   margin: 5px;
-  font-size: 1.2em;
+  font-size: .5em;
   font-family: Raleway;
 }
 
@@ -112,6 +115,14 @@ button {
 
   .App-footer {
     display: none;
+  }
+
+  .tile {
+    width: 70vw;
+  }
+
+  button {
+    font-size: 1.2em;
   }
 }
 
@@ -144,6 +155,14 @@ button {
     width: 150px;
     z-index: -1;
   }
+
+  .tile {
+    width: 70vw;
+  }
+
+  button {
+    font-size: 1.2em;
+  }
 }
 
 /*Larger Screen than vertical iPhone*/
@@ -165,9 +184,4 @@ button {
   .App-navbar {
     font-size: 1.5em;
   }
-
-  /*.responsiveImage {
-    width: 20%;
-    height: 20%;
-  }*/
 }

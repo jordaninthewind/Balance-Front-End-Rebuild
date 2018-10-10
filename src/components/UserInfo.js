@@ -10,7 +10,7 @@ const UserInfo = props => {
 	return (
 		<div>
 			<div>
-				<img className="profile" src={props.currentUserData.profile_url} />
+				<img className="profile" alt="profile_picture" src={props.currentUserData.profile_url} />
 				<div className="link">Update</div>
 			</div>
 			<h3>User Name: {props.currentUserData.name}</h3>

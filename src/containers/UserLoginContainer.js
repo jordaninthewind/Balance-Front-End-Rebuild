@@ -15,10 +15,6 @@ class UserLoginContainer extends Component {
     	}
 	}
 
-	// componentDidMount() {
-	// 	this.props.checkCurrentUserStorage();
-	// }
-
 	removeUserForm = () => {
 		this.setState({
 			displayCreateUser: false,
