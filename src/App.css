@@ -34,6 +34,7 @@
   top: 70px;
   left: 0;
   width: 100vw;
+  border-top: 1px solid rgba(255,234,0,1);
   background-color: rgba(168,240,255,1);
   height: 1.2em;
   padding-bottom: 5px;
@@ -47,10 +48,13 @@
 } 
 
 .App-footer {
+  position: fixed;
   background: linear-gradient(45deg, rgba(194,190,255,1) 0%, rgba(100,20,255,0.3) 25%, rgba(125,233,255,0.67) 80%);
   background-color: white;
   cursor: default;
   padding: 20px;
+  border-top: 1px solid rgba(255,234,0,1);
+  /*font-size: 1em;*/
 }
 
 .tile {
@@ -99,7 +103,7 @@ button {
 }
 
 .profile {
-  border: 1px solid black;
+  border: 2px solid rgba(255,234,0,.5);
   border-radius: 50%;
   max-width: 30vw;
 }
@@ -146,7 +150,7 @@ button {
     left: 0;
     right: 0;
     height: 10%;
-    font-size: 1em;
+    font-size: .7em;
     color: white;
   }
 
