@@ -1,4 +1,5 @@
 const BASE_URL = 'https://balance-backend-v2.herokuapp.com'
+// const BASE_URL = 'http://localhost:3000'
 
 const initialState = {
 	currentUser: null,
@@ -61,7 +62,7 @@ export const createUser = (name, lastName, email, password, location) => dispatc
 	    .catch(res => console.log(res))
 }
 
-const setUserInLocalStorage = (user) => {
+const setUserInLocalStorage = user => {
 	localStorage.setItem('currentUser', JSON.stringify(user) );
 }
 
@@ -81,8 +82,19 @@ export const deleteUser = user => dispatch => {
 		headers: {'Content-Type': 'application/json'},
 		method: "DELETE"
 		})
-		.then(res => res.json() )
-		.then(json => dispatch(deleteCurrentUser()))
+		.then( res => res.json() )
+		.then( json => dispatch( deleteCurrentUser() ) )
+}
+
+export const updateUser = user => dispatch => {
+	fetch(`${BASE_URL}/users/${user.id}`, {
+		headers: {
+	      'Accept': 'application/json',
+	      'Content-Type': 'application/json'
+	    },
+	    method: "PUT",
+	    body: JSON.stringify( { user } )
+	})
 }
 
 export default function usersReducer(state = initialState, action) {

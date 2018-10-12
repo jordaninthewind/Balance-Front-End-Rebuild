@@ -9,16 +9,15 @@ const UserInfo = props => {
 	
 	return (
 		<div>
+			<h3>User Name: {props.currentUserData.name}</h3>
 			<div>
 				<img className="profile" alt="profile_picture" src={props.currentUserData.profile_url} />
-				<div className="link">Update</div>
 			</div>
-			<h3>User Name: {props.currentUserData.name}</h3>
-				<div>Total Time: 
-					{" " + hours}
-					:{ totalMinutes < 10 ? "0" + totalMinutes : totalMinutes }
-					:{ seconds < 10 ? "0" + seconds : seconds }
-				</div>
+			<div>Total Time: 
+				{" " + hours}
+				:{ totalMinutes < 10 ? "0" + totalMinutes : totalMinutes }
+				:{ seconds < 10 ? "0" + seconds : seconds }
+			</div>
 			<div>Location: {props.currentUserData.location}</div>
 		</div>
 	);
