@@ -5,12 +5,6 @@ class UpdateUserForm extends Component {
 		super(props);
 
 		this.state = {	// add props.currentUser as only state to maintain via embedded object to simplify flow
-			// name: props.currentUser.name,
-			// lastName: props.currentUser.lastName,
-			// // password: "",
-			// email: props.currentUser.email,
-			// location: props.currentUser.location,
-			// profile_url: props.currentUser.profile_url,
 			currentUser: props.currentUser
 		}
 	}
@@ -33,15 +27,17 @@ class UpdateUserForm extends Component {
 	render() {
 		return (
 			<div className="App-component">
-				<p>Update User</p>
+				<h2>Update User</h2>
+				<h6>All Fields Necessary</h6>
 				<form onSubmit={ e => this.handleSubmit(e) } >
 					First Name: <input onChange={this.handleChange} name="name" value={this.state.currentUser.name} required /><br />
 					Last Name: <input onChange={this.handleChange} name="last_name" value={this.state.currentUser.last_name} required /> <br />
 					Password: <input onChange={this.handleChange} name="password" value={this.state.currentUser.password} required /> <br />
 					Email: <input onChange={this.handleChange} name="email" type="email" value={this.state.currentUser.email} required /> <br />
 					Location: <input onChange={this.handleChange} name="location" value={this.state.currentUser.location} required /><br />
-					Image Link: <input onChange={this.handleChange} name="profile_url" value={this.state.currentUser.profile_url} required /><br />
-					<div>-- Image Should Be Square --</div>
+					<h6>-- Profile Image Should Be Square --</h6>
+					Profile Image Link: <br />	
+					<input onChange={this.handleChange} name="profile_url" value={this.state.currentUser.profile_url} required /><br /><br />
 					<button type="submit">Update User</button>
 				</form>
 			</div>
