@@ -4,7 +4,7 @@ class UpdateUserForm extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {	// add props.currentUser as only state to maintain via embedded object to simplify flow
+		this.state = { // find a better way to reference current user as an object as props
 			currentUser: props.currentUser
 		}
 	}
@@ -28,7 +28,8 @@ class UpdateUserForm extends Component {
 		return (
 			<div className="App-component">
 				<h2>Update User</h2>
-				<h6>All Fields Necessary</h6>
+				<button onClick={() => this.props.displayUpdateUser()}>Return To User</button>
+				<h6>All Fields and Password Required for Valid Update</h6>
 				<form onSubmit={ e => this.handleSubmit(e) } >
 					First Name: <input onChange={this.handleChange} name="name" value={this.state.currentUser.name} required /><br />
 					Last Name: <input onChange={this.handleChange} name="last_name" value={this.state.currentUser.last_name} required /> <br />
@@ -40,6 +41,7 @@ class UpdateUserForm extends Component {
 					<input onChange={this.handleChange} name="profile_url" value={this.state.currentUser.profile_url} required /><br /><br />
 					<button type="submit">Update User</button>
 				</form>
+				<button onClick={() => { if (window.confirm("Click to confirm delete")) this.props.deleteUser(this.props.currentUser)}} >Delete Account</button>
 			</div>
 		)
 	}

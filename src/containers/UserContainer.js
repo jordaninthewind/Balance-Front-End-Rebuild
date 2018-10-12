@@ -14,14 +14,20 @@ class UserContainer extends Component {
 	}
 
 	displayUpdateUserForm = () => {
+		// e.preventDefault();
 		this.setState({
-			displayUpdateUser: true,
+			displayUpdateUser: !this.state.displayUpdateUser,
 		})
 	}
 
 	render() {
 		if (this.state.displayUpdateUser) {	
-			return <UpdateUserForm currentUser={this.props.currentUser} updateUser={this.props.updateUser}/>
+			return (<UpdateUserForm 
+						currentUser={this.props.currentUser} 
+						updateUser={this.props.updateUser} 
+						deleteUser={this.props.deleteUser} 
+						displayUpdateUser={this.displayUpdateUserForm}
+					/>)
 		} else {
 			return (
 				<div className='App-component'>
