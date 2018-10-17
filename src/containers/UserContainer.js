@@ -14,7 +14,6 @@ class UserContainer extends Component {
 	}
 
 	displayUpdateUserForm = () => {
-		// e.preventDefault();
 		this.setState({
 			displayUpdateUser: !this.state.displayUpdateUser,
 		})

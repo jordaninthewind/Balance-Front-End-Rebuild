@@ -33,9 +33,9 @@ class UpdateUserForm extends Component {
 				<form onSubmit={ e => this.handleSubmit(e) } >
 					First Name: <input onChange={this.handleChange} name="name" value={this.state.currentUser.name} required /><br />
 					Last Name: <input onChange={this.handleChange} name="last_name" value={this.state.currentUser.last_name} required /> <br />
-					Password: <input onChange={this.handleChange} name="password" value={this.state.currentUser.password} required /> <br />
 					Email: <input onChange={this.handleChange} name="email" type="email" value={this.state.currentUser.email} required /> <br />
 					Location: <input onChange={this.handleChange} name="location" value={this.state.currentUser.location} required /><br />
+
 					<h6>-- Profile Image Should Be Square --</h6>
 					Profile Image Link: <br />	
 					<input onChange={this.handleChange} name="profile_url" value={this.state.currentUser.profile_url} required /><br /><br />
@@ -48,3 +48,4 @@ class UpdateUserForm extends Component {
 };
 
 export default UpdateUserForm;
+// Password: <input onChange={this.handleChange} name="password" value={this.state.currentUser.password} required /> <br />
