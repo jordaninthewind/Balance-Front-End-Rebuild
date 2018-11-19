@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import TitleBar from './components/TitleBar.js';
 import QuoteContainer from './containers/QuoteContainer';
 import MeditationSessionsContainer from './containers/MeditationSessionsContainer';
@@ -18,9 +18,11 @@ class App extends Component {
 
   render() {
     return (
+        
+        <Router>
         <div className="App">
           <TitleBar />
-          <BrowserRouter>
+          <Switch>
             <div className="App-navbar">
               <Link to="/" className="menuTile">Home</Link>
               <Link to="/meditation_sessions" className="menuTile">Sessions</Link>
@@ -31,9 +33,11 @@ class App extends Component {
               <Route path="/timer" component={TimerContainer} />
               <Route path="/resources" component={ResourcesContainer} />
             </div>
-          </BrowserRouter>
+          </Switch>
         <QuoteContainer />
-      </div>
+        </div>
+        </Router>
+      
     );
   }
 }
