@@ -1,15 +1,15 @@
 :root {
-  --primary-color: rgba(168,240,255,1);
+  --primary-color: rgba(168, 240, 255, 1);
 }
 
 .App {
-  display: flex;  
+  display: flex;
   cursor: default;
   flex-flow: column;
   align-content: space-between;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;  
+  text-align: center;
   font-family: Raleway;
   width: 75%;
 }
@@ -17,7 +17,12 @@
 .App-header {
   font-family: 'Amatic SC', cursive;
   font-size: 18px;
-  background: linear-gradient(45deg, rgba(194,190,255,1) 0%, rgba(100,20,255,0.3) 55%, rgba(125,233,255,0.67) 80%);
+  background: linear-gradient(
+    45deg,
+    rgba(194, 190, 255, 1) 0%,
+    rgba(100, 20, 255, 0.3) 55%,
+    rgba(125, 233, 255, 0.67) 80%
+  );
   background-color: white;
   color: white;
   position: fixed;
@@ -38,43 +43,47 @@
   top: 70px;
   left: 0;
   width: 100vw;
-  border-top: 1px solid rgba(255,234,0,1);
+  border-top: 1px solid rgba(255, 234, 0, 1);
   background-color: var(--primary-color);
   height: 1.2em;
   padding-bottom: 5px;
   z-index: 1;
 }
 
-.App-component {`
-  overflow: auto;
-  color: rgba(100,20,255,.5);
+.App-component {
+  `overflow: auto;
+  color: rgba(100, 20, 255, 0.5);
   font-size: 1.3em;
-} 
+}
 
 .App-footer {
   position: fixed;
-  background: linear-gradient(45deg, rgba(194,190,255,1) 0%, rgba(100,20,255,0.3) 25%, rgba(125,233,255,0.67) 80%);
+  background: linear-gradient(
+    45deg,
+    rgba(194, 190, 255, 1) 0%,
+    rgba(100, 20, 255, 0.3) 25%,
+    rgba(125, 233, 255, 0.67) 80%
+  );
   background-color: white;
   cursor: default;
   padding: 20px;
-  border-top: 1px solid rgba(255,234,0,1);
+  border-top: 1px solid rgba(255, 234, 0, 1);
   /*font-size: 1em;*/
 }
 
 .tile {
-  border: 1px solid rgba(255,234,0,.4);
+  border: 1px solid rgba(255, 234, 0, 0.4);
   width: 20vw;
   padding-top: 1vh;
   margin: 2%;
   margin-left: auto;
   margin-right: auto;
   display: block;
-  border-radius: 5px; 
-  background-color: rgba(255,234,0,.05);
+  border-radius: 5px;
+  background-color: rgba(255, 234, 0, 0.05);
 }
 
 .menuTile {
-  /*color: rgba(100,20,255,.6);*/
   color: white;
   margin: 10px;
   z-index: 1000;
@@ -84,7 +93,7 @@
 }
 
 .title {
-  text-shadow: 1px 1px rgba(100,20,255,.2);
+  text-shadow: 1px 1px rgba(100, 20, 255, 0.2);
   z-index: 2;
 }
 
@@ -99,15 +108,15 @@
 }
 
 button {
-  border: 2px solid rgba(100,20,255,.2);
+  border: 2px solid rgba(100, 20, 255, 0.2);
   border-radius: 10px;
   margin: 5px;
-  font-size: .5em;
+  font-size: 0.5em;
   font-family: Raleway;
 }
 
 .profile {
-  border: 2px solid rgba(255,234,0,.5);
+  border: 2px solid rgba(255, 234, 0, 0.5);
   border-radius: 50%;
   max-width: 30vw;
 }
@@ -154,7 +163,7 @@ button {
     left: 0;
     right: 0;
     height: 10%;
-    font-size: .7em;
+    font-size: 0.7em;
     color: white;
   }
 
