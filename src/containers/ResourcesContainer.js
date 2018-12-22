@@ -1,51 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
+import ResourceTile from '../components/ResourceTile/ResourceTile';
 
-class ResourcesContainer extends React.Component {
-  // update here with meditation center map on react-google-maps & drawing app
-  // map still to come 11/2
+class ResourcesContainer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      resources: [
+        { name: "Lion's Roar", link: 'http://www.lionsroar.com' },
+        {
+          name: 'Github Frontend',
+          link: 'http://github.com/jordaninthewind/Balance-Front-End-Rebuild'
+        },
+        {
+          name: 'Github Backend',
+          link: 'http://github.com/jordaninthewind/balance-fis'
+        },
+        { name: 'Personal Page', link: 'http://www.jordan-kline.com' }
+      ]
+    };
+  }
+
   render() {
     return (
       <div className="App-component">
-        <br />
-        <br />
         <div>Links:</div>
-        <br />
-        <p>
-          <a
-            href="http://www.lionsroar.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Lion's Roar
-          </a>
-        </p>
-        <p>
-          <a
-            href="http://github.com/jordaninthewind/Balance-Front-End-Rebuild"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Github Frontend
-          </a>
-        </p>
-        <p>
-          <a
-            href="http://github.com/jordaninthewind/balance-fis"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Github Backend
-          </a>
-        </p>
-        <p>
-          <a
-            href="http://www.jordan-kline.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Personal Page
-          </a>
-        </p>
+        {this.state.resources.map(res => {
+          return (
+            <ResourceTile
+              image={'../../public/shambhala sun.png'}
+              title={res.name}
+              link={res.link}
+            />
+          );
+        })}
       </div>
     );
   }

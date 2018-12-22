@@ -43,48 +43,43 @@ class CreateUserForm extends Component {
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
-          First Name:{' '}
+          <label>First Name:</label>
           <input
             onChange={this.handleChange}
             name="firstName"
             value={this.state.firstName}
             required
           />
-          <br />
-          Last Name:{' '}
+          <label>Last Name:</label>
           <input
             onChange={this.handleChange}
             name="lastName"
             value={this.state.lastName}
             required
-          />{' '}
-          <br />
-          Password:{' '}
+          />
+          <label>Password:</label>
           <input
             onChange={this.handleChange}
             name="password"
             type="password"
             value={this.state.password}
             required
-          />{' '}
-          <br />
-          Email:{' '}
+          />
+          <label>Email:</label>
           <input
             onChange={this.handleChange}
             name="email"
             type="email"
             value={this.state.email}
             required
-          />{' '}
-          <br />
-          Location:{' '}
+          />
+          <label>Location:</label>
           <input
             onChange={this.handleChange}
             name="location"
             value={this.state.location}
             required
           />
-          <br />
           <button type="submit">Create User!</button>
         </form>
       </div>

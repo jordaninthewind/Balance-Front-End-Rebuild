@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Clock from './Clock';
 
-class TimerContainer extends Component {
+class TimerContainer extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -13,10 +13,7 @@ class TimerContainer extends Component {
   render() {
     return (
       <div className="App-component">
-        <br />
-        <br />
         <Clock />
-        <br />
       </div>
     );
   }
