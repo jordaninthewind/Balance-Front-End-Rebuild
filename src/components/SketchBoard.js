@@ -19,7 +19,7 @@ class SketchBoard extends React.Component {
   erase() {
     //response to Erase button click
     this.setState({
-      mode: 'erase'
+          mode: 'erase'
     });
   }
 
