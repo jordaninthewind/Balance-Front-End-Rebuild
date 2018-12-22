@@ -45,11 +45,11 @@ class MeditationSessionsContainer extends Component {
             's Sessions
           </div>
         )}
-        {this.props.meditationSessions > 0 && (
+        { this.props.meditationSessions > 0 && 
           <div>Total Count: {this.props.meditationSessions.count}</div>
-        )}
+        }
         <br />
-        {sessions}
+        { sessions }
       </div>
     );
   }

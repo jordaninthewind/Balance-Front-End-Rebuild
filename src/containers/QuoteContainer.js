@@ -17,18 +17,21 @@ class QuoteContainer extends Component {
     setInterval(this.selectQuote.bind(this), 15000);
   }
 
-  selectQuote() {
-    const quoteIndex = Math.floor(
-      Math.random() * (this.props.quotes.length - 1) + 0
-    );
-    this.setState({ currentQuoteIndex: quoteIndex });
-  }
+  selectQuote = () =>
+    this.setState({
+      currentQuoteIndex: Math.floor(
+        Math.random() * (this.props.quotes.length - 1)
+      )
+    });
 
   render() {
     return (
-      <div className="App-footer" onClick={this.selectQuote.bind(this)}>
+      <div className="App-footer" onClick={this.selectQuote}>
         {this.props.quotes.length && (
-          <Quote quote={this.props.quotes[this.state.currentQuoteIndex]} />
+          <Quote 
+            content={this.props.quotes[this.state.currentQuoteIndex].content}
+            author={this.props.quotes[this.state.currentQuoteIndex].author}
+          />
         )}
       </div>
     );
