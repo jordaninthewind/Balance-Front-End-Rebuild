@@ -1,0 +1,16 @@
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  font-size: 1.5em;
+  border-top: 2px solid var(--accent-yellow);
+  background: linear-gradient(
+    45deg,
+    var(--gradient-purple) 0%,
+    var(--middle-purple) 25%,
+    var(--gradient-blue) 80%
+  );
+  cursor: default;
+  padding: 10px;
+}
