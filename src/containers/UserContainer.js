@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserInfo from '../components/UserInfo';
+import UserInfo from '../components/UserInfo/UserInfo';
 import { connect } from 'react-redux';
 import UpdateUserForm from '../components/UpdateUserForm';
 import {
@@ -35,13 +35,12 @@ class UserContainer extends Component {
       );
     } else {
       return (
-        <div className="App-component">
-          <h2>Logged In As:</h2>
+        <div>
+          <div>Logged In As:</div>
           {this.props.currentUser && (
             <UserInfo currentUserData={this.props.currentUser} />
           )}
           {!this.props.currentUser && <h3>Please select a current user.</h3>}
-          <br />
           {this.props.currentUser && (
             <button onClick={() => this.props.logOut()}>Log Out</button>
           )}

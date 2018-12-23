@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import ResourceTile from '../components/ResourceTile/ResourceTile';
 
-class ResourcesContainer extends Component {
+class ResourcesContainer extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -23,18 +23,21 @@ class ResourcesContainer extends Component {
 
   render() {
     return (
-      <div className="App-component">
-        <div>Links:</div>
-        {this.state.resources.map(res => {
+      <>
+        <div className="title">Links:</div>
+        <div className="component">
+        {this.state.resources.map((res, idx) => {
           return (
             <ResourceTile
+              key={idx}
               image={'../../public/shambhala sun.png'}
               title={res.name}
               link={res.link}
             />
           );
         })}
-      </div>
+        </div>
+      </>
     );
   }
 }

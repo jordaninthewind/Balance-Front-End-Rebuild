@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MeditationSession from '../components/MeditationSession';
+import Session from '../components/Session/Session';
 import {
   getUserMeditationSessions,
   deleteMeditationSession
@@ -14,44 +14,37 @@ class MeditationSessionsContainer extends Component {
   }
 
   render() {
-    let sessions;
-
-    if (this.props.currentUser) {
-      if (this.props.meditationSessions.length > 0) {
-        sessions = this.props.meditationSessions.reverse().map(session => {
-          return (
-            <div key={session.id}>
-              <MeditationSession
-                session={session}
-                currentUser={this.props.currentUser}
-                deleteSession={this.props.deleteMeditationSession}
-              />
-            </div>
-          );
-        });
-      } else {
-        sessions = <div>There are no sessions yet!</div>;
-      }
-    } else {
-      sessions = <div>Log in to see sessions!</div>;
+    if (!this.props.currentUser) {
+      return <div>Log in to see sessions!</div>;
     }
 
-    return (
-      <div className="App-component">
-        <br />
-        {this.props.currentUser && (
-          <div>
+    if (this.props.meditationSessions.length === 0) {
+      return <div>There are no sessions yet!</div>;
+    } else {
+      return (
+        <>
+          <div className="title">
             {this.props.currentUser.name}
             's Sessions
           </div>
-        )}
-        { this.props.meditationSessions > 0 && 
-          <div>Total Count: {this.props.meditationSessions.count}</div>
-        }
-        <br />
-        { sessions }
-      </div>
-    );
+          <div className="subtitle">
+            Total Count: {this.props.meditationSessions.count}
+          </div>
+          <div className="component">
+            {this.props.meditationSessions.reverse().map(session => {
+              return (
+                <Session
+                  key={session.id}
+                  session={session}
+                  currentUser={this.props.currentUser}
+                  deleteSession={this.props.deleteMeditationSession}
+                />
+              );
+            })}
+          </div>
+        </>
+      );
+    }
   }
 }
 
