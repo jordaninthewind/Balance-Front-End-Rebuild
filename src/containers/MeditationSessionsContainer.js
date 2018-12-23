@@ -15,11 +15,11 @@ class MeditationSessionsContainer extends Component {
 
   render() {
     if (!this.props.currentUser) {
-      return <div>Log in to see sessions!</div>;
+      return <div className="title">Log in to see sessions!</div>;
     }
 
     if (this.props.meditationSessions.length === 0) {
-      return <div>There are no sessions yet!</div>;
+      return <div className="title">There are no sessions yet!</div>;
     } else {
       return (
         <>

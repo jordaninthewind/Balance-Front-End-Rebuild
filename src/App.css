@@ -26,23 +26,33 @@ body {
 }
 
 .title {
-  color: var(--gradient-purple);
+  color: var(--middle-purple);
   font-size: 3em;
   margin: 1em;
 }
 
 .subtitle {
-  color: var(--gradient-purple);
+  color: var(--middle-purple);
   font-size: 2em;
   margin: .5em;
 }
 
 button {
-  border: 2px solid rgba(100, 20, 255, 0.2);
+  border: 2px solid var(--middle-purple);
+  background-color: var(--middle-purple);
   border-radius: 10px;
+  padding: 2%;
   margin: 5px;
-  font-size: 1.5em;
+  font-size: 2em;
   font-family: Raleway;
+  outline: none;
+  color: white;
+  font-weight: bold;
+}
+
+button:hover {
+  color: var(--middle-purple);
+  background-color: white;  
 }
 
 /* Handles landscape mode on most phones*/

@@ -42,9 +42,9 @@ class UserLoginContainer extends Component {
   render() {
     if (!this.props.currentUser) {
       return (
-        <div className="App-component">
-          <h2>Find Balance!</h2>
-          <div>
+        <>
+          <div className="title">Find Balance!</div>
+          <div className="subtitle">
             Balance is a simple app to track your daily meditation, find
             inspiration through quotes and resources, and track progress.
           </div>
@@ -55,7 +55,7 @@ class UserLoginContainer extends Component {
           <br />
           {this.state.displayLoginUser && <LoginUserForm />}
           {this.state.displayCreateUser && <CreateUserForm />}
-        </div>
+        </>
       );
     } else {
       return (
