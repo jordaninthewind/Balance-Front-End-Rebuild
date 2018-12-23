@@ -86,6 +86,7 @@ class TimerContainer extends PureComponent {
           pauseClock={this.pauseClock}
           resetClock={this.resetClock}
           saveSession={this.saveSession}
+          timerStarted={this.state.timerStarted}
         />
       </>
     );

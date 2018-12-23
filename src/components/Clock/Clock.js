@@ -6,9 +6,10 @@ const Clock = ({
   startClock,
   pauseClock,
   resetClock,
-  saveSession
+  saveSession,
+  timerStarted
 }) => {
-  const minutes = Math.floor(timeCount / 60);
+  const minutes = ~~(timeCount / 60);
   const seconds = () => {
     if (timeCount % 60 < 10) {
       return '0' + (timeCount % 60);
@@ -24,10 +25,21 @@ const Clock = ({
     <div>
       <div className="title">Time Since Start</div>
       <div id="timer">{timeSpentMeditating}</div>
-      <button onClick={startClock}>Start</button>
-      <button onClick={pauseClock}>Pause</button>
-      <button onClick={resetClock}>Reset</button>
-      <button onClick={saveSession}>Save</button>
+      {!timerStarted ? (
+        <button onClick={startClock}>
+          Start
+        </button>
+      ) : (
+        <button onClick={pauseClock}>
+          Pause
+        </button>
+      )}
+      {timeCount > 0 && (
+        <>
+          <button onClick={resetClock}>Reset</button>
+          <button onClick={saveSession}>Save</button>
+        </>
+      )}
     </div>
   );
 };
