@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { loginUser } from '../reducers/usersReducer';
+import { loginUser } from '../../reducers/usersReducer';
 import { connect } from 'react-redux';
+import './LoginUserForm.css';
 
 class LoginUserForm extends Component {
   constructor(props) {
@@ -28,7 +29,8 @@ class LoginUserForm extends Component {
       <div>
         <div>{this.props.errorMessage}</div>
         <form onSubmit={e => this.handleSubmit(e)}>
-          E-mail: <br />
+          <div className="inputField">
+          <label>E-mail:</label>
           <input
             onChange={this.handleChange}
             name="email"
@@ -36,8 +38,9 @@ class LoginUserForm extends Component {
             value={this.state.email}
             required
           />
-          <br />
-          Password: <br />
+          </div>
+          <div className="inputField">
+          <label>Password:</label>          
           <input
             onChange={this.handleChange}
             name="password"
@@ -45,6 +48,7 @@ class LoginUserForm extends Component {
             value={this.state.password}
             required
           />
+          </div>
           <br />
           <button type="submit">Log In!</button>
         </form>

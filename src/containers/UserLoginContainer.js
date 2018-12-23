@@ -4,7 +4,7 @@ import {
   setCurrentUser,
   checkCurrentUserStorage
 } from '../reducers/usersReducer';
-import LoginUserForm from '../components/LoginUserForm';
+import LoginUserForm from '../components/LoginUserForm/LoginUserForm';
 import CreateUserForm from '../components/CreateUserForm';
 import UserContainer from './UserContainer';
 
@@ -49,7 +49,7 @@ class UserLoginContainer extends Component {
             inspiration through quotes and resources, and track progress.
           </div>
           <br />
-          <button onClick={this.displayLoginUserForm}>Login</button>{' '}
+          <button onClick={this.displayLoginUserForm}>Login</button>
           <button onClick={this.displayCreateUserForm}>Sign Up</button>
           <br />
           <br />
@@ -59,11 +59,9 @@ class UserLoginContainer extends Component {
       );
     } else {
       return (
-        <div>
-          <br />
-          <br />
+        <>
           <UserContainer />
-        </div>
+        </>
       );
     }
   }

@@ -55,57 +55,37 @@ button:hover {
   background-color: white;  
 }
 
+.inputField {
+  display: block;
+  color: var(--middle-purple);
+  font-size: 1.5em;
+}
+
 /* Handles landscape mode on most phones*/
 @media screen and (max-width: 800px) and (max-height: 500px) {
-  /* .App-navbar {
-    max-height: 70px;
-    font-size: 1em;
-  }
 
-  .App-component {
-    font-size: 15px;
-  }
-
-  .App-footer {
-    display: none;
-  }
-
-  .tile {
-    width: 70vw;
-  }
-
-  button {
-    font-size: 1.2em;
-  } */
 }
 
 /*Smaller screen than vertical iPhone 8plus*/
 @media screen and (max-width: 700px) {
-  /* .App-navbar {
-    max-height: 70px;
-    font-size: 1em;
-  } */
-
-  .responsiveImage {
-    /* top: -30px;
-    left: -20px;
-    height: 150px;
-    width: 150px;
-    z-index: -1; */
+  #header {
+    font-size: 3em;
+    font-weight: bold;
   }
 
-  .tile {
+  #header img {
+    display: none;
   }
 
-  button {
-    /* font-size: 1.2em; */
+  #navBar {
+    font-size: .8em;
   }
 }
 
 /*Larger Screen than vertical iPhone*/
 
 @media screen and (min-width: 701px) {
-  /* .App-component {
-    padding: 25px;
-  } */
+  #header {
+    /* font-size: 2em; */
+  }
 }

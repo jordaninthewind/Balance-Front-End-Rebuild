@@ -43,43 +43,54 @@ class CreateUserForm extends Component {
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
-          <label>First Name:</label>
-          <input
-            onChange={this.handleChange}
-            name="firstName"
-            value={this.state.firstName}
-            required
-          />
-          <label>Last Name:</label>
-          <input
-            onChange={this.handleChange}
-            name="lastName"
-            value={this.state.lastName}
-            required
-          />
-          <label>Password:</label>
-          <input
-            onChange={this.handleChange}
-            name="password"
-            type="password"
-            value={this.state.password}
-            required
-          />
-          <label>Email:</label>
-          <input
-            onChange={this.handleChange}
-            name="email"
-            type="email"
-            value={this.state.email}
-            required
-          />
-          <label>Location:</label>
-          <input
-            onChange={this.handleChange}
-            name="location"
-            value={this.state.location}
-            required
-          />
+          <div className="inputField">
+            <label>First Name:</label>
+            <input
+              onChange={this.handleChange}
+              name="firstName"
+              value={this.state.firstName}
+              required
+            />
+          </div>
+          <div className="inputField">
+            <label>Last Name:</label>
+            <input
+              onChange={this.handleChange}
+              name="lastName"
+              value={this.state.lastName}
+              required
+            />
+          </div>
+          <div className="inputField">
+            <label>Password:</label>
+            <input
+              onChange={this.handleChange}
+              name="password"
+              type="password"
+              value={this.state.password}
+              required
+            />
+          </div>
+          <div className="inputField">
+            <label>Email:</label>
+            <input
+              onChange={this.handleChange}
+              name="email"
+              type="email"
+              value={this.state.email}
+              required
+            />
+          </div>
+          <div className="inputField">
+            <label>Location:</label>
+            <input
+              onChange={this.handleChange}
+              name="location"
+              value={this.state.location}
+              required
+            />
+          </div>
+          <br />
           <button type="submit">Create User!</button>
         </form>
       </div>

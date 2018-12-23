@@ -10,10 +10,9 @@
     color: white;
     border-bottom: 2px solid var(--accent-yellow);
     width: 100%;
-    height: 76px;
     text-shadow: 1px 1px rgba(100, 20, 255, 0.2);
   }
-  
+
 #header img {
   position: fixed;
   left: -20px;
