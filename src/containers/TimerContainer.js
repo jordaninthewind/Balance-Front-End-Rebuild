@@ -58,12 +58,8 @@ class TimerContainer extends PureComponent {
           })
         }
       )
-        .then(function(res) {
-          alert('Saved session!');
-        })
-        .catch(function(res) {
-          console.log(res);
-        });
+      .then(res => alert('Saved session!'))
+      .catch(res => console.log(res));
 
       this.setState({
         timeCount: 0,

@@ -1,9 +1,11 @@
 :root {
-  --primary-color: rgba(168, 240, 255, 1);
   --accent-yellow: rgba(255, 234, 0, 1);
-  --gradient-purple: rgba(194, 190, 255, 1);
+  --primary-color: rgba(168, 240, 255, 1);
   --gradient-blue: rgba(125, 233, 255, 0.67);
+  --darker-blue: rgba(125, 233, 255, 0.8);
+  --gradient-purple: rgba(194, 190, 255, 1);
   --middle-purple: rgba(100, 20, 255, 0.3);
+  --darker-purple: rgba(100, 20, 255, 0.4);
 }
 
 body {
@@ -20,15 +22,10 @@ body {
   color: rgba(100, 20, 255, 0.5);
   font-size: 1.3em;
   position: relative;
-
-}
-
-.componentContainer {
-  margin: 0 auto;
 }
 
 .title {
-  color: var(--middle-purple);
+  color: var(--darker-purple);
   font-size: 3em;
   margin: 1em;
 }
@@ -41,12 +38,10 @@ body {
 
 button {
   width: 100%;
-  border: 0;
-  border-radius: 0;
-  font-size: 3em;
   background-color: var(--middle-purple);
-  padding: 5%;
-  margin: 5px;
+  border: 1px solid var(--darker-purple);
+  font-size: 5em;
+  padding: 3%;
   outline: none;
   color: white;
   font-weight: bold;
@@ -65,8 +60,26 @@ button:hover {
 
 /* Handles landscape mode on most phones*/
 @media screen and (max-width: 800px) and (max-height: 500px) {
-  #header img {
+  #header {
     display: none;
+  }
+
+  #navBar {
+    padding: 2%;
+  }
+
+  #navBar a {
+    padding: 0 3%;
+    font-weight: bolder;
+  }
+
+  button {
+    max-width: 33%;
+    min-height: 30%;
+  }
+
+  .profilePicture {
+    max-width: 50%;
   }
 
   #userComponent {
@@ -76,7 +89,8 @@ button:hover {
 
   .component {
     display: flex;
-    overflow: hidden;
+    overflow: auto;
+    min-height: 100%;
   }
 
   .title {
@@ -85,6 +99,15 @@ button:hover {
 
   #timer {
     font-size: 3em;
+  }
+
+  #footer {
+    display: none;
+  }
+
+  #buttonContainer {
+    min-width: 50%;
+    min-height: 100%;
   }
 }
 

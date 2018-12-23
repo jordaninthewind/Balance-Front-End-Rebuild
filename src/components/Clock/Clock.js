@@ -22,24 +22,22 @@ const Clock = ({
     timeCount < 60 ? timeCount : minutes + ':' + seconds();
 
   return (
-    <div className="component">
+    <div>
       <div className="title">Time Since Start</div>
       <div id="timer">{timeSpentMeditating}</div>
-      {!timerStarted ? (
-        <button onClick={startClock}>
-          Start
-        </button>
-      ) : (
-        <button onClick={pauseClock}>
-          Pause
-        </button>
-      )}
-      {timeCount > 0 && (
-        <>
-          <button onClick={resetClock}>Reset</button>
-          <button onClick={saveSession}>Save</button>
-        </>
-      )}
+      <div id="buttonContainer">
+        {!timerStarted ? (
+          <button onClick={startClock}>Start</button>
+        ) : (
+          <button onClick={pauseClock}>Pause</button>
+        )}
+        {timeCount > 0 && (
+          <>
+            <button onClick={resetClock}>Reset</button>
+            <button onClick={saveSession}>Save</button>
+          </>
+        )}
+      </div>
     </div>
   );
 };

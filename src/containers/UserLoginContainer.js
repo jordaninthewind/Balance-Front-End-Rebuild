@@ -48,13 +48,14 @@ class UserLoginContainer extends Component {
             Balance is a simple app to track your daily meditation, find
             inspiration through quotes and resources, and track progress.
           </div>
-          <br />
-          <button onClick={this.displayLoginUserForm}>Login</button>
-          <button onClick={this.displayCreateUserForm}>Sign Up</button>
-          <br />
-          <br />
           {this.state.displayLoginUser && <LoginUserForm />}
           {this.state.displayCreateUser && <CreateUserForm />}
+          {!this.state.displayLoginUser && (
+            <button onClick={this.displayLoginUserForm}>Login</button>
+          )}
+          {!this.state.displayCreateUser && (
+            <button onClick={this.displayCreateUserForm}>Sign Up</button>
+          )}
         </>
       );
     } else {

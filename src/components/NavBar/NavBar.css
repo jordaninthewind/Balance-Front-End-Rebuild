@@ -1,6 +1,7 @@
 #navBar {
   width: 100%;
   background-color: var(--primary-color);
+  margin-bottom: 5%;
 }
 
 .menuTile {

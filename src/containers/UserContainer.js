@@ -36,16 +36,12 @@ class UserContainer extends Component {
     } else {
       return (
         <div id="userComponent">
-          <div className="title">Logged In As:</div>
           {this.props.currentUser && (
-            <UserInfo currentUserData={this.props.currentUser} />
-          )}
-          {!this.props.currentUser && <h3>Please select a current user.</h3>}
-          {this.props.currentUser && (
-            <button onClick={() => this.props.logOut()}>Log Out</button>
-          )}
-          {this.props.currentUser && (
-            <button onClick={this.displayUpdateUserForm}>Update User</button>
+            <div>
+              <UserInfo currentUserData={this.props.currentUser} />
+              <button onClick={this.props.logOut}>Log Out</button>
+              <button onClick={this.displayUpdateUserForm}>Update User</button>
+            </div>
           )}
         </div>
       );

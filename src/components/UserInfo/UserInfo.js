@@ -8,21 +8,21 @@ const UserInfo = ({ currentUserData }) => {
   const seconds = currentUserData.total_time % 60;
 
   return (
-    <div>
-      <div className="subtitle">User Name: {currentUserData.name}</div>
+    <div className="container">
       <div>
         <img
-          className="profile"
+          className="profilePicture"
           alt="profile_picture"
           src={currentUserData.profile_url}
         />
+        <div className="title">User Name: {currentUserData.name}</div>
       </div>
-      <div className='subtitle'>
+      <div className="subtitle">
         Total Time:
         {' ' + hours}:{totalMinutes < 10 ? '0' + totalMinutes : totalMinutes}:
         {seconds < 10 ? '0' + seconds : seconds}
       </div>
-      <div className='subtitle'>Location: {currentUserData.location}</div>
+      <div className="subtitle">Location: {currentUserData.location}</div>
     </div>
   );
 };
