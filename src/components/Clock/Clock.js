@@ -22,7 +22,7 @@ const Clock = ({
     timeCount < 60 ? timeCount : minutes + ':' + seconds();
 
   return (
-    <div>
+    <div className="component">
       <div className="title">Time Since Start</div>
       <div id="timer">{timeSpentMeditating}</div>
       {!timerStarted ? (

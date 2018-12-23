@@ -35,7 +35,7 @@ class UserContainer extends Component {
       );
     } else {
       return (
-        <div>
+        <div id="userComponent">
           <div className="title">Logged In As:</div>
           {this.props.currentUser && (
             <UserInfo currentUserData={this.props.currentUser} />

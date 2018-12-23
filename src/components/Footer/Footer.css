@@ -11,6 +11,7 @@
     var(--middle-purple) 25%,
     var(--gradient-blue) 80%
   );
+  background-color: white;
   cursor: default;
   padding: 10px;
 }
