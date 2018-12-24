@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import { checkCurrentUserStorage } from './reducers/usersReducer';
+import { checkCurrentUserStorage } from './actions/actions';
 import Header from './components/Header/Header.js';
 import NavBar from './components/NavBar/NavBar';
 import MeditationSessionsContainer from './containers/MeditationSessionsContainer';

@@ -6,7 +6,7 @@ import {
   deleteUser,
   updateUser,
   deleteCurrentUser
-} from '../reducers/usersReducer';
+} from '../actions/actions';
 
 class UserContainer extends Component {
   constructor(props) {

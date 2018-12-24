@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createUser } from '../reducers/usersReducer';
+import { createUser } from '../actions/actions';
 import { connect } from 'react-redux';
 
 class CreateUserForm extends Component {

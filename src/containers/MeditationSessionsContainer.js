@@ -4,7 +4,7 @@ import Session from '../components/Session/Session';
 import {
   getUserMeditationSessions,
   deleteMeditationSession
-} from '../reducers/meditationSessionsReducer';
+} from '../actions/actions';
 
 class MeditationSessionsContainer extends Component {
   componentDidMount() {
