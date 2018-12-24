@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
   setCurrentUser,
   checkCurrentUserStorage
-} from '../reducers/usersReducer';
+} from '../actions/actions';
 import LoginUserForm from '../components/LoginUserForm/LoginUserForm';
 import CreateUserForm from '../components/CreateUserForm';
 import UserContainer from './UserContainer';

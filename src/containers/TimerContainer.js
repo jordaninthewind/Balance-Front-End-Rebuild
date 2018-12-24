@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Clock from '../components/Clock/Clock';
+import CountdownTimer from '../components/CountdownTimer/CountdownTimer';
 
 class TimerContainer extends PureComponent {
   constructor(props) {
@@ -8,7 +9,9 @@ class TimerContainer extends PureComponent {
 
     this.state = {
       timeCount: 0,
-      timerStarted: false
+      timerStarted: false,
+      countdownTimeCount: 600,
+      countdown: true
     };
   }
 
@@ -58,8 +61,8 @@ class TimerContainer extends PureComponent {
           })
         }
       )
-      .then(res => alert('Saved session!'))
-      .catch(res => console.log(res));
+        .then(res => alert('Saved session!'))
+        .catch(res => console.log(res));
 
       this.setState({
         timeCount: 0,
@@ -73,17 +76,31 @@ class TimerContainer extends PureComponent {
     }
   };
 
+  changeTimers = () => {
+    this.setState({
+      countdown: !this.state.countdown
+    });
+  };
+
   render() {
     return (
       <>
-        <Clock
-          timeCount={this.state.timeCount}
-          startClock={this.startClock}
-          pauseClock={this.pauseClock}
-          resetClock={this.resetClock}
-          saveSession={this.saveSession}
-          timerStarted={this.state.timerStarted}
-        />
+        <button onClick={this.changeTimers}>Change Timer</button>
+        {this.state.countdown ? (
+          <CountdownTimer
+            countdownTimeCount={this.state.countdownTimeCount}
+            startClock={this.startClock}
+          />
+        ) : (
+          <Clock
+            timeCount={this.state.timeCount}
+            startClock={this.startClock}
+            pauseClock={this.pauseClock}
+            resetClock={this.resetClock}
+            saveSession={this.saveSession}
+            timerStarted={this.state.timerStarted}
+          />
+        )}
       </>
     );
   }

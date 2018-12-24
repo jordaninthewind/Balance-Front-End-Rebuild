@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllQuotes } from '../../reducers/quotesReducer';
+import { getAllQuotes } from '../../actions/actions';
 import Quote from '../Quote.js';
 import './Footer.css';
 
