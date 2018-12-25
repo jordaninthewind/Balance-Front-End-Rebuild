@@ -1,7 +1,7 @@
 import React from 'react';
 import './CountdownTimer.css';
 
-const CountdownTimer = ({ countdownTimeCount, startClock}) => {
+const CountdownTimer = ({ countdownTimeCount, startClock }) => {
   return (
     <div>
       <div>{countdownTimeCount}</div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { loginUser } from '../../reducers/usersReducer';
+import { loginUser } from '../../actions/actions';
 import { connect } from 'react-redux';
 import './LoginUserForm.css';
 
