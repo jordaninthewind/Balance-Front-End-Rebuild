@@ -22,7 +22,7 @@ const Clock = ({
     timeCount < 60 ? timeCount : minutes + ':' + seconds();
 
   return (
-    <div>
+    <>
       <div className="title">Time Since Start</div>
       <div id="timer">{timeSpentMeditating}</div>
       <div id="buttonContainer">
@@ -31,14 +31,14 @@ const Clock = ({
         ) : (
           <button onClick={pauseClock}>Pause</button>
         )}
-        {timeCount > 0 && (
+        { !!timerStarted && (
           <>
             <button onClick={resetClock}>Reset</button>
             <button onClick={saveSession}>Save</button>
           </>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

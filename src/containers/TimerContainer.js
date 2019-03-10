@@ -1,20 +1,21 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Clock from '../components/Clock/Clock';
 
-class TimerContainer extends PureComponent {
+class TimerContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      timerStarted: false,
+      timeStart: null,
       timeCount: 0,
-      timerStarted: false
-    };
+    }
   }
 
   timer = () => {
     this.setState({
-      timeCount: this.state.timeCount + 1
+      timeCount: ~~((Date.now() - this.state.timeStart) / 1000),
     });
   };
 
@@ -22,7 +23,8 @@ class TimerContainer extends PureComponent {
     if (this.state.timerStarted === false) {
       this.intervalId = setInterval(this.timer.bind(this), 1000);
       this.setState({
-        timerStarted: true
+        timerStarted: true,
+        timeStart: Date.now(),
       });
     }
   };
@@ -37,16 +39,17 @@ class TimerContainer extends PureComponent {
   resetClock = e => {
     clearInterval(this.intervalId);
     this.setState({
+      timerStarted: false,
+      timeStart: null,
       timeCount: 0,
-      timerStarted: false
     });
   };
 
   saveSession = e => {
     if (this.props.currentUser && this.state.timeCount > 0) {
       fetch(
-        `https://balance-backend-v2.herokuapp.com/users/${
-          this.props.currentUser.id
+        `${process.env.REACT_APP_BASE_URL}/users/${
+        this.props.currentUser.id
         }/meditation_sessions`,
         {
           headers: {
@@ -58,8 +61,8 @@ class TimerContainer extends PureComponent {
           })
         }
       )
-      .then(res => alert('Saved session!'))
-      .catch(res => console.log(res));
+        .then(() => alert('Saved session!'))
+        .catch(res => console.log(res));
 
       this.setState({
         timeCount: 0,
@@ -75,16 +78,14 @@ class TimerContainer extends PureComponent {
 
   render() {
     return (
-      <>
-        <Clock
-          timeCount={this.state.timeCount}
-          startClock={this.startClock}
-          pauseClock={this.pauseClock}
-          resetClock={this.resetClock}
-          saveSession={this.saveSession}
-          timerStarted={this.state.timerStarted}
-        />
-      </>
+      <Clock
+        timeCount={this.state.timeCount}
+        startClock={this.startClock}
+        pauseClock={this.pauseClock}
+        resetClock={this.resetClock}
+        saveSession={this.saveSession}
+        timerStarted={this.state.timerStarted}
+      />
     );
   }
 }
