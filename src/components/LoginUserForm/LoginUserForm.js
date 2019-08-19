@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { loginUser } from '../../reducers/usersReducer';
 import { connect } from 'react-redux';
+import { Button } from 'reactstrap';
 import './LoginUserForm.css';
 
 class LoginUserForm extends Component {
@@ -50,7 +51,7 @@ class LoginUserForm extends Component {
           />
           </div>
           <br />
-          <button type="submit">Log In!</button>
+          <Button type="submit">Log In!</Button>
         </form>
       </div>
     );

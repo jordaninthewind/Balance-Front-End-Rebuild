@@ -1,10 +1,11 @@
 #footer {
   position: fixed;
   bottom: 0;
-  width: 100%;
-  color: white;
-  font-size: 1.2em;
-  border-top: 2px solid var(--accent-yellow);
+  width: 100vw;
+  color: #FCFCFC;
+  font-weight: q500;
+  font-size: 1.5em;
+  border-top: 6px solid gold;
   background: linear-gradient(
     45deg,
     var(--gradient-purple) 0%,
@@ -14,4 +15,8 @@
   background-color: white;
   cursor: default;
   padding: 10px;
+  div {
+    text-align: center;
+    padding: 0 5vw;
+  }
 }

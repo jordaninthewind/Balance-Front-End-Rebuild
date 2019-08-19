@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UserInfo from '../components/UserInfo/UserInfo';
 import { connect } from 'react-redux';
 import UpdateUserForm from '../components/UpdateUserForm';
+import { Button } from 'reactstrap';
 import {
   deleteUser,
   updateUser,
@@ -39,8 +40,8 @@ class UserContainer extends Component {
           {this.props.currentUser && (
             <div>
               <UserInfo currentUserData={this.props.currentUser} />
-              <button onClick={this.props.logOut}>Log Out</button>
-              <button onClick={this.displayUpdateUserForm}>Update User</button>
+              <Button onClick={this.props.logOut}>Log Out</Button>
+              <Button onClick={this.displayUpdateUserForm}>Update User</Button>
             </div>
           )}
         </div>

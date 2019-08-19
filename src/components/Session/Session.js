@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'reactstrap';
 import './Session.css';
 
 const Session = props => {
@@ -17,7 +18,7 @@ const Session = props => {
         {minutes >= 10 ? minutes : '0' + minutes}:
         {seconds >= 10 ? seconds : '0' + seconds}
         <span>
-          <button
+          <Button
             onClick={() => {
               if (
                 window.confirm('Are you sure you want to delete this session?')
@@ -26,7 +27,7 @@ const Session = props => {
             }}
           >
             X
-          </button>
+          </Button>
         </span>
       </div>
       <div>{props.session.date}</div>

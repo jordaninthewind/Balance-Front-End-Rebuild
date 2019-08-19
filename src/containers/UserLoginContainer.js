@@ -7,6 +7,7 @@ import {
 import LoginUserForm from '../components/LoginUserForm/LoginUserForm';
 import CreateUserForm from '../components/CreateUserForm';
 import UserContainer from './UserContainer';
+import { Button } from 'reactstrap';
 
 class UserLoginContainer extends Component {
   constructor(props) {
@@ -51,10 +52,10 @@ class UserLoginContainer extends Component {
           {this.state.displayLoginUser && <LoginUserForm />}
           {this.state.displayCreateUser && <CreateUserForm />}
           {!this.state.displayLoginUser && (
-            <button onClick={this.displayLoginUserForm}>Login</button>
+            <Button onClick={this.displayLoginUserForm}>Login</Button>
           )}
           {!this.state.displayCreateUser && (
-            <button onClick={this.displayCreateUserForm}>Sign Up</button>
+            <Button onClick={this.displayCreateUserForm}>Sign Up</Button>
           )}
         </>
       );

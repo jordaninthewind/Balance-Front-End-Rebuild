@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
 
 class UpdateUserForm extends Component {
   constructor(props) {
@@ -28,9 +29,9 @@ class UpdateUserForm extends Component {
     return (
       <div className="App-component">
         <h2>Update User</h2>
-        <button onClick={() => this.props.displayUpdateUser()}>
+        <Button onClick={() => this.props.displayUpdateUser()}>
           Return To User
-        </button>
+        </Button>
         <h6>All Fields and Password Required for Valid Update</h6>
         <form onSubmit={e => this.handleSubmit(e)}>
           First Name:{' '}
@@ -76,16 +77,16 @@ class UpdateUserForm extends Component {
           />
           <br />
           <br />
-          <button type="submit">Update User</button>
+          <Button type="submit">Update User</Button>
         </form>
-        <button
+        <Button
           onClick={() => {
             if (window.confirm('Click to confirm delete'))
               this.props.deleteUser(this.props.currentUser);
           }}
         >
           Delete Account
-        </button>
+        </Button>
       </div>
     );
   }

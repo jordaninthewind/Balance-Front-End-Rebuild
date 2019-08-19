@@ -1,5 +1,6 @@
-import React from 'react';
-import './Clock.css';
+import React from "react";
+import { Button } from "reactstrap";
+import "./Clock.css";
 
 const Clock = ({
   timeCount,
@@ -12,14 +13,14 @@ const Clock = ({
   const minutes = ~~(timeCount / 60);
   const seconds = () => {
     if (timeCount % 60 < 10) {
-      return '0' + (timeCount % 60);
+      return "0" + (timeCount % 60);
     } else {
       return timeCount % 60;
     }
   };
 
   const timeSpentMeditating =
-    timeCount < 60 ? timeCount : minutes + ':' + seconds();
+    timeCount < 60 ? timeCount : minutes + ":" + seconds();
 
   return (
     <>
@@ -27,14 +28,14 @@ const Clock = ({
       <div id="timer">{timeSpentMeditating}</div>
       <div id="buttonContainer">
         {!timerStarted ? (
-          <button onClick={startClock}>Start</button>
+          <Button onClick={startClock}>Start</Button>
         ) : (
-          <button onClick={pauseClock}>Pause</button>
+          <Button onClick={pauseClock}>Pause</Button>
         )}
-        { !!timerStarted && (
+        {!!timerStarted && (
           <>
-            <button onClick={resetClock}>Reset</button>
-            <button onClick={saveSession}>Save</button>
+            <Button onClick={resetClock}>Reset</Button>
+            <Button onClick={saveSession}>Save</Button>
           </>
         )}
       </div>

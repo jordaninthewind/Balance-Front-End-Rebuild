@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
 import store from './store';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'normalize.css';
 import './index.css';
 

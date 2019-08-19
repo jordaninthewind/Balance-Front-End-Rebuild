@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createUser } from '../reducers/usersReducer';
 import { connect } from 'react-redux';
+import { Button } from 'reactstrap';
 
 class CreateUserForm extends Component {
   constructor(props) {
@@ -91,7 +92,7 @@ class CreateUserForm extends Component {
             />
           </div>
           <br />
-          <button type="submit">Create User!</button>
+          <Button type="submit">Create User!</Button>
         </form>
       </div>
     );

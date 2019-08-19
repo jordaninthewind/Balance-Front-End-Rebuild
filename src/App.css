@@ -11,7 +11,7 @@
 body {
   cursor: default;
   text-align: center;
-  font-family: Raleway;
+  font-family: Raleway !important;
   font-size: 12px;
 }
 
@@ -20,7 +20,7 @@ body {
   align-content: space-around;
   overflow: auto;
   color: rgba(100, 20, 255, 0.5);
-  font-size: 1.3em;
+  font-size: 16px;
   position: relative;
 }
 
@@ -36,7 +36,7 @@ body {
   margin: .5em;
 }
 
-button {
+/* button {
   width: 100%;
   background-color: var(--middle-purple);
   border: 1px solid var(--darker-purple);
@@ -45,7 +45,7 @@ button {
   outline: none;
   color: white;
   font-weight: bold;
-}
+} */
 
 button:hover {
   color: var(--middle-purple);
@@ -114,13 +114,13 @@ button:hover {
 /*Smaller screen than vertical iPhone 8plus*/
 @media screen and (max-width: 700px) {
   #header {
-    font-size: 3em;
+    font-size: 2em;
     font-weight: bold;
   }
-
+/* 
   #header img {
     display: none;
-  }
+  } */
 
   #navBar {
     font-size: .8em;

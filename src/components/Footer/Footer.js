@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllQuotes } from '../../reducers/quotesReducer';
 import Quote from '../Quote.js';
-import './Footer.css';
+import './Footer.scss';
 
 class Footer extends Component {
   constructor(props) {
