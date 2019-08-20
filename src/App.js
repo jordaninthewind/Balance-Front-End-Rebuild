@@ -9,7 +9,7 @@ import UserLoginContainer from "./containers/UserLoginContainer";
 import ResourcesContainer from "./containers/ResourcesContainer";
 import Footer from "./components/Footer/Footer";
 import { Lost } from "./components/Lost";
-import "./App.css";
+import "./App.scss";
 
 class App extends Component {
   componentDidMount() {
@@ -20,16 +20,18 @@ class App extends Component {
     return (
       <>
         <NavBar />
-        <Switch>
-          <Route exact path="/" component={UserLoginContainer} />
-          <Route
-            path="/meditation_sessions"
-            component={MeditationSessionsContainer}
-          />
-          <Route path="/timer" component={TimerContainer} />
-          <Route path="/resources" component={ResourcesContainer} />
-          <Route component={Lost} />
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route exact path="/" component={UserLoginContainer} />
+            <Route
+              path="/meditation_sessions"
+              component={MeditationSessionsContainer}
+            />
+            <Route path="/timer" component={TimerContainer} />
+            <Route path="/resources" component={ResourcesContainer} />
+            <Route component={Lost} />
+          </Switch>
+        </div>
         <Footer />
       </>
     );

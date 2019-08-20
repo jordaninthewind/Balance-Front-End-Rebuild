@@ -28,9 +28,11 @@
     rgba(125, 233, 255, 0.67) 80%
   );
   color: white;
-  .nav-link:hover {
+  .nav-link {
+    color: white;
+    .active {
     color: gold;
-    // color: rgba(194, 190, 255, 1);
+    }
   }
   border-bottom: 12px solid gold;
   width: 100%;
@@ -40,4 +42,7 @@
 img {
   height: 10vw;
   width: 10vw;
+  @media screen and (max-width: 427px) {
+    display: none;
+  }
 }
