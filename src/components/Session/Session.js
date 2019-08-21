@@ -4,8 +4,8 @@ import './Session.css';
 
 const Session = props => {
   let seconds = props.session.duration % 60;
-  let minutes = Math.floor(props.session.duration / 60);
-  let hours = Math.floor(props.session.duration / 3600);
+  let minutes = ~~(props.session.duration / 60);
+  let hours = ~~(props.session.duration / 3600);
   if (minutes > 60) {
     minutes = minutes - hours * 60;
   }
@@ -19,12 +19,7 @@ const Session = props => {
         {seconds >= 10 ? seconds : '0' + seconds}
         <span>
           <Button
-            onClick={() => {
-              if (
-                window.confirm('Are you sure you want to delete this session?')
-              )
-                props.deleteSession(props.currentUser, props.session.id);
-            }}
+            onClick={() => { if (window.confirm('Are you sure you want to delete this session?')) props.deleteSession(props.currentUser, props.session.id); }}
           >
             X
           </Button>

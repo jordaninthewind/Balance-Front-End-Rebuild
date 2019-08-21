@@ -1,13 +1,28 @@
-import React from 'react';
-import './ResourceTile.css';
+import React from "react";
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button
+} from "reactstrap";
+import "./ResourceTile.scss";
 
 const ResourceTile = ({ image, link, title }) => {
   return (
-    <div className='resourceTile'>
-      <img src={image} alt="" />
-      <p><a href={link}>{title}</a></p>
-    </div>
+    <Card>
+      <CardImg src={image} alt="" top />
+      <CardTitle>
+        <a href={link}>{title}</a>
+      </CardTitle>
+    </Card>
   );
 };
+
+ResourceTile.defaultProps = {
+  image:  'shambhala sun.png'
+}
 
 export default ResourceTile;

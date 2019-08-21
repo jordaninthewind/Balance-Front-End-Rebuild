@@ -31,9 +31,8 @@ class NavBar extends React.Component {
     return (
       <div>
         <Navbar color="faded" id="header" expand="md" light>
-          <NavbarBrand>
-            B a l a n c e <img src="shambhala sun.png" alt="" />
-          </NavbarBrand>
+          <img className="logo-img" src="shambhala sun.png" alt="" />
+          <NavbarBrand>B a l a n c e</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

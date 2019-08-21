@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import ResourceTile from '../components/ResourceTile/ResourceTile';
+import React, { PureComponent } from "react";
+import ResourceTile from "../components/ResourceTile/ResourceTile";
 
 class ResourcesContainer extends PureComponent {
   constructor(props) {
@@ -7,16 +7,25 @@ class ResourcesContainer extends PureComponent {
 
     this.state = {
       resources: [
-        { name: "Lion's Roar", link: 'http://www.lionsroar.com' },
         {
-          name: 'Github Frontend',
-          link: 'http://github.com/jordaninthewind/Balance-Front-End-Rebuild'
+          name: "Lion's Roar",
+          link: "http://www.lionsroar.com",
+          image:
+            "https://thebuddhistcentre.com/sites/default/files/styles/gallery_full_size/public/users/157/groups/images/screen_shot_2018-11-06_at_17.08.27.png"
         },
         {
-          name: 'Github Backend',
-          link: 'http://github.com/jordaninthewind/balance-fis'
+          name: "Github Frontend",
+          link: "http://github.com/jordaninthewind/Balance-Front-End-Rebuild",
+          image:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/120px-Octicons-mark-github.svg.png"
         },
-        { name: 'Personal Page', link: 'http://www.jordan-kline.com' }
+        {
+          name: "Github Backend",
+          link: "http://github.com/jordaninthewind/balance-fis",
+          image:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/120px-Octicons-mark-github.svg.png"
+        },
+        { name: "Personal Page", link: "https://jordan-kline.com", image: "jordan-kline.png" }
       ]
     };
   }
@@ -24,18 +33,18 @@ class ResourcesContainer extends PureComponent {
   render() {
     return (
       <>
-        <div className="title">Links:</div>
+        <h1>Relevant Links:</h1>
         <div className="component">
-        {this.state.resources.map((res, idx) => {
-          return (
-            <ResourceTile
-              key={idx}
-              image={'../../public/shambhala sun.png'}
-              title={res.name}
-              link={res.link}
-            />
-          );
-        })}
+          {this.state.resources.map((res, idx) => {
+            return (
+              <ResourceTile
+                key={idx}
+                image={res.image}
+                title={res.name}
+                link={res.link}
+              />
+            );
+          })}
         </div>
       </>
     );

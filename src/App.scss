@@ -17,7 +17,8 @@ body {
 
 .component {
   display: flex;
-  align-content: space-around;
+  justify-content: space-around;
+  flex-wrap: wrap;
   overflow: auto;
   color: rgba(100, 20, 255, 0.5);
   font-size: 16px;

@@ -12,6 +12,7 @@
 .navbar-brand.navbar-brand {
   font-size: 10rem;
   margin-left: 2vw;
+  z-index: 10;
   @media screen and (max-width: 1500px) {
     font-size: 5rem;
   }
@@ -39,10 +40,12 @@
   text-shadow: 1px 1px rgba(100, 20, 255, 0.2);
 }
 
-img {
-  height: 10vw;
-  width: 10vw;
+.logo-img {
+  position: absolute;
+  max-height: 20vw;
+  max-width: 20vw;
+  z-index: 1;
   @media screen and (max-width: 427px) {
-    display: none;
+    // display: none;
   }
 }

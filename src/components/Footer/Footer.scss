@@ -4,7 +4,7 @@
   width: 100vw;
   color: #FCFCFC;
   font-weight: q500;
-  font-size: 1.5em;
+  font-size: 1.25em;
   border-top: 6px solid gold;
   background: linear-gradient(
     45deg,
@@ -16,8 +16,9 @@
   cursor: default;
   padding: 10px;
   margin-top: 20px;
+  min-height: 100px;
   div {
     text-align: center;
-    padding: 0 5vw;
+    padding: 3vh 5vw;
   }
 }
