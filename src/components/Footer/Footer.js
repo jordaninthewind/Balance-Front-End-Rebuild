@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getAllQuotes } from '../../reducers/quotesReducer';
-import Quote from '../Quote.js';
-import './Footer.scss';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getAllQuotes } from "../../reducers/quotesReducer";
+import Quote from "../Quote.js";
+import "./Footer.scss";
 
 class Footer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = 
+    this.state = {
       currentQuoteIndex: 0
     };
   }
@@ -29,7 +29,7 @@ class Footer extends Component {
     return (
       <div id="footer" onClick={this.selectQuote}>
         {this.props.quotes.length && (
-          <Quote 
+          <Quote
             content={this.props.quotes[this.state.currentQuoteIndex].content}
             author={this.props.quotes[this.state.currentQuoteIndex].author}
           />
