@@ -28,14 +28,14 @@ const Clock = ({
       <div id="timer">{timeSpentMeditating}</div>
       <div id="buttonContainer">
         {!timerStarted ? (
-          <Button onClick={startClock}>Start</Button>
+          <Button onClick={startClock} className="btn-light">Start</Button>
         ) : (
-          <Button onClick={pauseClock}>Pause</Button>
+          <Button onClick={pauseClock} className="btn-light">Pause</Button>
         )}
         {!!timerStarted && (
           <>
-            <Button onClick={resetClock}>Reset</Button>
-            <Button onClick={saveSession}>Save</Button>
+            <Button onClick={resetClock} className="btn-light">Reset</Button>
+            <Button onClick={saveSession} className="btn-light">Save</Button>
           </>
         )}
       </div>

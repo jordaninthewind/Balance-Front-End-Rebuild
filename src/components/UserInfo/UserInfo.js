@@ -9,16 +9,12 @@ const UserInfo = ({ currentUserData }) => {
 
   return (
     <div className="container">
-      <div>
-        <img
-          className="profilePicture"
-          alt="profile_picture"
-          src={'shambhala sun.png'}
-          height="250px"
-          width="250px"
-        />
-        <div className="title">User Name: {currentUserData.name}</div>
-      </div>
+      <img
+        className="profilePicture"
+        alt="profile"
+        src={currentUserData.profile_url}
+      />
+      <div className="title">User Name: {currentUserData.name}</div>
       <div className="subtitle">
         Total Time:
         {" " + hours}:{totalMinutes < 10 ? "0" + totalMinutes : totalMinutes}:

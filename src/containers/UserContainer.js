@@ -40,8 +40,8 @@ class UserContainer extends Component {
           {this.props.currentUser && (
             <div>
               <UserInfo currentUserData={this.props.currentUser} />
-              <Button onClick={this.props.logOut}>Log Out</Button>
-              <Button onClick={this.displayUpdateUserForm}>Update User</Button>
+              <Button onClick={this.props.logOut} className="btn-light">Log Out</Button>
+              <Button onClick={this.displayUpdateUserForm} className="btn-light">Update User</Button>
             </div>
           )}
         </div>

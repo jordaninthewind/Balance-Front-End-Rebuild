@@ -51,7 +51,7 @@ class LoginUserForm extends Component {
           />
           </div>
           <br />
-          <Button type="submit">Log In!</Button>
+          <Button type="submit" className="btn-light">Log In!</Button>
         </form>
       </div>
     );

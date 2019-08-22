@@ -1,32 +1,37 @@
-import React from 'react';
-import { Button } from 'reactstrap';
-import './Session.css';
+import React from "react";
+import { Button, Card, CardTitle, CardSubtitle } from "reactstrap";
+import "./Session.scss";
 
-const Session = props => {
-  let seconds = props.session.duration % 60;
-  let minutes = ~~(props.session.duration / 60);
-  let hours = ~~(props.session.duration / 3600);
+const Session = ({ session, deleteSession, currentUser }) => {
+  let seconds = session.duration % 60;
+  let minutes = ~~(session.duration / 60);
+  let hours = ~~(session.duration / 3600);
+
   if (minutes > 60) {
     minutes = minutes - hours * 60;
   }
 
   return (
-    <div className="session">
-      <div>
-        Duration:
-        {hours >= 10 ? ' ' + hours : ' 0' + hours}:
-        {minutes >= 10 ? minutes : '0' + minutes}:
-        {seconds >= 10 ? seconds : '0' + seconds}
-        <span>
-          <Button
-            onClick={() => { if (window.confirm('Are you sure you want to delete this session?')) props.deleteSession(props.currentUser, props.session.id); }}
-          >
-            X
-          </Button>
-        </span>
-      </div>
-      <div>{props.session.date}</div>
-    </div>
+    <>
+      <Card className="session">
+        <Button
+          className="btn-light"
+          onClick={() => {
+            if (window.confirm("Are you sure you want to delete this session?"))
+              deleteSession(currentUser, session.id);
+          }}
+        >
+          X
+        </Button>
+        <CardTitle>
+          Duration:
+          {hours >= 10 ? " " + hours : " 0" + hours}:
+          {minutes >= 10 ? minutes : "0" + minutes}:
+          {seconds >= 10 ? seconds : "0" + seconds}
+        </CardTitle>
+        <CardSubtitle>{session.date}</CardSubtitle>
+      </Card>
+    </>
   );
 };
 

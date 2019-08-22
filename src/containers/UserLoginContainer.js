@@ -52,10 +52,10 @@ class UserLoginContainer extends Component {
           {this.state.displayLoginUser && <LoginUserForm />}
           {this.state.displayCreateUser && <CreateUserForm />}
           {!this.state.displayLoginUser && (
-            <Button onClick={this.displayLoginUserForm}>Login</Button>
+            <Button onClick={this.displayLoginUserForm} className="btn-light">Login</Button>
           )}
           {!this.state.displayCreateUser && (
-            <Button onClick={this.displayCreateUserForm}>Sign Up</Button>
+            <Button onClick={this.displayCreateUserForm} className="btn-light">Sign Up</Button>
           )}
         </>
       );

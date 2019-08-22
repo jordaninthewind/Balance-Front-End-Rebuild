@@ -29,7 +29,7 @@ class UpdateUserForm extends Component {
     return (
       <div className="App-component">
         <h2>Update User</h2>
-        <Button onClick={() => this.props.displayUpdateUser()}>
+        <Button className="btn-light" onClick={() => this.props.displayUpdateUser()}>
           Return To User
         </Button>
         <h6>All Fields and Password Required for Valid Update</h6>
@@ -77,9 +77,9 @@ class UpdateUserForm extends Component {
           />
           <br />
           <br />
-          <Button type="submit">Update User</Button>
+          <Button className="btn-light" type="submit">Update User</Button>
         </form>
-        <Button
+        <Button className="btn-light"
           onClick={() => {
             if (window.confirm('Click to confirm delete'))
               this.props.deleteUser(this.props.currentUser);

@@ -92,7 +92,7 @@ class CreateUserForm extends Component {
             />
           </div>
           <br />
-          <Button type="submit">Create User!</Button>
+          <Button type="submit" className="btn-light">Create User!</Button>
         </form>
       </div>
     );
