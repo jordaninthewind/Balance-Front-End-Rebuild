@@ -9,14 +9,13 @@ class TimerContainer extends Component {
     this.state = {
       timerStarted: false,
       timeStart: null,
-      sessionTime: 0,
       timeCount: 0,
     }
   }
 
   timer = () => {
     this.setState({
-      sessionTime: ~~((Date.now() - this.state.timeStart) / 1000),
+      timeCount: ~~((Date.now() - this.state.timeStart) / 1000),
     });
   };
 
@@ -33,7 +32,7 @@ class TimerContainer extends Component {
   pauseClock = e => {
     clearInterval(this.intervalId);
     this.setState({
-      timerStarted: false,
+      timerStarted: false
     });
   };
 
@@ -46,7 +45,7 @@ class TimerContainer extends Component {
     });
   };
 
-  saveSession = () => {
+  saveSession = e => {
     if (this.props.currentUser && this.state.timeCount > 0) {
       fetch(
         `${process.env.REACT_APP_BASE_URL}/users/${

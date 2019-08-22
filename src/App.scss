@@ -34,25 +34,18 @@ body {
 .title {
   color: var(--darker-purple);
   font-size: 3em;
-  margin: 1em;
+  margin: .5em;
 }
 
 .subtitle {
   color: var(--middle-purple);
   font-size: 2em;
-  margin: .5em;
 }
 
-/* button {
-  width: 100%;
-  background-color: var(--middle-purple);
-  border: 1px solid var(--darker-purple);
-  font-size: 5em;
+button {
+  min-width: 50px;
   padding: 3%;
-  outline: none;
-  color: white;
-  font-weight: bold;
-} */
+}
 
 button:hover {
   color: var(--middle-purple);
