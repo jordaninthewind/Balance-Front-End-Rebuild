@@ -10,10 +10,18 @@
 }
 
 .navbar-brand.navbar-brand {
+  a {
+    color: white;
+    text-decoration: none;
+  }
   margin-left: 2vw;
   z-index: 10;
-  @media screen and (max-width: 1500px) {
-    font-size: 5rem;
+  font-size: 5rem;
+  // @media screen and (max-width: 1500px) {
+  //   font-size: 5rem;
+  // }
+  @media screen and (max-width: 415px) {
+    font-size: 3rem;
   }
 }
 
@@ -39,12 +47,7 @@
 }
 
 .logo-img {
-  position: fixed;
-  top: 10;
-  max-height: 20vw;
-  max-width: 20vw;
+  max-height: 10vw;
+  max-width: 10vw;
   z-index: 1;
-  @media screen and (max-width: 427px) {
-    // display: none;
-  }
 }
