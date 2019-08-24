@@ -16,19 +16,17 @@
   }
   margin-left: 2vw;
   z-index: 10;
-  font-size: 5rem;
-  // @media screen and (max-width: 1500px) {
-  //   font-size: 5rem;
-  // }
-  @media screen and (max-width: 415px) {
+  font-size: 3.5rem;
+  @media screen and (max-width: 500px) {
     font-size: 3rem;
+  }
+  @media screen and (max-width: 415px) {
+    font-size: 2rem;
   }
 }
 
 #header {
-  font-size: 2em;
   font-weight: 600;
-  font-family: 'Amatic SC', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background: linear-gradient(
     45deg,
     rgba(194, 190, 255, 1) 0%,
@@ -38,9 +36,12 @@
   color: white;
   .nav-link {
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    @media screen and (max-width: 1000px) {
+      font-size: 1rem;
+    }
     .active {
-    color: gold;
+      color: gold;
     }
   }
   border-bottom: 12px solid gold;
