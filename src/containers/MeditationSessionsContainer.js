@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Session from '../components/Session/Session';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Session from "../components/Session/Session";
 import {
   getUserMeditationSessions,
   deleteMeditationSession
-} from '../reducers/meditationSessionsReducer';
+} from "../reducers/meditationSessionsReducer";
 
 class MeditationSessionsContainer extends Component {
   componentDidMount() {
@@ -27,9 +27,6 @@ class MeditationSessionsContainer extends Component {
             {this.props.currentUser.name}
             's Sessions
           </div>
-          <div className="subtitle">
-            Total Count: {this.props.meditationSessions.count}
-          </div>
           <div className="component">
             {this.props.meditationSessions.reverse().map(session => {
               return (
@@ -41,6 +38,9 @@ class MeditationSessionsContainer extends Component {
                 />
               );
             })}
+          </div>
+          <div className="subtitle">
+            Total Count: {this.props.meditationSessions.length}
           </div>
         </>
       );

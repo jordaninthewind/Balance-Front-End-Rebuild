@@ -8,7 +8,7 @@ const UserInfo = ({ currentUserData }) => {
   const seconds = currentUserData.total_time % 60;
 
   return (
-    <div className="container">
+    <>
       <img
         className="profilePicture"
         alt="profile"
@@ -21,7 +21,7 @@ const UserInfo = ({ currentUserData }) => {
         {seconds < 10 ? "0" + seconds : seconds}
       </div>
       <div className="subtitle">Location: {currentUserData.location}</div>
-    </div>
+    </>
   );
 };
 

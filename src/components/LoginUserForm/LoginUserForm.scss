@@ -1,0 +1,19 @@
+
+.loginForm {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+  display: table;
+  p {
+    display: table-row;
+    label {
+      display: table-cell;
+      text-align: left;
+    }
+    input {
+      display: table-cell;
+    }
+  }
+}

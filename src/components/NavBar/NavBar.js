@@ -31,13 +31,24 @@ class NavBar extends React.Component {
     return (
       <div>
         <Navbar color="faded" id="header" expand="md" light>
-          <img className="logo-img" src="shambhala sun.png" alt="" />
-          <NavbarBrand>
-            <RRNavLink to="/">B a l a n c e</RRNavLink>
-          </NavbarBrand>
+          <RRNavLink to="/">
+            <img className="logo-img" src="shambhala sun.png" alt="" />
+          </RRNavLink>
+          <NavbarBrand>B a l a n c e</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+            <NavItem>
+                <NavLink
+                  to="/timer"
+                  className="menuTile"
+                  activeClassName="active"
+                  tag={RRNavLink}
+                  onClick={this.toggle}
+                >
+                  Timer
+                </NavLink>
+              </NavItem>
               <NavItem>
                 <NavLink
                   to="/meditation_sessions"
@@ -47,17 +58,6 @@ class NavBar extends React.Component {
                   onClick={this.toggle}
                 >
                   Sessions
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  to="/timer"
-                  className="menuTile"
-                  activeClassName="active"
-                  tag={RRNavLink}
-                  onClick={this.toggle}
-                >
-                  Timer
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -79,7 +79,7 @@ class NavBar extends React.Component {
                   tag={RRNavLink}
                   onClick={this.toggle}
                 >
-                  Login
+                  Profile
                 </NavLink>
               </NavItem>
             </Nav>

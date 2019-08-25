@@ -29,6 +29,7 @@ body {
   padding: 2vw;;
   margin: auto;
   text-align: center;
+  margin-bottom: 100px;
 }
 
 .title {
@@ -40,6 +41,9 @@ body {
 .subtitle {
   color: var(--middle-purple);
   font-size: 2em;
+  @media screen and (max-width: 415px) {
+    font-size: 1.25em;
+  }
 }
 
 button {
@@ -53,17 +57,12 @@ button:hover {
 }
 
 .inputField {
-  display: block;
   color: var(--middle-purple);
   font-size: 1.5em;
 }
 
 /* Handles landscape mode on most phones*/
 @media screen and (max-width: 800px) and (max-height: 500px) {
-  #header {
-    display: none;
-  }
-
   #navBar {
     padding: 2%;
   }
@@ -72,14 +71,10 @@ button:hover {
     padding: 0 3%;
     font-weight: bolder;
   }
-
-  button {
-    max-width: 33%;
-    min-height: 30%;
-  }
-
+  
   .profilePicture {
-    max-width: 50%;
+    min-width: 200px;
+    min-height: 200px;
   }
 
   #userComponent {

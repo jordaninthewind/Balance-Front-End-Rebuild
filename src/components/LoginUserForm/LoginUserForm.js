@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { loginUser } from '../../reducers/usersReducer';
-import { connect } from 'react-redux';
-import { Button } from 'reactstrap';
-import './LoginUserForm.css';
+import React, { Component } from "react";
+import { loginUser } from "../../reducers/usersReducer";
+import { connect } from "react-redux";
+import { Button } from "reactstrap";
+import "./LoginUserForm.scss";
 
 class LoginUserForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     };
   }
 
@@ -27,31 +27,36 @@ class LoginUserForm extends Component {
 
   render() {
     return (
-      <div>
-        <div>{this.props.errorMessage}</div>
+      <div className="loginForm">
         <form onSubmit={e => this.handleSubmit(e)}>
-          <div className="inputField">
-          <label>E-mail:</label>
-          <input
-            onChange={this.handleChange}
-            name="email"
-            type="email"
-            value={this.state.email}
-            required
-          />
-          </div>
-          <div className="inputField">
-          <label>Password:</label>          
-          <input
-            onChange={this.handleChange}
-            name="password"
-            type="password"
-            value={this.state.password}
-            required
-          />
-          </div>
-          <br />
-          <Button type="submit" className="btn-light">Log In!</Button>
+          <p className="inputField">
+            <label>E-mail: </label>
+            <input
+              onChange={this.handleChange}
+              name="email"
+              type="email"
+              value={this.state.email}
+              required
+            />
+          </p>
+          <p className="inputField">
+            <label>Password: </label>
+            <input
+              onChange={this.handleChange}
+              name="password"
+              type="password"
+              value={this.state.password}
+              required
+            />
+          </p>
+          {this.props.errorMessage && (
+            <div class="alert alert-warning" role="alert">
+              {this.props.errorMessage}
+            </div>
+          )}
+          <Button type="submit" className="btn-light">
+          Log In
+        </Button>
         </form>
       </div>
     );
