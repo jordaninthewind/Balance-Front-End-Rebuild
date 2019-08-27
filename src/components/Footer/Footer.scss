@@ -1,6 +1,6 @@
 #footer {
-  position: fixed;
-  bottom: 0;
+  position: sticky;
+  bottom: -20px;
   width: 100vw;
   color: #fcfcfc;
   font-weight: 800;
@@ -19,13 +19,12 @@
   min-height: 100px;
   div {
     text-align: center;
-    padding: 3vh 5vw;
+    padding: 0 5vw;
   }
   @media screen and (max-width: 768px) {
     min-height: 0;
     div {
       font-size: 1rem;
-      padding: 0;
     }
   }
 }
