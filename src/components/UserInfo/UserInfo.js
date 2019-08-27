@@ -1,11 +1,11 @@
 import React from "react";
 import "./UserInfo.css";
 
-const UserInfo = ({ currentUserData }) => {
-  const minutes = Math.floor(currentUserData.total_time / 60);
+const UserInfo = ({ currentUserData, timeMeditated }) => {
+  const minutes = Math.floor(timeMeditated / 60);
   const totalMinutes = minutes % 60;
   const hours = Math.floor(minutes / 60);
-  const seconds = currentUserData.total_time % 60;
+  const seconds = timeMeditated % 60;
 
   return (
     <>
