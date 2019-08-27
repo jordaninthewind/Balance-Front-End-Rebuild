@@ -18,7 +18,9 @@ class MeditationSessionsContainer extends Component {
       return <div className="title">Log in to see sessions!</div>;
     }
 
-    if (this.props.meditationSessions.length === 0) {
+    if (this.props.loading) {
+      return <div className="title">Loading...</div>
+    } else if (this.props.meditationSessions.length === 0) {
       return <div className="title">There are no sessions yet!</div>;
     } else {
       return (
@@ -51,7 +53,8 @@ class MeditationSessionsContainer extends Component {
 const mapStateToProps = state => {
   return {
     currentUser: state.usersReducer.currentUser,
-    meditationSessions: state.meditationSessionsReducer.meditationSessions
+    meditationSessions: state.meditationSessionsReducer.meditationSessions,
+    loading: state.meditationSessionsReducer.loading
   };
 };
 

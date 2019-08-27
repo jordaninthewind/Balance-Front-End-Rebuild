@@ -10,7 +10,12 @@ export const resetMeditationSessions = () => {
   return { type: 'RESET_USER_MEDITATION_SESSIONS' };
 };
 
+export const setLoading = () => {
+  return { type: 'SET_LOADING' };
+};
+
 export const getUserMeditationSessions = currentUser => dispatch => {
+  dispatch(setLoading());
   fetch(`${BASE_URL}/users/${currentUser.id}/meditation_sessions.json`)
     .then(res => res.json())
     .then(json => {
@@ -33,7 +38,8 @@ export const deleteMeditationSession = (currentUser, session) => dispatch => {
 // reducer
 
 const initialState = {
-  meditationSessions: []
+  meditationSessions: [],
+  loading: false
 };
 
 export default function meditationSessionsReducer(
@@ -41,10 +47,16 @@ export default function meditationSessionsReducer(
   action
 ) {
   switch (action.type) {
+    case 'SET_LOADING':
+      return {
+        ...state,
+        loading: true,
+      }
     case 'GET_USER_MEDITATION_SESSIONS':
       return {
         ...state,
-        meditationSessions: action.meditationSessions
+        meditationSessions: action.meditationSessions,
+        loading: false
       };
     case 'RESET_USER_MEDITATION_SESSIONS':
       return {

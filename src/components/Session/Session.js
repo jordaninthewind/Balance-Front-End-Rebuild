@@ -23,12 +23,12 @@ const Session = ({ session, deleteSession, currentUser }) => {
         >
           X
         </Button>
-        <CardTitle>
-          Duration:
+        <CardTitle>Duration:</CardTitle>
+        <CardSubtitle>
           {hours >= 10 ? " " + hours : " 0" + hours}:
           {minutes >= 10 ? minutes : "0" + minutes}:
           {seconds >= 10 ? seconds : "0" + seconds}
-        </CardTitle>
+        </CardSubtitle>
         <CardSubtitle>{session.date}</CardSubtitle>
       </Card>
     </>
