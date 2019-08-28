@@ -5,7 +5,7 @@ import "./Clock.css";
 const Clock = ({
   timeCount,
   startClock,
-  pauseClock,
+  stopClock,
   resetClock,
   saveSession,
   timerStarted
@@ -27,17 +27,18 @@ const Clock = ({
       <div className="title">Time Since Start</div>
       <div id="timer">{timeSpentMeditating}</div>
       <div id="buttonContainer">
-        {!timerStarted ? (
-          <Button onClick={startClock} className="btn-light">Start</Button>
-        ) : (
-          <Button onClick={pauseClock} className="btn-light">Pause</Button>
-        )}
+        {!timerStarted &&
+          <Button onClick={startClock} className="btn btn-outline">Start Session</Button>          
+        }
         {!!timerStarted && (
           <>
-            <Button onClick={resetClock} className="btn-light">Reset</Button>
-            <Button onClick={saveSession} className="btn-light">Save</Button>
+            <Button onClick={stopClock} className="btn btn-outline">Close Session</Button>
+            <Button onClick={resetClock} className="btn btn-outline">Reset</Button>
           </>
         )}
+        {(!timerStarted && timeCount > 0) &&
+          <Button onClick={saveSession} className="btn btn-warning">Save Session</Button>
+        }
       </div>
     </>
   );

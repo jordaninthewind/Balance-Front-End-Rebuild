@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Clock from '../components/Clock/Clock';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Clock from "../components/Clock/Clock";
+// import * as moment from 'moment';
 
 class TimerContainer extends Component {
   constructor(props) {
@@ -9,30 +10,33 @@ class TimerContainer extends Component {
     this.state = {
       timerStarted: false,
       timeStart: null,
-      timeCount: 0,
-    }
+      timeStop: null,
+      timeNow: null
+    };
   }
 
   timer = () => {
     this.setState({
-      timeCount: ~~((Date.now() - this.state.timeStart) / 1000),
+      timeNow: Date.now()
     });
   };
 
-  startClock = e => {
+  startClock = () => {
     if (this.state.timerStarted === false) {
       this.intervalId = setInterval(this.timer.bind(this), 1000);
       this.setState({
         timerStarted: true,
         timeStart: Date.now(),
+        timeNow: Date.now()
       });
     }
   };
 
-  pauseClock = e => {
+  stopClock = () => {
     clearInterval(this.intervalId);
     this.setState({
-      timerStarted: false
+      timerStarted: false,
+      timeStop: Date.now()
     });
   };
 
@@ -41,37 +45,35 @@ class TimerContainer extends Component {
     this.setState({
       timerStarted: false,
       timeStart: null,
-      timeCount: 0,
+      timeStop: null,
+      timeNow: null
     });
   };
 
   saveSession = e => {
-    if (this.props.currentUser && this.state.timeCount > 0) {
+    if (this.props.currentUser && (this.state.timeStop - this.state.timeStart) > 0) {
       fetch(
-        `${process.env.REACT_APP_BASE_URL}/users/${
-        this.props.currentUser.id
-        }/meditation_sessions`,
+        `${process.env.REACT_APP_BASE_URL}/users/${this.props.currentUser.id}/meditation_sessions`,
         {
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
           },
-          method: 'POST',
+          method: "POST",
           body: JSON.stringify({
-            meditation_session: { time: this.state.timeCount }
+            meditation_session: {
+              time: Math.abs(~~(this.state.timeStart - this.state.timeStop)/1000)
+            }
           })
         }
       )
-        .then(() => alert('Saved session!'))
+        .then(() => alert("Saved session!"))
         .catch(res => console.log(res));
 
-      this.setState({
-        timeCount: 0,
-        timerStarted: false
-      });
       clearInterval(this.intervalId);
+      this.resetClock();
     } else {
       alert(
-        'You must be logged in to save a session and timer must be at a value greater than zero!'
+        "You must be logged in to save a session and timer must be at a value greater than zero!"
       );
     }
   };
@@ -79,9 +81,9 @@ class TimerContainer extends Component {
   render() {
     return (
       <Clock
-        timeCount={this.state.timeCount}
+        timeCount={~~((this.state.timeNow - this.state.timeStart)/1000)}
         startClock={this.startClock}
-        pauseClock={this.pauseClock}
+        stopClock={this.stopClock}
         resetClock={this.resetClock}
         saveSession={this.saveSession}
         timerStarted={this.state.timerStarted}
