@@ -14,8 +14,8 @@ class UserContainer extends Component {
     super(props);
 
     this.state = {
-      displayUpdateUser: false,
-      meditationTime: null
+      displayUpdateUserForm: false,
+      meditationTime: null,
     };
   }
 
@@ -23,56 +23,60 @@ class UserContainer extends Component {
     if (time) {
       this.setState({
         meditationTime: time.reduce((acc, curr) => acc + curr.duration, 0)
-      })
+      });
     }
   };
 
-  displayUpdateUserForm = () => {
+  displayUpdateUser = () => {
     this.setState({
-      displayUpdateUser: !this.state.displayUpdateUser
+      displayUpdateUserForm: !this.state.displayUpdateUserForm
     });
   };
 
   componentWillMount() {
-    this.updateMeditationTime(this.props.sessions)
+    this.updateMeditationTime(this.props.sessions);
   }
 
   render() {
-    console.log(this.state.meditationTime)
-    if (this.state.displayUpdateUser) {
-      return (
-        <UpdateUserForm
-          currentUser={this.props.currentUser}
-          updateUser={this.props.updateUser}
-          deleteUser={this.props.deleteUser}
-          displayUpdateUser={this.displayUpdateUserForm}
-        />
-      );
-    } else {
-      return (
-        <div id="userComponent">
-          {this.props.currentUser && (
-            <>
-              <UserInfo
-                currentUserData={this.props.currentUser}
-                timeMeditated={this.state.meditationTime}
-              />
-              <Button onClick={this.props.logOut} className="btn-light">
-                Log Out
-              </Button>
-              <Button
-                onClick={this.displayUpdateUserForm}
-                className="btn-light"
-              >
-                Update User
-              </Button>
-            </>
-          )}
-        </div>
-      );
-    }
+    console.log(this.state.meditationTime);
+    // if (this.state.displayUpdateUserForm) {
+    //   return (
+    //     <UpdateUserForm
+    //       currentUser={this.props.currentUser}
+    //       updateUser={this.props.updateUser}
+    //       deleteUser={this.props.deleteUser}
+    //       displayUpdateUserForm={this.displayUpdateUserForm}
+    //     />
+    //   );
+    // } else {
+    return (
+      <div id="userComponent">
+        {this.props.currentUser && (
+          <>
+            <UserInfo
+              currentUserData={this.props.currentUser}
+              timeMeditated={this.state.meditationTime}
+            />
+            <Button onClick={this.props.logOut} className="btn-light">
+              Log Out
+            </Button>
+            <Button onClick={this.displayUpdateUser} className="btn-light">
+              Update User
+            </Button>
+            <UpdateUserForm
+              currentUser={this.props.currentUser}
+              updateUser={this.props.updateUser}
+              deleteUser={this.props.deleteUser}
+              displayUpdateUserForm={this.state.displayUpdateUserForm}
+              displayUpdateUser={this.displayUpdateUser}
+            />
+          </>
+        )}
+      </div>
+    );
   }
 }
+// }
 
 const mapStateToProps = state => {
   return {

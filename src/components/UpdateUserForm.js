@@ -1,5 +1,16 @@
 import React, { Component } from "react";
-import { Button } from "reactstrap";
+import PropTypes from "prop-types";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Input,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from "reactstrap";
 
 class UpdateUserForm extends Component {
   constructor(props) {
@@ -27,71 +38,106 @@ class UpdateUserForm extends Component {
 
   render() {
     return (
-      <div className="component">
-        <h2>Update User</h2>
-        <div>
-          <Button color="light" onClick={this.props.displayUpdateUser}>
-            Return To User
-          </Button>
-        </div>
-        <div>
+      <Modal
+        isOpen={this.props.displayUpdateUserForm}
+        className={"modal-dialog-centered component"}
+      >
+        <ModalHeader>Update User</ModalHeader>
+        <ModalBody>
           <h6>All Fields and Password Required for Valid Update</h6>
-        </div>
-        <form onSubmit={e => this.handleSubmit(e)}>
-          <p>First Name:</p>
-          <input
-            onChange={this.handleChange}
-            name="name"
-            value={this.state.currentUser.name}
-            required
-          />
-
-          <p>Last Name:</p>
-          <input
-            onChange={this.handleChange}
-            name="last_name"
-            value={this.state.currentUser.last_name}
-            required
-          />
-
-          <p>Email:</p>
-          <input
-            onChange={this.handleChange}
-            name="email"
-            type="email"
-            value={this.state.currentUser.email}
-            required
-          />
-
-          <p>Location:</p>
-          <input
-            onChange={this.handleChange}
-            name="location"
-            value={this.state.currentUser.location}
-            required
-          />
-          <p>Password: (Required)</p>
-          <input
-            onChange={this.handleChange}
-            name="password"
-            type="password"
-            value={this.state.currentUser.password}
-            required
-          />
+          {/* <form onSubmit={e => this.handleSubmit(e)}> */}
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>First Name</InputGroupText>
+            </InputGroupAddon>
+            <Input
+              placeholder="First Name"
+              onChange={this.handleChange}
+              name="name"
+              value={this.state.currentUser.name}
+              required
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>Last Name</InputGroupText>
+            </InputGroupAddon>
+            <Input
+              placeholder="Last Name"
+              onChange={this.handleChange}
+              name="last_name"
+              value={this.state.currentUser.last_name}
+              required
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>E-mail</InputGroupText>
+            </InputGroupAddon>
+            <Input
+              placeholder="E-mail"
+              onChange={this.handleChange}
+              name="email"
+              value={this.state.currentUser.email}
+              required
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>Location</InputGroupText>
+            </InputGroupAddon>
+            <Input
+              placeholder="Location"
+              onChange={this.handleChange}
+              name="name"
+              value={this.state.currentUser.location}
+              required
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>Password</InputGroupText>
+            </InputGroupAddon>
+            <Input
+              placeholder="Password"
+              onChange={this.handleChange}
+              name="password"
+              value={this.state.currentUser.password}
+              type="password"
+              required
+            />
+          </InputGroup>
+          <br />
           <h5>-- Profile Image Should Be Square --</h5>
           <h6>Profile Image Link:</h6>
-          <input
-            onChange={this.handleChange}
-            name="profile_url"
-            value={this.state.currentUser.profile_url}
-            required
-          />
-          <br />
-          <Button color="light" type="submit">
+          <InputGroup>
+            <Input
+              placeholder="Link to Profile Image Here"
+              onChange={this.handleChange}
+              name="profile_picture"
+              value={this.state.currentUser.profile_url}
+              required
+            />
+          </InputGroup>
+        </ModalBody>
+        <ModalFooter style={{justifyContent: 'space-between'}}>
+          <Button
+            color="light"
+            onClick={this.props.displayUpdateUser}
+            >
+            Return To User
+          </Button>
+          <Button
+            outline
+            color="secondary"
+            type="submit"
+            onClick={e => this.handleSubmit(e)}
+          >
             Update User
           </Button>
           <Button
-            color="light"
+            outline
+            color="danger"
             onClick={() => {
               if (window.confirm("Click to confirm delete"))
                 this.props.deleteUser(this.props.currentUser);
@@ -99,10 +145,15 @@ class UpdateUserForm extends Component {
           >
             Delete Account
           </Button>
-        </form>
-      </div>
+        </ModalFooter>
+      </Modal>
     );
   }
 }
+
+UpdateUserForm.propTypes = {
+  displayUpdateUser: PropTypes.func,
+  displayUpdateUserForm: PropTypes.bool
+};
 
 export default UpdateUserForm;
