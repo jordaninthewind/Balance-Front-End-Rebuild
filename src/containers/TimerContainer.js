@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Clock from "../components/Clock/Clock";
+import SessionModal from "../components/SessionModal/SessionModal";
 // import * as moment from 'moment';
 
 class TimerContainer extends Component {
@@ -11,7 +12,8 @@ class TimerContainer extends Component {
       timerStarted: false,
       timeStart: null,
       timeStop: null,
-      timeNow: null
+      timeNow: null,
+      showModal: false
     };
   }
 
@@ -22,14 +24,12 @@ class TimerContainer extends Component {
   };
 
   startClock = () => {
-    if (this.state.timerStarted === false) {
-      this.intervalId = setInterval(this.timer.bind(this), 1000);
-      this.setState({
-        timerStarted: true,
-        timeStart: Date.now(),
-        timeNow: Date.now()
-      });
-    }
+    this.intervalId = setInterval(this.timer.bind(this), 1000);
+    this.setState({
+      timerStarted: true,
+      timeStart: Date.now(),
+      timeNow: Date.now()
+    });
   };
 
   stopClock = () => {
@@ -40,7 +40,7 @@ class TimerContainer extends Component {
     });
   };
 
-  resetClock = e => {
+  resetClock = () => {
     clearInterval(this.intervalId);
     this.setState({
       timerStarted: false,
@@ -50,8 +50,17 @@ class TimerContainer extends Component {
     });
   };
 
+  toggleModal = () => {
+    this.setState({
+      showModal: !this.state.showModal
+    });
+  };
+
   saveSession = e => {
-    if (this.props.currentUser && (this.state.timeStop - this.state.timeStart) > 0) {
+    if (
+      this.props.currentUser &&
+      this.state.timeStop - this.state.timeStart > 0
+    ) {
       fetch(
         `${process.env.REACT_APP_BASE_URL}/users/${this.props.currentUser.id}/meditation_sessions`,
         {
@@ -61,15 +70,17 @@ class TimerContainer extends Component {
           method: "POST",
           body: JSON.stringify({
             meditation_session: {
-              time: Math.abs(~~(this.state.timeStart - this.state.timeStop)/1000)
+              time: Math.abs(
+                ~~(this.state.timeStart - this.state.timeStop) / 1000
+              )
             }
           })
         }
       )
-        .then(() => alert("Saved session!"))
+        // .then(() => alert("Saved session!"))
+        .then(res => console.log(res))
+        .then(res => this.toggleModal())
         .catch(res => console.log(res));
-
-      clearInterval(this.intervalId);
       this.resetClock();
     } else {
       alert(
@@ -80,14 +91,23 @@ class TimerContainer extends Component {
 
   render() {
     return (
-      <Clock
-        timeCount={~~((this.state.timeNow - this.state.timeStart)/1000)}
-        startClock={this.startClock}
-        stopClock={this.stopClock}
-        resetClock={this.resetClock}
-        saveSession={this.saveSession}
-        timerStarted={this.state.timerStarted}
-      />
+      <>
+        <Clock
+          timeCount={~~((this.state.timeNow - this.state.timeStart) / 1000)}
+          startClock={this.startClock}
+          stopClock={this.stopClock}
+          resetClock={this.resetClock}
+          saveSession={this.saveSession}
+          timerStarted={this.state.timerStarted}
+        />
+        <SessionModal
+          buttonLabel={"Something something something"}
+          title={"Session Saved!"}
+          body={"Yes, I can haz savez."}
+          showModal={this.state.showModal}
+          toggle={this.toggleModal}
+        />
+      </>
     );
   }
 }

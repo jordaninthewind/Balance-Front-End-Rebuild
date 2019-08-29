@@ -27,18 +27,26 @@ const Clock = ({
       <div className="title">Time Since Start</div>
       <div id="timer">{timeSpentMeditating}</div>
       <div id="buttonContainer">
-        {!timerStarted &&
-          <Button onClick={startClock} className="btn btn-outline">Start Session</Button>          
-        }
+        {!timerStarted && timeCount <= 0 && (
+          <Button outline onClick={startClock} color="secondary">
+            Start Session
+          </Button>
+        )}
         {!!timerStarted && (
+          <Button outline onClick={stopClock} color="secondary">
+            Close Session
+          </Button>
+        )}
+        {!timerStarted && timeCount > 0 && (
           <>
-            <Button onClick={stopClock} className="btn btn-outline">Close Session</Button>
-            <Button onClick={resetClock} className="btn btn-outline">Reset</Button>
+            <Button onClick={saveSession} color="warning">
+              Save Session
+            </Button>
+            <Button outline onClick={resetClock} color="secondary">
+              Reset
+            </Button>
           </>
         )}
-        {(!timerStarted && timeCount > 0) &&
-          <Button onClick={saveSession} className="btn btn-warning">Save Session</Button>
-        }
       </div>
     </>
   );

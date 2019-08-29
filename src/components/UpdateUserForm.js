@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import React, { Component } from "react";
+import { Button } from "reactstrap";
 
 class UpdateUserForm extends Component {
   constructor(props) {
@@ -27,48 +27,59 @@ class UpdateUserForm extends Component {
 
   render() {
     return (
-      <div className="App-component">
+      <div className="component">
         <h2>Update User</h2>
-        <Button className="btn-light" onClick={() => this.props.displayUpdateUser()}>
-          Return To User
-        </Button>
-        <h6>All Fields and Password Required for Valid Update</h6>
+        <div>
+          <Button color="light" onClick={this.props.displayUpdateUser}>
+            Return To User
+          </Button>
+        </div>
+        <div>
+          <h6>All Fields and Password Required for Valid Update</h6>
+        </div>
         <form onSubmit={e => this.handleSubmit(e)}>
-          First Name:{' '}
+          <p>First Name:</p>
           <input
             onChange={this.handleChange}
             name="name"
             value={this.state.currentUser.name}
             required
           />
-          <br />
-          Last Name:{' '}
+
+          <p>Last Name:</p>
           <input
             onChange={this.handleChange}
             name="last_name"
             value={this.state.currentUser.last_name}
             required
-          />{' '}
-          <br />
-          Email:{' '}
+          />
+
+          <p>Email:</p>
           <input
             onChange={this.handleChange}
             name="email"
             type="email"
             value={this.state.currentUser.email}
             required
-          />{' '}
-          <br />
-          Location:{' '}
+          />
+
+          <p>Location:</p>
           <input
             onChange={this.handleChange}
             name="location"
             value={this.state.currentUser.location}
             required
           />
-          <br />
-          <h6>-- Profile Image Should Be Square --</h6>
-          Profile Image Link: <br />
+          <p>Password: (Required)</p>
+          <input
+            onChange={this.handleChange}
+            name="password"
+            type="password"
+            value={this.state.currentUser.password}
+            required
+          />
+          <h5>-- Profile Image Should Be Square --</h5>
+          <h6>Profile Image Link:</h6>
           <input
             onChange={this.handleChange}
             name="profile_url"
@@ -76,17 +87,19 @@ class UpdateUserForm extends Component {
             required
           />
           <br />
-          <br />
-          <Button className="btn-light" type="submit">Update User</Button>
+          <Button color="light" type="submit">
+            Update User
+          </Button>
+          <Button
+            color="light"
+            onClick={() => {
+              if (window.confirm("Click to confirm delete"))
+                this.props.deleteUser(this.props.currentUser);
+            }}
+          >
+            Delete Account
+          </Button>
         </form>
-        <Button className="btn-light"
-          onClick={() => {
-            if (window.confirm('Click to confirm delete'))
-              this.props.deleteUser(this.props.currentUser);
-          }}
-        >
-          Delete Account
-        </Button>
       </div>
     );
   }
