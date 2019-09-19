@@ -29,6 +29,9 @@ class MeditationSessionsContainer extends Component {
             {this.props.currentUser.name}
             's Sessions
           </div>
+          <div className="subtitle">
+            Total Count: {this.props.meditationSessions.length}
+          </div>
           <div className="component">
             {this.props.meditationSessions.reverse().map(session => {
               return (
@@ -40,9 +43,6 @@ class MeditationSessionsContainer extends Component {
                 />
               );
             })}
-          </div>
-          <div className="subtitle">
-            Total Count: {this.props.meditationSessions.length}
           </div>
         </>
       );

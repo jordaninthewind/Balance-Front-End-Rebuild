@@ -1,11 +1,9 @@
 .session {
-  width: 20vw;
-  padding: 2vh 2vw;
-  margin: 20px;
-  &.session {
-    min-width: 100px;
+  .card-title {
+    font-size: 1.5rem;
   }
-  button {
-    max-width: min-content;
+  .card-subtitle {
+    font-weight: 800;
+    margin: 0;
   }
 }

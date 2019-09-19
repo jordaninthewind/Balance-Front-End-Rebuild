@@ -38,17 +38,6 @@ class UserContainer extends Component {
   }
 
   render() {
-    console.log(this.state.meditationTime);
-    // if (this.state.displayUpdateUserForm) {
-    //   return (
-    //     <UpdateUserForm
-    //       currentUser={this.props.currentUser}
-    //       updateUser={this.props.updateUser}
-    //       deleteUser={this.props.deleteUser}
-    //       displayUpdateUserForm={this.displayUpdateUserForm}
-    //     />
-    //   );
-    // } else {
     return (
       <div id="userComponent">
         {this.props.currentUser && (

@@ -1,5 +1,12 @@
 import React from "react";
-import { Button, Card, CardTitle, CardSubtitle } from "reactstrap";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardSubtitle,
+  Col
+} from "reactstrap";
 import "./Session.scss";
 
 const Session = ({ session, deleteSession, currentUser }) => {
@@ -12,8 +19,14 @@ const Session = ({ session, deleteSession, currentUser }) => {
   }
 
   return (
-    <>
-      <Card className="session">
+    <Col sm="6">
+      <Card className="session" width="100%">
+        <CardTitle>
+          {hours >= 10 ? " " + hours : " 0" + hours}:
+          {minutes >= 10 ? minutes : "0" + minutes}:
+          {seconds >= 10 ? seconds : "0" + seconds}
+        </CardTitle>
+        <CardSubtitle>{session.date}</CardSubtitle>
         <Button
           className="btn-light"
           onClick={() => {
@@ -23,15 +36,8 @@ const Session = ({ session, deleteSession, currentUser }) => {
         >
           X
         </Button>
-        <CardTitle>Duration:</CardTitle>
-        <CardSubtitle>
-          {hours >= 10 ? " " + hours : " 0" + hours}:
-          {minutes >= 10 ? minutes : "0" + minutes}:
-          {seconds >= 10 ? seconds : "0" + seconds}
-        </CardSubtitle>
-        <CardSubtitle>{session.date}</CardSubtitle>
       </Card>
-    </>
+    </Col>
   );
 };
 
