@@ -49,7 +49,7 @@ class UserLoginContainer extends Component {
             Balance is a simple app to track your daily meditation, find
             inspiration through quotes and resources, and track progress.
           </div>
-          {this.state.displayLoginUser && <LoginUserForm />}
+          {this.state.displayLoginUser && <LoginUserForm googleSignin={this.props.signInWithGoogle} />}
           {this.state.displayCreateUser && <CreateUserForm />}
           {!this.state.displayLoginUser && (
             <Button onClick={this.displayLoginUserForm} className="btn-light">Login</Button>

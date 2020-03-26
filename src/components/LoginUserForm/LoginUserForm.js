@@ -58,6 +58,7 @@ class LoginUserForm extends Component {
           Log In
         </Button>
         </form>
+        <button onClick={this.props.googleSignin}>Sign In with Google</button>
       </div>
     );
   }
