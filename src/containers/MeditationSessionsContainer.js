@@ -30,7 +30,8 @@ class MeditationSessionsContainer extends Component {
             's Sessions
           </div>
           <div className="component">
-            {this.props.meditationSessions.reverse().map(session => {
+          { 
+            this.props.meditationSessions.map(session => {
               return (
                 <Session
                   key={session.id}
@@ -39,7 +40,8 @@ class MeditationSessionsContainer extends Component {
                   deleteSession={this.props.deleteMeditationSession}
                 />
               );
-            })}
+            }) 
+          }
           </div>
           <div className="subtitle">
             Total Count: {this.props.meditationSessions.length}
