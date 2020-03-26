@@ -1,14 +1,11 @@
 // todo: build out better error handling
-
 const graphQlFetch = query => {
-  return fetch("https://balance-graphql-backend.herokuapp.com/v1/graphql", {
+  return fetch(process.env.REACT_APP_GRAPHQL_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query })
   });
 };
-
-const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // actions
 
@@ -28,32 +25,32 @@ const removeMeditationSession = session => {
   return { type: "REMOVE_MEDITATION_SESSION", session };
 };
 
-export const saveUserMeditationSession = (currentUser, duration) => dispatch => {
-  console.log(currentUser)
-  console.log(duration)
-  // debugger;
+export const saveUserMeditationSession = (currentUser, duration, timeStarted) => dispatch => {
   const query = `
   mutation AddMeditationSession {
-    insert_meditation_sessions(objects: {duration: 1000, user_id: 10}) {
+    insert_meditation_sessions(objects: {duration: ${duration}, user_id: ${currentUser.id}, time_started: ${timeStarted}}) {
       returning {
         id
       }
     }
   }
   `
+
   graphQlFetch(query)
-    // .then(() => alert("Saved session!"))
-    .then(res => console.log(res))
-    .then(res => this.toggleModal())
-    .catch(res => console.log(res));
+    .then(res => {
+      if (res.errors) throw new Error(res.errors)
+      this.toggleModal()
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    });
 }
 
 export const getUserMeditationSessions = currentUser => dispatch => {
-  // todo: update userId to firebase userid in state
-  const userId = 10;
   const query = `
   query GetMeditationSessions {
-    meditation_sessions(where: {user_id: {_eq: ${userId}}}) {
+    meditation_sessions(where: {user_id: {_eq: ${currentUser.id}}}) {
       duration
       date: time_started
       id
@@ -66,6 +63,13 @@ export const getUserMeditationSessions = currentUser => dispatch => {
   graphQlFetch(query)
     .then(res => res.json())
     .then(json => {
+      if (json.errors) throw new Error(json.errors)
+
+      // transform date to string -- TODO: update for more versatile datatype
+      json.data.meditation_sessions.forEach(med => {
+        if (!med.date) return;
+        med.date = (new Date(med.date)).toString()
+      })
       dispatch(setMeditationSessions(json.data.meditation_sessions));
     })
     .catch(err => console.log(err));
@@ -79,7 +83,7 @@ export const deleteMeditationSession = (currentUser, session) => dispatch => {
         id
       }
     }
-  }  
+  }
   `;
 
   graphQlFetch(query)
@@ -97,6 +101,7 @@ export const deleteMeditationSession = (currentUser, session) => dispatch => {
 
 const initialState = {
   meditationSessions: [],
+  errors: {},
   loading: false
 };
 
@@ -109,6 +114,16 @@ export default function meditationSessionsReducer(
       return {
         ...state,
         loading: true
+      };
+    case "SET_ERRORS":
+      return {
+        ...state,
+        errors: action.errors
+      };
+    case "CLEAR_ERRORS":
+      return {
+        ...state,
+        errors: {}
       };
     case "GET_USER_MEDITATION_SESSIONS":
       return {

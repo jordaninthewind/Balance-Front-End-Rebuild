@@ -5,7 +5,6 @@ import SessionModal from "../components/SessionModal/SessionModal";
 import {
   saveUserMeditationSession,
 } from "../reducers/meditationSessionsReducer";
-// import * as moment from 'moment';
 
 class TimerContainer extends Component {
   constructor(props) {
@@ -14,15 +13,14 @@ class TimerContainer extends Component {
     this.state = {
       timerStarted: false,
       timeStart: null,
-      timeStop: null,
-      timeNow: null,
+      duration: 0,
       showModal: false
     };
   }
 
   timer = () => {
     this.setState({
-      timeNow: Date.now()
+      duration: this.state.duration += 1
     });
   };
 
@@ -30,16 +28,14 @@ class TimerContainer extends Component {
     this.intervalId = setInterval(this.timer.bind(this), 1000);
     this.setState({
       timerStarted: true,
-      timeStart: Date.now(),
-      timeNow: Date.now()
+      timeStart: JSON.stringify(new Date())
     });
   };
 
   stopClock = () => {
     clearInterval(this.intervalId);
     this.setState({
-      timerStarted: false,
-      timeStop: Date.now()
+      timerStarted: false
     });
   };
 
@@ -48,8 +44,7 @@ class TimerContainer extends Component {
     this.setState({
       timerStarted: false,
       timeStart: null,
-      timeStop: null,
-      timeNow: null
+      duration: 0,
     });
   };
 
@@ -59,13 +54,9 @@ class TimerContainer extends Component {
     });
   };
 
-  async saveSession(e) {
-    if (
-      this.props.currentUser &&
-      this.state.timeStop - this.state.timeStart > 0
-    ) {
-      const duration = this.state.timeStop - this.state.timeStart;
-      await this.props.saveMeditationSession(this.props.currentUser, duration);
+  saveSession = async (e) => {
+    if (this.props.currentUser && this.state.duration > 0) {
+      await this.props.saveMeditationSession(this.props.currentUser, this.state.duration, this.state.timeStart);
       this.resetClock();
     } else {
       alert(
@@ -78,7 +69,7 @@ class TimerContainer extends Component {
     return (
       <>
         <Clock
-          timeCount={~~((this.state.timeNow - this.state.timeStart) / 1000)}
+          timeCount={this.state.duration}
           startClock={this.startClock}
           stopClock={this.stopClock}
           resetClock={this.resetClock}
@@ -86,9 +77,9 @@ class TimerContainer extends Component {
           timerStarted={this.state.timerStarted}
         />
         <SessionModal
-          buttonLabel={"Something something something"}
-          title={"Session Saved!"}
-          body={"Yes, I can haz savez."}
+          buttonLabel={this.props.errors.errorCta}
+          title={this.props.errors.errorTitle}
+          body={this.props.errors.errorBody}
           showModal={this.state.showModal}
           toggle={this.toggleModal}
         />
@@ -99,14 +90,15 @@ class TimerContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.usersReducer.currentUser
+    currentUser: state.usersReducer.currentUser,
+    errors: state.meditationSessionsReducer.errors
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    saveMeditationSession: (currentUser, duration) =>
-      dispatch(saveUserMeditationSession(currentUser, duration))
+    saveMeditationSession: (currentUser, duration, timeStarted) =>
+      dispatch(saveUserMeditationSession(currentUser, duration, timeStarted))
   };
 };
 
