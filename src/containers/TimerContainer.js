@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Clock from "../components/Clock/Clock";
 import SessionModal from "../components/SessionModal/SessionModal";
+import {
+  saveUserMeditationSession,
+} from "../reducers/meditationSessionsReducer";
 // import * as moment from 'moment';
 
 class TimerContainer extends Component {
@@ -56,31 +59,13 @@ class TimerContainer extends Component {
     });
   };
 
-  saveSession = e => {
+  async saveSession(e) {
     if (
       this.props.currentUser &&
       this.state.timeStop - this.state.timeStart > 0
     ) {
-      fetch(
-        `${process.env.REACT_APP_BASE_URL}/users/${this.props.currentUser.id}/meditation_sessions`,
-        {
-          headers: {
-            "Content-Type": "application/json"
-          },
-          method: "POST",
-          body: JSON.stringify({
-            meditation_session: {
-              time: Math.abs(
-                ~~(this.state.timeStart - this.state.timeStop) / 1000
-              )
-            }
-          })
-        }
-      )
-        // .then(() => alert("Saved session!"))
-        .then(res => console.log(res))
-        .then(res => this.toggleModal())
-        .catch(res => console.log(res));
+      const duration = this.state.timeStop - this.state.timeStart;
+      await this.props.saveMeditationSession(this.props.currentUser, duration);
       this.resetClock();
     } else {
       alert(
@@ -118,7 +103,14 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    saveMeditationSession: (currentUser, duration) =>
+      dispatch(saveUserMeditationSession(currentUser, duration))
+  };
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(TimerContainer);
