@@ -1,44 +1,107 @@
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+// todo: build out better error handling
+const graphQlFetch = query => {
+  return fetch(process.env.REACT_APP_GRAPHQL_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query })
+  });
+};
 
 // actions
 
 const setMeditationSessions = meditationSessions => {
-  return { type: 'GET_USER_MEDITATION_SESSIONS', meditationSessions };
+  return { type: "GET_USER_MEDITATION_SESSIONS", meditationSessions };
 };
 
 export const resetMeditationSessions = () => {
-  return { type: 'RESET_USER_MEDITATION_SESSIONS' };
+  return { type: "RESET_USER_MEDITATION_SESSIONS" };
 };
 
 export const setLoading = () => {
-  return { type: 'SET_LOADING' };
-};
-
-export const getUserMeditationSessions = currentUser => dispatch => {
-  dispatch(setLoading());
-  fetch(`${BASE_URL}/users/${currentUser.id}/meditation_sessions.json`)
-    .then(res => res.json())
-    .then(json => {
-      dispatch(setMeditationSessions(json));
-    });
+  return { type: "SET_LOADING" };
 };
 
 const removeMeditationSession = session => {
-  return { type: 'REMOVE_MEDITATION_SESSION', session };
+  return { type: "REMOVE_MEDITATION_SESSION", session };
+};
+
+export const saveUserMeditationSession = (currentUser, duration, timeStarted) => dispatch => {
+  const query = `
+  mutation AddMeditationSession {
+    insert_meditation_sessions(objects: {duration: ${duration}, user_id: ${currentUser.id}, time_started: ${timeStarted}}) {
+      returning {
+        id
+      }
+    }
+  }
+  `
+
+  graphQlFetch(query)
+    .then(res => {
+      if (res.errors) throw new Error(res.errors)
+      this.toggleModal()
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    });
+}
+
+export const getUserMeditationSessions = currentUser => dispatch => {
+  const query = `
+  query GetMeditationSessions {
+    meditation_sessions(where: {user_id: {_eq: ${currentUser.id}}}) {
+      duration
+      date: time_started
+      id
+    }
+  }
+  `;
+
+  dispatch(setLoading());
+
+  graphQlFetch(query)
+    .then(res => res.json())
+    .then(json => {
+      if (json.errors) throw new Error(json.errors)
+
+      // transform date to string -- TODO: update for more versatile datatype
+      json.data.meditation_sessions.forEach(med => {
+        if (!med.date) return;
+        med.date = (new Date(med.date)).toString()
+      })
+      dispatch(setMeditationSessions(json.data.meditation_sessions));
+    })
+    .catch(err => console.log(err));
 };
 
 export const deleteMeditationSession = (currentUser, session) => dispatch => {
-  fetch(`${BASE_URL}/users/${currentUser.id}/meditation_sessions/${session}`, {
-    method: 'DELETE'
-  }).then(() => {
-    dispatch(removeMeditationSession(session));
-  });
+  const query = `
+  mutation DeleteMeditationSession {
+    delete_meditation_sessions(where: {id: {_eq: ${session}}}) {
+      returning {
+        id
+      }
+    }
+  }
+  `;
+
+  graphQlFetch(query)
+    .then(res => res.json())
+    .then(json => {
+      if (json.errors) throw new Error('this a problem')
+      dispatch(removeMeditationSession(session));
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 
 // reducer
 
 const initialState = {
   meditationSessions: [],
+  errors: {},
   loading: false
 };
 
@@ -47,23 +110,33 @@ export default function meditationSessionsReducer(
   action
 ) {
   switch (action.type) {
-    case 'SET_LOADING':
+    case "SET_LOADING":
       return {
         ...state,
-        loading: true,
-      }
-    case 'GET_USER_MEDITATION_SESSIONS':
+        loading: true
+      };
+    case "SET_ERRORS":
+      return {
+        ...state,
+        errors: action.errors
+      };
+    case "CLEAR_ERRORS":
+      return {
+        ...state,
+        errors: {}
+      };
+    case "GET_USER_MEDITATION_SESSIONS":
       return {
         ...state,
         meditationSessions: action.meditationSessions,
         loading: false
       };
-    case 'RESET_USER_MEDITATION_SESSIONS':
+    case "RESET_USER_MEDITATION_SESSIONS":
       return {
         ...state,
         meditationSessions: []
       };
-    case 'REMOVE_MEDITATION_SESSION':
+    case "REMOVE_MEDITATION_SESSION":
       return {
         ...state,
         meditationSessions: state.meditationSessions.filter(sess => {

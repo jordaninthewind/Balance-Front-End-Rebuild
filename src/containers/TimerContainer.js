@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Clock from "../components/Clock/Clock";
 import SessionModal from "../components/SessionModal/SessionModal";
-// import * as moment from 'moment';
+import {
+  saveUserMeditationSession,
+} from "../reducers/meditationSessionsReducer";
 
 class TimerContainer extends Component {
   constructor(props) {
@@ -11,15 +13,14 @@ class TimerContainer extends Component {
     this.state = {
       timerStarted: false,
       timeStart: null,
-      timeStop: null,
-      timeNow: null,
+      duration: 0,
       showModal: false
     };
   }
 
   timer = () => {
     this.setState({
-      timeNow: Date.now()
+      duration: this.state.duration += 1
     });
   };
 
@@ -27,16 +28,14 @@ class TimerContainer extends Component {
     this.intervalId = setInterval(this.timer.bind(this), 1000);
     this.setState({
       timerStarted: true,
-      timeStart: Date.now(),
-      timeNow: Date.now()
+      timeStart: JSON.stringify(new Date())
     });
   };
 
   stopClock = () => {
     clearInterval(this.intervalId);
     this.setState({
-      timerStarted: false,
-      timeStop: Date.now()
+      timerStarted: false
     });
   };
 
@@ -45,8 +44,7 @@ class TimerContainer extends Component {
     this.setState({
       timerStarted: false,
       timeStart: null,
-      timeStop: null,
-      timeNow: null
+      duration: 0,
     });
   };
 
@@ -56,31 +54,9 @@ class TimerContainer extends Component {
     });
   };
 
-  saveSession = e => {
-    if (
-      this.props.currentUser &&
-      this.state.timeStop - this.state.timeStart > 0
-    ) {
-      fetch(
-        `${process.env.REACT_APP_BASE_URL}/users/${this.props.currentUser.id}/meditation_sessions`,
-        {
-          headers: {
-            "Content-Type": "application/json"
-          },
-          method: "POST",
-          body: JSON.stringify({
-            meditation_session: {
-              time: Math.abs(
-                ~~(this.state.timeStart - this.state.timeStop) / 1000
-              )
-            }
-          })
-        }
-      )
-        // .then(() => alert("Saved session!"))
-        .then(res => console.log(res))
-        .then(res => this.toggleModal())
-        .catch(res => console.log(res));
+  saveSession = async (e) => {
+    if (this.props.currentUser && this.state.duration > 0) {
+      await this.props.saveMeditationSession(this.props.currentUser, this.state.duration, this.state.timeStart);
       this.resetClock();
     } else {
       alert(
@@ -93,7 +69,7 @@ class TimerContainer extends Component {
     return (
       <>
         <Clock
-          timeCount={~~((this.state.timeNow - this.state.timeStart) / 1000)}
+          timeCount={this.state.duration}
           startClock={this.startClock}
           stopClock={this.stopClock}
           resetClock={this.resetClock}
@@ -101,9 +77,9 @@ class TimerContainer extends Component {
           timerStarted={this.state.timerStarted}
         />
         <SessionModal
-          buttonLabel={"Something something something"}
-          title={"Session Saved!"}
-          body={"Yes, I can haz savez."}
+          buttonLabel={this.props.errors.errorCta}
+          title={this.props.errors.errorTitle}
+          body={this.props.errors.errorBody}
           showModal={this.state.showModal}
           toggle={this.toggleModal}
         />
@@ -114,11 +90,19 @@ class TimerContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.usersReducer.currentUser
+    currentUser: state.usersReducer.currentUser,
+    errors: state.meditationSessionsReducer.errors
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    saveMeditationSession: (currentUser, duration, timeStarted) =>
+      dispatch(saveUserMeditationSession(currentUser, duration, timeStarted))
   };
 };
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(TimerContainer);
