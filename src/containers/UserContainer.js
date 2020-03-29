@@ -3,11 +3,6 @@ import UserInfo from "../components/UserInfo/UserInfo";
 import { connect } from "react-redux";
 import UpdateUserForm from "../components/UpdateUserForm";
 import { Button } from "reactstrap";
-import {
-  deleteUser,
-  updateUser,
-  deleteCurrentUser
-} from "../reducers/usersReducer";
 
 class UserContainer extends Component {
   constructor(props) {
@@ -38,22 +33,20 @@ class UserContainer extends Component {
   }
 
   render() {
+    const { user } = this.props;
     return (
       <div id="userComponent">
-        {this.props.currentUser && (
+        {user && (
           <>
             <UserInfo
-              currentUserData={this.props.currentUser}
+              currentUserData={user}
               timeMeditated={this.state.meditationTime}
             />
-            <Button onClick={this.props.logOut} className="btn-light">
-              Log Out
-            </Button>
             <Button onClick={this.displayUpdateUser} className="btn-light">
               Update User
             </Button>
             <UpdateUserForm
-              currentUser={this.props.currentUser}
+              currentUser={user}
               updateUser={this.props.updateUser}
               deleteUser={this.props.deleteUser}
               displayUpdateUserForm={this.state.displayUpdateUserForm}
@@ -69,21 +62,18 @@ class UserContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.usersReducer.currentUser,
-    users: state.usersReducer.users,
     sessions: state.meditationSessionsReducer.meditationSessions
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    deleteUser: user => dispatch(deleteUser(user)),
-    updateUser: user => dispatch(updateUser(user)),
-    logOut: () => dispatch(deleteCurrentUser())
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     deleteUser: user => dispatch(deleteUser(user)),
+//     updateUser: user => dispatch(updateUser(user)),
+//   };
+// };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(UserContainer);

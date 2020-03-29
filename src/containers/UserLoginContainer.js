@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  setCurrentUser,
-  checkCurrentUserStorage
-} from '../reducers/usersReducer';
 import LoginUserForm from '../components/LoginUserForm/LoginUserForm';
-import CreateUserForm from '../components/CreateUserForm';
+import CreateUserForm from '../components/CreateUserForm/CreateUserForm';
 import UserContainer from './UserContainer';
 import { Button } from 'reactstrap';
+import { withFirebase } from '../components/Firebase';
+import { AuthUserContext } from '../components/FirebaseSession'
+
+const INITIAL_STATE = {
+  displayCreateUser: false,
+  displayLoginUser: false
+}
 
 class UserLoginContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      displayCreateUser: false,
-      displayLoginUser: false
-    };
+    this.state = { ...INITIAL_STATE };
   }
+
+  static contextType = AuthUserContext;
 
   removeUserForm = () => {
     this.setState({
@@ -41,7 +42,9 @@ class UserLoginContainer extends Component {
   };
 
   render() {
-    if (!this.props.currentUser) {
+    const user = this.context;
+
+    if (!user) {
       return (
         <>
           <div className="title">Find Balance!</div>
@@ -49,40 +52,24 @@ class UserLoginContainer extends Component {
             Balance is a simple app to track your daily meditation, find
             inspiration through quotes and resources, and track progress.
           </div>
-          {this.state.displayLoginUser && <LoginUserForm googleSignin={this.props.signInWithGoogle} />}
-          {this.state.displayCreateUser && <CreateUserForm />}
           {!this.state.displayLoginUser && (
             <Button onClick={this.displayLoginUserForm} className="btn-light">Login</Button>
           )}
+          {this.state.displayLoginUser && <LoginUserForm />}
           {!this.state.displayCreateUser && (
             <Button onClick={this.displayCreateUserForm} className="btn-light">Sign Up</Button>
           )}
+          {this.state.displayCreateUser && <CreateUserForm />}
         </>
       );
     } else {
       return (
         <>
-          <UserContainer />
+          <UserContainer user={user} />
         </>
       );
     }
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.usersReducer.currentUser
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    checkCurrentUserStorage: () => dispatch(checkCurrentUserStorage()),
-    setCurrentUser: user => dispatch(setCurrentUser(user))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserLoginContainer);
+export default UserLoginContainer;
