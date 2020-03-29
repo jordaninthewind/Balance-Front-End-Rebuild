@@ -35,9 +35,9 @@ class Navigation extends React.Component {
 
   render() {
     const user = this.context;
-    console.log(this.props)
+
     return (
-      <div>
+      <header>
         <Navbar color="faded" id="header" expand="md" light>
           <RRNavLink to={CONSTANTS.LANDING}>
             <img className="logo-img" src="shambhala sun.png" alt="" />
@@ -61,7 +61,7 @@ class Navigation extends React.Component {
                   to={CONSTANTS.MEDITATION_SESSIONS}
                   className="menuTile"
                   activeClassName="active"
-                  onClick={this.toggle}
+                  tag={RRNavLink}
                 >
                   Sessions
                 </NavLink>
@@ -71,7 +71,7 @@ class Navigation extends React.Component {
                   to={CONSTANTS.RESOURCES}
                   className="menuTile"
                   activeClassName="active"
-                  onClick={this.toggle}
+                  tag={RRNavLink}
                 >
                   Resources
                 </NavLink>
@@ -87,20 +87,20 @@ class Navigation extends React.Component {
                 </NavLink>
               </NavItem>
               {user &&
-                <NavItem
-                  onClick={this.props.firebase.doSignOut}
-                  to={CONSTANTS.LANDING}
-                  className="menuTile"
-                  activeClassName="active"
-                  tag={RRNavLink}
-                >
-                  <NavLink>Sign Out</NavLink>
+                <NavItem>
+                  <NavLink
+                    to={CONSTANTS.LANDING}
+                    className="menuTile"
+                    onClick={this.props.firebase.doSignOut}
+                    activeClassName="active"
+                    tag={RRNavLink}>
+                    Sign Out</NavLink>
                 </NavItem>
               }
             </Nav>
           </Collapse>
         </Navbar>
-      </div>
+      </header>
     );
   }
 }
