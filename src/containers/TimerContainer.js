@@ -20,7 +20,7 @@ class TimerContainer extends Component {
 
   timer = () => {
     this.setState({
-      duration: this.state.duration += 1
+      duration: this.state.duration + 1
     });
   };
 
