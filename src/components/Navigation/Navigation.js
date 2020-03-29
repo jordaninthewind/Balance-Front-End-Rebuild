@@ -27,6 +27,7 @@ class Navigation extends React.Component {
 
   static contextType = AuthUserContext;
 
+  // TODO: Fix sidebar toggle on link click
   toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
