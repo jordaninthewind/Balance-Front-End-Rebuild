@@ -8,13 +8,16 @@ import store from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'normalize.css';
 import './index.css';
+import Firebase, { FirebaseContext } from './components/Firebase';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <Route path="/" component={App} />
-    </Router>
-  </Provider>,
+  <FirebaseContext.Provider value={new Firebase()}>
+    <Provider store={store}>
+      <Router>
+        <Route path="/" component={App} />
+      </Router>
+    </Provider>
+  </FirebaseContext.Provider>,
 
   document.getElementById('root')
 );
