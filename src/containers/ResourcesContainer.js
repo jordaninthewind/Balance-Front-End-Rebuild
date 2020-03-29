@@ -25,7 +25,11 @@ class ResourcesContainer extends PureComponent {
           image:
             "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/120px-Octicons-mark-github.svg.png"
         },
-        { name: "Personal Page", link: "https://jordan-kline.com", image: "jordan-kline.png" }
+        {
+          name: "Personal Page",
+          link: "https://www.jordan-kline.com",
+          image: "jordan-kline.png"
+        }
       ]
     };
   }
