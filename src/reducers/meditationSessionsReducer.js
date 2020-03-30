@@ -25,10 +25,10 @@ const removeMeditationSession = session => {
   return { type: "REMOVE_MEDITATION_SESSION", session };
 };
 
-export const saveUserMeditationSession = (currentUser, duration, timeStarted) => dispatch => {
+export const saveUserMeditationSession = (user, duration, timeStarted) => dispatch => {
   const query = `
-  mutation AddMeditationSession {
-    insert_meditation_sessions(objects: {duration: ${duration}, user_id: ${currentUser.id}, time_started: ${timeStarted}}) {
+  mutation {
+    insert_meditation_sessions(objects: {duration: ${duration}, time_started: ${timeStarted}, user_id: ${JSON.stringify(user)}}) {
       returning {
         id
       }
@@ -39,7 +39,7 @@ export const saveUserMeditationSession = (currentUser, duration, timeStarted) =>
   graphQlFetch(query)
     .then(res => {
       if (res.errors) throw new Error(res.errors)
-      this.toggleModal()
+      // this.toggleModal()
       console.log(res)
     })
     .catch(err => {
@@ -47,10 +47,10 @@ export const saveUserMeditationSession = (currentUser, duration, timeStarted) =>
     });
 }
 
-export const getUserMeditationSessions = currentUser => dispatch => {
+export const getUserMeditationSessions = userId => dispatch => {
   const query = `
-  query GetMeditationSessions {
-    meditation_sessions(where: {user_id: {_eq: ${currentUser.id}}}) {
+  query {
+    meditation_sessions(where: {user_id: {_eq: ${JSON.stringify(userId)}}}) {
       duration
       date: time_started
       id
@@ -70,12 +70,13 @@ export const getUserMeditationSessions = currentUser => dispatch => {
         if (!med.date) return;
         med.date = (new Date(med.date)).toString()
       })
+
       dispatch(setMeditationSessions(json.data.meditation_sessions));
     })
     .catch(err => console.log(err));
 };
 
-export const deleteMeditationSession = (currentUser, session) => dispatch => {
+export const deleteMeditationSession = (session) => dispatch => {
   const query = `
   mutation DeleteMeditationSession {
     delete_meditation_sessions(where: {id: {_eq: ${session}}}) {
@@ -89,7 +90,7 @@ export const deleteMeditationSession = (currentUser, session) => dispatch => {
   graphQlFetch(query)
     .then(res => res.json())
     .then(json => {
-      if (json.errors) throw new Error('this a problem')
+      if (json.errors) throw new Error('Something went wrong while deleting the session. Please try again.')
       dispatch(removeMeditationSession(session));
     })
     .catch(err => {

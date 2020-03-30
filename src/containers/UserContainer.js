@@ -34,12 +34,13 @@ class UserContainer extends Component {
 
   render() {
     const { user } = this.props;
+
     return (
       <div id="userComponent">
         {user && (
           <>
             <UserInfo
-              currentUserData={user}
+              user={user}
               timeMeditated={this.state.meditationTime}
             />
             <Button onClick={this.displayUpdateUser} className="btn-light">
@@ -58,7 +59,6 @@ class UserContainer extends Component {
     );
   }
 }
-// }
 
 const mapStateToProps = state => {
   return {

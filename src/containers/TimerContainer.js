@@ -5,6 +5,7 @@ import SessionModal from "../components/SessionModal/SessionModal";
 import {
   saveUserMeditationSession,
 } from "../reducers/meditationSessionsReducer";
+import { AuthUserContext } from '../components/FirebaseSession';
 
 class TimerContainer extends Component {
   constructor(props) {
@@ -17,6 +18,8 @@ class TimerContainer extends Component {
       showModal: false
     };
   }
+
+  static contextType = AuthUserContext;
 
   timer = () => {
     this.setState({
@@ -55,8 +58,8 @@ class TimerContainer extends Component {
   };
 
   saveSession = async (e) => {
-    if (this.props.currentUser && this.state.duration > 0) {
-      await this.props.saveMeditationSession(this.props.currentUser, this.state.duration, this.state.timeStart);
+    if (this.context.uid && this.state.duration > 0) {
+      await this.props.saveMeditationSession(this.context.uid, this.state.duration, this.state.timeStart);
       this.resetClock();
     } else {
       alert(
