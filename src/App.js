@@ -7,10 +7,11 @@ import UserLoginContainer from "./containers/UserLoginContainer";
 import ResourcesContainer from "./containers/ResourcesContainer";
 import Footer from "./components/Footer/Footer";
 import { Lost } from "./components/Lost";
-import { withAuth } from './components/FirebaseSession';
+import { withAuth, AuthUserContext } from './components/FirebaseSession';
 import "./App.scss";
 
 class App extends Component {
+  static contextType = AuthUserContext;
   render() {
     return (
       <>
@@ -22,7 +23,7 @@ class App extends Component {
             />
             <Route
               path="/meditation_sessions"
-              component={MeditationSessionsContainer}
+              render={(props) => <MeditationSessionsContainer {...props} currentUser={this.context}/>}
             />
             <Route 
               path="/timer" 
