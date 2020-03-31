@@ -43,7 +43,7 @@ class Navigation extends React.Component {
           <RRNavLink to={CONSTANTS.LANDING}>
             <img className="logo-img" src="shambhala sun.png" alt="" />
           </RRNavLink>
-          <NavbarBrand>B a l a n c e</NavbarBrand>
+          <NavbarBrand>b a l a n c e</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
