@@ -1,5 +1,6 @@
 import React from 'react';
-import { Session } from '../Session';
+import Grid from '@material-ui/core/Grid';
+import { SessionCard } from '../SessionCard';
 
 const SessionDisplay = props => {
     if (props.loading) {
@@ -8,22 +9,29 @@ const SessionDisplay = props => {
 
     if (props.meditationSessions.length === 0) {
         return <div className="title">There are no sessions yet!</div>;
-    }
-    else {
-
+    } else {
+    // TODO: Add grid spacing
         return (
-            <div>
-                <div className="title">Total Recorded Sessions</div>
-                {props.meditationSessions.map(session => {
-                    return (
-                        <Session
-                            session={session}
-                            deleteSession={props.deleteMeditationSession}
-                        >
-                        </Session>
-                    )
-                })}
-            </div>
+            <>
+                <div className="title">Total Recorded Sessions: </div>
+                <Grid
+                    container
+                    direction="row-reverse"
+                    justify="center"
+                    alignItems="center"
+                >
+                    {props.meditationSessions.map(session => {
+                        return (
+                            <SessionCard
+                                key={Math.random()}
+                                session={session}
+                                deleteSession={props.deleteMeditationSession}
+                            >
+                            </SessionCard>
+                        )
+                    })}
+                </Grid>
+            </>
         )
     }
 }
