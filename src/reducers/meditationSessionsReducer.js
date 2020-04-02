@@ -39,7 +39,6 @@ export const saveUserMeditationSession = (user, duration, timeStarted) => dispat
   graphQlFetch(query)
     .then(res => {
       if (res.errors) throw new Error(res.errors)
-      // this.toggleModal()
       console.log(res)
     })
     .catch(err => {
