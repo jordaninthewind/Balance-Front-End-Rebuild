@@ -1,7 +1,7 @@
 import React from "react";
 import "./UserInfo.css";
 
-const UserInfo = ({ user, timeMeditated }) => {
+const UserInfo = ({ user, timeMeditated, photoUrl }) => {
   const minutes = Math.floor(timeMeditated / 60);
   const totalMinutes = minutes % 60;
   const hours = Math.floor(minutes / 60);
@@ -12,7 +12,7 @@ const UserInfo = ({ user, timeMeditated }) => {
       <img
         className="profilePicture"
         alt="profile"
-        src={user.photoUrl}
+        src={photoUrl}
       />
       <div className="title">User Name: {user.fullName}</div>
       <div className="subtitle">User E-mail: {user.email}</div>
@@ -27,7 +27,7 @@ const UserInfo = ({ user, timeMeditated }) => {
 };
 
 UserInfo.defaultProps = {
-  user: { photoUrl: "shambhala sun.png" }
+  photoUrl: "shambhala sun.png"
 };
 
 export default UserInfo;
