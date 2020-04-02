@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Clock from "../components/Clock/Clock";
-import SessionModal from "../components/SessionModal/SessionModal";
+import { SessionModal } from "../components/SessionModal";
 import {
   saveUserMeditationSession,
 } from "../reducers/meditationSessionsReducer";
 import { AuthUserContext } from '../components/FirebaseSession';
 
-class TimerContainer extends Component {
+class TimerContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -58,8 +58,9 @@ class TimerContainer extends Component {
   };
 
   saveSession = async (e) => {
-    if (this.context.uid && this.state.duration > 0) {
+    if (this.context && this.context.uid && this.state.duration > 0) {
       await this.props.saveMeditationSession(this.context.uid, this.state.duration, this.state.timeStart);
+      this.toggleModal();
       this.resetClock();
     } else {
       alert(
