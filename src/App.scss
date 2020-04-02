@@ -15,6 +15,10 @@ body {
   font-size: 12px;
 }
 
+h4 {
+  text-align: center;
+}
+
 .component {
   display: flex;
   justify-content: center;
@@ -26,21 +30,16 @@ body {
   text-align: center;
 }
 
-.container {
-  padding: 2vw;;
-  margin: auto;
-  text-align: center;
-  margin-bottom: 100px;
-}
-
 .title {
   color: var(--darker-purple);
   font-size: 3em;
+  text-align: justify;
 }
 
 .subtitle {
   color: var(--middle-purple);
   font-size: 2em;
+  text-align: justify;
   @media screen and (max-width: 415px) {
     font-size: 1.25em;
   }

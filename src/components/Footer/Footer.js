@@ -1,53 +1,74 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getAllQuotes } from "../../reducers/quotesReducer";
-import Quote from "../Quote.js";
-import "./Footer.scss";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { withFirebase } from '../Firebase';
+import { makeStyles } from '@material-ui/core/styles';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import RestoreIcon from '@material-ui/icons/Restore';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import * as ROUTES from '../../constants/routes';
 
-class Footer extends Component {
-  constructor(props) {
-    super(props);
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 1000,
+    minWidth: 'max-content',
+    width: '50%',
+    position: 'fixed',
+    bottom: '20px'
+  },
+});
 
-    this.state = {
-      currentQuoteIndex: 0
-    };
-  }
+const Footer = props => {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
 
-  componentDidMount() {
-    this.props.getAllQuotes();
-    setInterval(this.selectQuote.bind(this), 15000);
-  }
-
-  selectQuote = () =>
-    this.setState({
-      currentQuoteIndex: Math.floor(
-        Math.random() * (this.props.quotes.length - 1)
-      )
-    });
-
-  render() {
-    return (
-      <div id="footer" onClick={this.selectQuote}>
-        {this.props.quotes.length && (
-          <Quote
-            content={this.props.quotes[this.state.currentQuoteIndex].content}
-            author={this.props.quotes[this.state.currentQuoteIndex].author}
-          />
-        )}
-      </div>
-    );
-  }
+  return (
+    <BottomNavigation
+      value={value}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+      showLabels
+      className={classes.root}
+    >
+      <BottomNavigationAction
+        component={Link}
+        to={ROUTES.LANDING}
+        label={props.user ? "Profile" : "Login"}
+        icon={<AccountCircleIcon />}
+      />
+      <BottomNavigationAction
+        component={Link}
+        to={ROUTES.TIMER}
+        label="Timer"
+        icon={<RestoreIcon />}
+      />
+      <BottomNavigationAction
+        component={Link}
+        to={ROUTES.MEDITATION_SESSIONS}
+        label="Sessions"
+        icon={<AssessmentIcon />}
+      />
+      <BottomNavigationAction
+        component={Link}
+        to={ROUTES.RESOURCES}
+        label="Resources"
+        icon={<LibraryBooksIcon />}
+      />
+      {props.user &&
+        <BottomNavigationAction
+          component={Link}
+          to={ROUTES.LANDING}
+          onClick={props.firebase.doSignOut}
+          label="Sign Out"
+          icon={<ExitToAppIcon />}
+        />
+      }
+    </BottomNavigation>
+  );
 }
 
-const mapStateToProps = state => {
-  return { quotes: state.quotesReducer.quotes };
-};
-
-const mapDispatchToProps = dispatch => {
-  return { getAllQuotes: () => dispatch(getAllQuotes()) };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Footer);
+export default withFirebase(Footer);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import UserInfo from "../components/UserInfo/UserInfo";
 import { connect } from "react-redux";
 import UpdateUserForm from "../components/UpdateUserForm";
-import { Button } from "reactstrap";
+import Button from "@material-ui/core/Button";
 
 class UserContainer extends Component {
   constructor(props) {
@@ -36,26 +36,20 @@ class UserContainer extends Component {
     const { user } = this.props;
 
     return (
-      <div id="userComponent">
-        {user && (
-          <>
-            <UserInfo
-              user={user}
-              timeMeditated={this.state.meditationTime}
-            />
-            <Button onClick={this.displayUpdateUser} className="btn-light">
-              Update User
-            </Button>
-            <UpdateUserForm
-              currentUser={user}
-              updateUser={this.props.updateUser}
-              deleteUser={this.props.deleteUser}
-              displayUpdateUserForm={this.state.displayUpdateUserForm}
-              displayUpdateUser={this.displayUpdateUser}
-            />
-          </>
-        )}
-      </div>
+      <>
+        <UserInfo
+          user={user}
+          timeMeditated={this.state.meditationTime}
+        />
+        <Button onClick={this.displayUpdateUser}>Update User</Button>
+        <UpdateUserForm
+          currentUser={user}
+          updateUser={this.props.updateUser}
+          deleteUser={this.props.deleteUser}
+          displayUpdateUserForm={this.state.displayUpdateUserForm}
+          displayUpdateUser={this.displayUpdateUser}
+        />
+      </>
     );
   }
 }
