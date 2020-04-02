@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LoginUserForm from '../components/LoginUserForm/LoginUserForm';
 import CreateUserForm from '../components/CreateUserForm/CreateUserForm';
 import UserContainer from './UserContainer';
-import { Button } from 'reactstrap';
+import Button from '@material-ui/core/Button';
 import { withFirebase } from '../components/Firebase';
 import { AuthUserContext } from '../components/FirebaseSession'
 
@@ -43,32 +43,33 @@ class UserLoginContainer extends Component {
 
   render() {
     const user = this.context;
+    const { displayCreateUser, displayLoginUser } = this.state;
 
     if (!user) {
       return (
         <>
-          <div className="title">Find Balance!</div>
-          <div className="subtitle">
-            Balance is a simple app to track your daily meditation, find
-            inspiration through quotes and resources, and track progress.
-          </div>
-          {!this.state.displayLoginUser && (
-            <Button onClick={this.displayLoginUserForm} className="btn-light">Login</Button>
+          {(!displayLoginUser && !displayCreateUser) &&
+            <>
+              <h1>Find Balance!</h1>
+              <h4>
+                Balance is a simple app to track your daily meditation, find
+                inspiration through quotes and resources, and track progress.
+              </h4>
+            </>
+          }
+          {!displayLoginUser && (
+            <Button onClick={this.displayLoginUserForm}>Login</Button>
           )}
-          {this.state.displayLoginUser && <LoginUserForm />}
-          {!this.state.displayCreateUser && (
-            <Button onClick={this.displayCreateUserForm} className="btn-light">Sign Up</Button>
+          {displayLoginUser && <LoginUserForm />}
+          {!displayCreateUser && (
+            <Button onClick={this.displayCreateUserForm}>Sign Up</Button>
           )}
-          {this.state.displayCreateUser && <CreateUserForm />}
-        </>
-      );
-    } else {
-      return (
-        <>
-          <UserContainer user={user} />
+          {displayCreateUser && <CreateUserForm />}
         </>
       );
     }
+
+    return <UserContainer user={user} />
   }
 }
 
