@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-// import { loginUser } from "../../reducers/usersReducer";
-// import { connect } from "react-redux";
-import { Button } from "reactstrap";
-import "./LoginUserForm.scss";
+import Button from "@material-ui/core/Button";
+import FormGroup from '@material-ui/core/FormGroup';
+import TextField from '@material-ui/core/TextField';
 import { withFirebase } from '../Firebase';
+
 import * as ROUTES from '../../constants/routes';
+import "./LoginUserForm.scss";
 
 const INITIAL_STATE = {
   email: '',
@@ -22,11 +23,12 @@ class LoginUserForm extends Component {
   }
 
   onSubmit = event => {
+    event.preventDefault();
+
     const { email, password } = this.state;
 
-    event.preventDefault();
     this.props.firebase.doSignInWithEmailAndPassword(email, password)
-      .then(authUser => {
+      .then(() => {
         this.setState({
           ...INITIAL_STATE
         });
@@ -49,61 +51,40 @@ class LoginUserForm extends Component {
     const isValid = email && password;
 
     return (
-      <form className="loginForm" onSubmit={this.onSubmit}>
-        <p className="inputField">
-          <label>E-mail: </label>
-          <input
-            onChange={this.onChange}
-            name="email"
-            type="email"
-            value={this.state.email}
-            required
-          />
-        </p>
-        <p className="inputField">
-          <label>Password: </label>
-          <input
-            onChange={this.onChange}
-            name="password"
-            type="password"
-            value={this.state.password}
-            required
-          />
-        </p>
-        {this.props.errorMessage && (
-          <div class="alert alert-warning" role="alert">
-            {this.props.errorMessage}
-          </div>
-        )}
+      <FormGroup>
+        <TextField
+          margin="dense"
+          label="E-mail"
+          variant="outlined"
+          onChange={this.onChange}
+          name="email"
+          type="email"
+          value={this.state.email}
+          placeholder="E-mail"
+          required
+        />
+        <TextField
+          margin="dense"
+          label="Password"
+          variant="outlined"
+          onChange={this.onChange}
+          name="password"
+          type="password"
+          value={this.state.password}
+          placeholder="Password"
+          required
+        />
         <Button
           type="submit"
-          className="btn-light"
           disabled={!isValid}
+          onClick={this.onSubmit}
         >
           Log In
         </Button>
-        {/* <button onClick={this.props.googleSignin}>Sign In with Google</button> */}
-        {error & <p>{error.message}</p>}
-      </form>
+        {error && <p>{error.message}</p>}
+      </FormGroup>
     );
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     errorMessage: state.usersReducer.errorMessage
-//   };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     loginUser: (email, password) => dispatch(loginUser(email, password))
-//   };
-// };
-
-
-// export default connect(
 export default withFirebase(LoginUserForm);
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(LoginUserForm);
