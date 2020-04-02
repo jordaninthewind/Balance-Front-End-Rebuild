@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { createUser } from '../../reducers/usersReducer';
 import { connect } from 'react-redux';
-import { Button } from 'reactstrap';
+import Button from '@material-ui/core/Button';
 import { withFirebase } from '../Firebase';
+import FormGroup from '@material-ui/core/FormGroup';
+import TextField from '@material-ui/core/TextField';
 
 const INITIAL_STATE = {
   firstName: '',
@@ -47,60 +49,63 @@ class CreateUserForm extends Component {
     const { firstName, lastName, email, password, location, error } = this.state;
 
     return (
-      <div>
-        <form onSubmit={this.onSubmit}>
-          <div className="inputField">
-            <label>First Name:</label>
-            <input
-              onChange={this.onChange}
-              name="firstName"
-              value={firstName}
-              required
-            />
-          </div>
-          <div className="inputField">
-            <label>Last Name:</label>
-            <input
-              onChange={this.onChange}
-              name="lastName"
-              value={lastName}
-              required
-            />
-          </div>
-          <div className="inputField">
-            <label>Password:</label>
-            <input
-              onChange={this.onChange}
-              name="password"
-              type="password"
-              value={password}
-              required
-            />
-          </div>
-          <div className="inputField">
-            <label>Email:</label>
-            <input
-              onChange={this.onChange}
-              name="email"
-              type="email"
-              value={email}
-              required
-            />
-          </div>
-          <div className="inputField">
-            <label>Location:</label>
-            <input
-              onChange={this.onChange}
-              name="location"
-              value={location}
-              required
-            />
-          </div>
-          <br />
-          <Button type="submit" className="btn-light">Create User!</Button>
-          {error && <p>{error.message}</p>}
-        </form>
-      </div>
+      <FormGroup onSubmit={this.onSubmit}>
+        <TextField
+        margin="dense"
+          label="First Name"
+          variant="outlined"
+          onChange={this.onChange}
+          name="firstName"
+          value={firstName}
+          placeholder="First Name"
+          required>
+        </TextField>
+        <TextField
+          margin="dense"
+          label="Last Name"
+          variant="outlined"
+          onChange={this.onChange}
+          name="lastName"
+          value={lastName}
+          placeholder="Last Name"
+          required>
+        </TextField>
+        <TextField
+          margin="dense"
+          label="Password"
+          variant="outlined"
+          onChange={this.onChange}
+          name="password"
+          type="password"
+          value={password}
+          placeholder="Password"
+          required>
+        </TextField>
+        <TextField
+          margin="dense"
+          label="E-mail"
+          variant="outlined"
+          onChange={this.onChange}
+          name="email"
+          type="email"
+          value={email}
+          placeholder="E-mail"
+          required>
+        </TextField>
+        <TextField
+          margin="dense"
+          label="Location"
+          variant="outlined"
+          onChange={this.onChange}
+          name="location"
+          value={location}
+          placeholder="Location"
+          required>
+        </TextField>
+        <br />
+        <Button type="submit" className="btn-light">Create User!</Button>
+        {error && <p>{error.message}</p>}
+      </FormGroup >
     );
   }
 }
