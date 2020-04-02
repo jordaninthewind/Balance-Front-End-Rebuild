@@ -28,7 +28,7 @@ class CreateUserForm extends Component {
     event.preventDefault();
     const { firstName, lastName, email, password, location } = this.state;
 
-    this.props.firebase.doCreateUserWithEmailAndPassword(email, password)
+    this.props.doSignup(email, password)
       .then(authUser => {
         this.setState({
           ...INITIAL_STATE
@@ -48,77 +48,74 @@ class CreateUserForm extends Component {
   render() {
     const { firstName, lastName, email, password, location, error } = this.state;
 
+    const isValid = firstName && lastName && email && password && location;
+
     return (
-      <FormGroup onSubmit={this.onSubmit}>
-        <TextField
-        margin="dense"
-          label="First Name"
-          variant="outlined"
-          onChange={this.onChange}
-          name="firstName"
-          value={firstName}
-          placeholder="First Name"
-          required>
-        </TextField>
-        <TextField
-          margin="dense"
-          label="Last Name"
-          variant="outlined"
-          onChange={this.onChange}
-          name="lastName"
-          value={lastName}
-          placeholder="Last Name"
-          required>
-        </TextField>
-        <TextField
-          margin="dense"
-          label="Password"
-          variant="outlined"
-          onChange={this.onChange}
-          name="password"
-          type="password"
-          value={password}
-          placeholder="Password"
-          required>
-        </TextField>
-        <TextField
-          margin="dense"
-          label="E-mail"
-          variant="outlined"
-          onChange={this.onChange}
-          name="email"
-          type="email"
-          value={email}
-          placeholder="E-mail"
-          required>
-        </TextField>
-        <TextField
-          margin="dense"
-          label="Location"
-          variant="outlined"
-          onChange={this.onChange}
-          name="location"
-          value={location}
-          placeholder="Location"
-          required>
-        </TextField>
-        <br />
-        <Button type="submit" className="btn-light">Create User!</Button>
-        {error && <p>{error.message}</p>}
-      </FormGroup >
+      <form onSubmit={this.onSubmit}>
+        <FormGroup>
+          <TextField
+            margin="dense"
+            label="First Name"
+            variant="outlined"
+            onChange={this.onChange}
+            name="firstName"
+            value={firstName}
+            placeholder="First Name"
+            required>
+          </TextField>
+          <TextField
+            margin="dense"
+            label="Last Name"
+            variant="outlined"
+            onChange={this.onChange}
+            name="lastName"
+            value={lastName}
+            placeholder="Last Name"
+            required>
+          </TextField>
+          <TextField
+            margin="dense"
+            label="Password"
+            variant="outlined"
+            onChange={this.onChange}
+            name="password"
+            type="password"
+            value={password}
+            placeholder="Password"
+            required>
+          </TextField>
+          <TextField
+            margin="dense"
+            label="E-mail"
+            variant="outlined"
+            onChange={this.onChange}
+            name="email"
+            type="email"
+            value={email}
+            placeholder="E-mail"
+            required>
+          </TextField>
+          <TextField
+            margin="dense"
+            label="Location"
+            variant="outlined"
+            onChange={this.onChange}
+            name="location"
+            value={location}
+            placeholder="Location"
+            required>
+          </TextField>
+          <Button
+            type="submit"
+            disabled={!isValid}
+          >
+            Sign Up
+        </Button>
+          {error && <p>{error.message}</p>}
+        </FormGroup >
+      </form>
     );
   }
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     createUser: (firstName, lastName, email, password, location) =>
-//       dispatch(createUser(firstName, lastName, email, password, location))
-//   };
-// };
-
-// export default connect(
-//   null,
-//   mapDispatchToProps
-// )
-export default withFirebase(CreateUserForm);
+export default CreateUserForm;

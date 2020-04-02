@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
-import { withFirebase } from '../Firebase';
 
 import * as ROUTES from '../../constants/routes';
 import "./LoginUserForm.scss";
@@ -27,7 +26,7 @@ class LoginUserForm extends Component {
 
     const { email, password } = this.state;
 
-    this.props.firebase.doSignInWithEmailAndPassword(email, password)
+    this.props.doLogin(email, password)
       .then(() => {
         this.setState({
           ...INITIAL_STATE
@@ -51,40 +50,41 @@ class LoginUserForm extends Component {
     const isValid = email && password;
 
     return (
-      <FormGroup>
-        <TextField
-          margin="dense"
-          label="E-mail"
-          variant="outlined"
-          onChange={this.onChange}
-          name="email"
-          type="email"
-          value={this.state.email}
-          placeholder="E-mail"
-          required
-        />
-        <TextField
-          margin="dense"
-          label="Password"
-          variant="outlined"
-          onChange={this.onChange}
-          name="password"
-          type="password"
-          value={this.state.password}
-          placeholder="Password"
-          required
-        />
-        <Button
-          type="submit"
-          disabled={!isValid}
-          onClick={this.onSubmit}
-        >
-          Log In
+      <form onClick={this.onSubmit}>
+        <FormGroup>
+          <TextField
+            margin="dense"
+            label="E-mail"
+            variant="outlined"
+            onChange={this.onChange}
+            name="email"
+            type="email"
+            value={this.state.email}
+            placeholder="E-mail"
+            required
+          />
+          <TextField
+            margin="dense"
+            label="Password"
+            variant="outlined"
+            onChange={this.onChange}
+            name="password"
+            type="password"
+            value={this.state.password}
+            placeholder="Password"
+            required
+          />
+          <Button
+            type="submit"
+            disabled={!isValid}
+          >
+            Log In
         </Button>
-        {error && <p>{error.message}</p>}
-      </FormGroup>
+          {error && <p>{error.message}</p>}
+        </FormGroup>
+      </form>
     );
   }
 }
 
-export default withFirebase(LoginUserForm);
+export default LoginUserForm;

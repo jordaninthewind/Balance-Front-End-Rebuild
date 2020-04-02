@@ -9,8 +9,8 @@ const graphQlFetch = query => {
 
 // actions
 
-const setMeditationSessions = meditationSessions => {
-  return { type: "GET_USER_MEDITATION_SESSIONS", meditationSessions };
+export const setMeditationSessions = meditationSessions => {
+  return { type: "SET_USER_MEDITATION_SESSIONS", meditationSessions };
 };
 
 export const resetMeditationSessions = () => {
@@ -39,7 +39,7 @@ export const saveUserMeditationSession = (user, duration, timeStarted) => dispat
   graphQlFetch(query)
     .then(res => {
       if (res.errors) throw new Error(res.errors)
-      console.log(res)
+      this.getUserMeditationSessions(user);
     })
     .catch(err => {
       console.log(err)
@@ -69,6 +69,7 @@ export const getUserMeditationSessions = userId => dispatch => {
         if (!med.date) return;
         med.date = (new Date(med.date)).toString()
       })
+      localStorage.setItem('userSessions', JSON.stringify(json.data.meditation_sessions))
 
       dispatch(setMeditationSessions(json.data.meditation_sessions));
     })
@@ -125,7 +126,7 @@ export default function meditationSessionsReducer(
         ...state,
         errors: {}
       };
-    case "GET_USER_MEDITATION_SESSIONS":
+    case "SET_USER_MEDITATION_SESSIONS":
       return {
         ...state,
         meditationSessions: action.meditationSessions,

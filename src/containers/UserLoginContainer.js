@@ -44,27 +44,35 @@ class UserLoginContainer extends Component {
   render() {
     const user = this.context;
     const { displayCreateUser, displayLoginUser } = this.state;
+    const showDescription = !displayLoginUser && !displayCreateUser;
 
     if (!user) {
       return (
         <>
-          {(!displayLoginUser && !displayCreateUser) &&
+          {showDescription &&
             <>
               <h1>Find Balance!</h1>
               <h4>
-                Balance is a simple app to track your daily meditation, find
-                inspiration through quotes and resources, and track progress.
+                Balance is a simple app to track your daily meditation & progress over time.
               </h4>
             </>
           }
-          {!displayLoginUser && (
-            <Button onClick={this.displayLoginUserForm}>Login</Button>
-          )}
-          {displayLoginUser && <LoginUserForm />}
+          {displayLoginUser &&
+            <LoginUserForm
+              doLogin={this.props.firebase.doSignInWithEmailAndPassword}
+            />
+          }
+          {displayCreateUser &&
+            <CreateUserForm
+              doSignup={this.props.firebase.doCreateUserWithEmailAndPassword}
+            />
+          }
           {!displayCreateUser && (
             <Button onClick={this.displayCreateUserForm}>Sign Up</Button>
           )}
-          {displayCreateUser && <CreateUserForm />}
+          {!displayLoginUser && (
+            <Button onClick={this.displayLoginUserForm}>Login</Button>
+          )}
         </>
       );
     }
@@ -73,4 +81,4 @@ class UserLoginContainer extends Component {
   }
 }
 
-export default UserLoginContainer;
+export default withFirebase(UserLoginContainer);
