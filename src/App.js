@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { Container, CssBaseline } from '@material-ui/core';
+import { Container, Grid, CssBaseline } from '@material-ui/core';
 import { withAuth, AuthUserContext } from './components/FirebaseSession';
 
 import Navigation from "./components/Navigation/Navigation";
@@ -20,26 +20,35 @@ class App extends React.Component {
         <Navigation />
         <CssBaseline />
         <Container fixed>
-          <Switch>
-            <Route exact path="/"
-              component={UserLoginContainer}
-            />
-            <Route
-              path="/meditation_sessions"
-              render={(props) => <MeditationSessionsContainer {...props} currentUser={this.context} />}
-            />
-            <Route
-              path="/timer"
-              component={TimerContainer}
-            />
-            <Route
-              path="/resources"
-              component={ResourcesContainer}
-            />
-            <Route component={Lost} />
-          </Switch>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            maxHeight="80vh"
+          >
+            <Switch>
+              <Route exact path="/"
+                component={UserLoginContainer}
+              />
+              <Route
+                path="/meditation_sessions"
+                render={(props) => <MeditationSessionsContainer {...props} currentUser={this.context} />}
+              />
+              <Route
+                path="/timer"
+                component={TimerContainer}
+              />
+              <Route
+                path="/resources"
+                component={ResourcesContainer}
+              />
+              <Route component={Lost} />
+            </Switch>
+            <Footer user={this.context} />
+          </Grid>
         </Container>
-        <Footer />
       </>
     );
   }
