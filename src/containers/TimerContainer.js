@@ -5,7 +5,8 @@ import { SessionModal } from "../components/SessionModal";
 import { saveUserMeditationSession } from "../reducers/meditationSessionsReducer";
 import { AuthUserContext } from "../components/FirebaseSession";
 import InputLabel from "@material-ui/core/InputLabel";
-import NativeSelect from "@material-ui/core/Select";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 class TimerContainer extends React.Component {
   constructor(props) {
@@ -112,17 +113,14 @@ class TimerContainer extends React.Component {
             How long do you want to sit today?
           </InputLabel>
         )}
-        <NativeSelect
-          labelId="time-select"
-          onChange={this.updateMeditationTime}
-        >
-          <option value="" selected>
+        <Select labelId="time-select" onChange={this.updateMeditationTime}>
+          <MenuItem value="" selected>
             Select A Time
-          </option>
+          </MenuItem>
           {[5, 10, 15, 20, 25, 30, 45, 60].map((num) => {
-            return <option value={num * 60}>{num} Minutes</option>;
+            return <MenuItem value={num * 60}>{num} Minutes</MenuItem>;
           })}
-        </NativeSelect>
+        </Select>
         <SessionModal
           buttonLabel={this.props.errors.errorCta}
           title={this.props.errors.errorTitle}
