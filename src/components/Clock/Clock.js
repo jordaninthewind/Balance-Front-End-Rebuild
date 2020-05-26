@@ -1,5 +1,6 @@
 import React from "react";
-import { Button } from "reactstrap";
+import Button from "@material-ui/core/Button";
+import Switch from "@material-ui/core/Switch";
 import "./Clock.css";
 
 const Clock = ({
@@ -8,7 +9,9 @@ const Clock = ({
   stopClock,
   resetClock,
   saveSession,
-  timerStarted
+  timerStarted,
+  playAudio,
+  toggleSound,
 }) => {
   const minutes = ~~(timeCount / 60);
   const seconds = () => {
@@ -24,20 +27,19 @@ const Clock = ({
 
   return (
     <>
-      <div className="title">Time Since Start</div>
       <div id="timer">{timeSpentMeditating}</div>
       <div id="buttonContainer">
-        {!timerStarted && timeCount <= 0 && (
+        {!timerStarted && timeCount > 0 && (
           <Button outline onClick={startClock} color="secondary">
             Start Session
           </Button>
         )}
-        {!!timerStarted && (
+        {timerStarted && (
           <Button outline onClick={stopClock} color="secondary">
-            Close Session
+            End Session
           </Button>
         )}
-        {!timerStarted && timeCount > 0 && (
+        {!timerStarted && timeCount === 0 && (
           <>
             <Button onClick={saveSession} color="warning">
               Save Session
@@ -47,6 +49,10 @@ const Clock = ({
             </Button>
           </>
         )}
+      </div>
+      <div id="sound-toggle" onTouchEnd={toggleSound} onClick={toggleSound}>
+        Turn {!playAudio ? "On" : "Off"} Gong
+        <Switch checked={playAudio} onChange={toggleSound} />
       </div>
     </>
   );

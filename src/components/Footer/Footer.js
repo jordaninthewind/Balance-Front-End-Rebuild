@@ -1,27 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { withFirebase } from '../Firebase';
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import AssessmentIcon from '@material-ui/icons/Assessment';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import * as ROUTES from '../../constants/routes';
+import React from "react";
+import { Link } from "react-router-dom";
+import { withFirebase } from "../Firebase";
+import { makeStyles } from "@material-ui/core/styles";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import RestoreIcon from "@material-ui/icons/Restore";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import AssessmentIcon from "@material-ui/icons/Assessment";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import * as ROUTES from "../../constants/routes";
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 1000,
-    minWidth: 'max-content',
-    width: '50%',
-    position: 'fixed',
-    bottom: '20px'
+    minWidth: "max-content",
+    width: "50%",
+    position: "fixed",
+    bottom: "20px",
   },
 });
 
-const Footer = props => {
+const Footer = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -38,7 +38,7 @@ const Footer = props => {
         component={Link}
         to={ROUTES.LANDING}
         label={props.user ? "Profile" : "Login"}
-        icon={<AccountCircleIcon />}
+        icon={<AccountCircleIcon style={classes.root.icon} />}
       />
       <BottomNavigationAction
         component={Link}
@@ -58,7 +58,7 @@ const Footer = props => {
         label="Resources"
         icon={<LibraryBooksIcon />}
       />
-      {props.user &&
+      {props.user && (
         <BottomNavigationAction
           component={Link}
           to={ROUTES.LANDING}
@@ -66,9 +66,9 @@ const Footer = props => {
           label="Sign Out"
           icon={<ExitToAppIcon />}
         />
-      }
+      )}
     </BottomNavigation>
   );
-}
+};
 
 export default withFirebase(Footer);

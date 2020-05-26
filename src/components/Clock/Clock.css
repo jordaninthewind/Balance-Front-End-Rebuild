@@ -1,5 +1,10 @@
 #timer {
-    font-size: 6em;
-    margin: 5%;
-    color: var(--middle-purple);
+  font-size: 6em;
+  margin: 10px;
+  color: #454545;
+}
+
+#sound-toggle {
+  position: fixed;
+  bottom: 100px;
 }
