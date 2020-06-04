@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Container, Grid, CssBaseline } from "@material-ui/core";
-import { MuiThemeProvider } from "@material-ui/core/Styles";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./theme";
 
 import Footer from "./components/Footer/Footer";
