@@ -5,28 +5,28 @@ import {
   InputGroupAddon,
   InputGroupText,
   Input,
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
 } from "reactstrap";
+import Button from "@material-ui/core/Button";
 
 class UpdateUserForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currentUser: props.currentUser
+      currentUser: props.currentUser,
     };
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.updateUser(this.state.currentUser);
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     let inputName = e.target.name;
     let inputValue = e.target.value;
 
@@ -120,18 +120,15 @@ class UpdateUserForm extends Component {
             />
           </InputGroup>
         </ModalBody>
-        <ModalFooter style={{justifyContent: 'space-between'}}>
-          <Button
-            color="light"
-            onClick={this.props.displayUpdateUser}
-            >
+        <ModalFooter style={{ justifyContent: "space-between" }}>
+          <Button color="light" onClick={this.props.displayUpdateUser}>
             Return To User
           </Button>
           <Button
             outline
             color="secondary"
             type="submit"
-            onClick={e => this.handleSubmit(e)}
+            onClick={(e) => this.handleSubmit(e)}
           >
             Update User
           </Button>
@@ -153,7 +150,7 @@ class UpdateUserForm extends Component {
 
 UpdateUserForm.propTypes = {
   displayUpdateUser: PropTypes.func,
-  displayUpdateUserForm: PropTypes.bool
+  displayUpdateUserForm: PropTypes.bool,
 };
 
 export default UpdateUserForm;

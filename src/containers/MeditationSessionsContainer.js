@@ -2,16 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   getUserMeditationSessions,
-  deleteMeditationSession
+  deleteMeditationSession,
 } from "../reducers/meditationSessionsReducer";
-import SessionDisplay from '../components/SessionDisplay/SessionDisplay';
-import { Container, CssBaseline } from '@material-ui/core';
+import SessionDisplay from "../components/SessionDisplay/SessionDisplay";
 
 class MeditationSessionsContainer extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     if (this.props.currentUser) {
       const { uid } = this.props.currentUser;
@@ -20,8 +15,12 @@ class MeditationSessionsContainer extends Component {
   }
 
   render() {
-    const { currentUser, loading, meditationSessions, deleteMeditationSession } = this.props;
-    if (!currentUser) return <div className="title">Log in to see sessions!</div>;
+    const {
+      currentUser,
+      loading,
+      meditationSessions,
+      deleteMeditationSession,
+    } = this.props;
 
     return (
       <SessionDisplay
@@ -30,23 +29,23 @@ class MeditationSessionsContainer extends Component {
         loading={loading}
         deleteMeditationSession={deleteMeditationSession}
       />
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     meditationSessions: state.meditationSessionsReducer.meditationSessions,
-    loading: state.meditationSessionsReducer.loading
+    loading: state.meditationSessionsReducer.loading,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    setUserMeditationSessions: currentUser =>
+    setUserMeditationSessions: (currentUser) =>
       dispatch(getUserMeditationSessions(currentUser)),
-    deleteMeditationSession: session =>
-      dispatch(deleteMeditationSession(session))
+    deleteMeditationSession: (session) =>
+      dispatch(deleteMeditationSession(session)),
   };
 };
 

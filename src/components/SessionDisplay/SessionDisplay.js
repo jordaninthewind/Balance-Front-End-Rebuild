@@ -1,26 +1,28 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import { SessionCard } from '../SessionCard';
+import React from "react";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/Styles";
+import Paper from "@material-ui/core/Paper";
+import { SessionCard } from "../SessionCard";
 
-const SessionDisplay = props => {
-    if (props.loading) {
-        return <div className="title">Loading...</div>
-    }
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    // color: theme.palette.text.secondary,
+  },
+}));
 
-    if (props.meditationSessions.length === 0) {
-        return <div className="title">There are no sessions yet!</div>;
-    } else {
-    // TODO: Add grid spacing
-        return (
-            <>
-                <div className="title">Total Recorded Sessions: </div>
-                <Grid
-                    container
-                    direction="row-reverse"
-                    justify="center"
-                    alignItems="center"
-                >
-                    {props.meditationSessions.map(session => {
+const SessionDisplay = (props) => {
+  const classes = useStyles();
+  if (props.loading) {
+    return <div className="title">Loading...</div>;
+  }
+
+  return (
+    <Paper className={classes.paper}>
+      <div className="title">Total Recorded Sessions: </div>
+      <h1>I am the sessions container</h1>
+      {/* {props.meditationSessions.map(session => {
                         return (
                             <SessionCard
                                 key={Math.random()}
@@ -29,11 +31,9 @@ const SessionDisplay = props => {
                             >
                             </SessionCard>
                         )
-                    })}
-                </Grid>
-            </>
-        )
-    }
-}
+                    })} */}
+    </Paper>
+  );
+};
 
 export default SessionDisplay;

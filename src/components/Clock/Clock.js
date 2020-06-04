@@ -4,13 +4,14 @@ import Switch from "@material-ui/core/Switch";
 import "./Clock.css";
 
 const Clock = ({
-  timeCount,
-  startClock,
-  stopClock,
+  duration,
+  playAudio,
   resetClock,
   saveSession,
+  startClock,
+  stopClock,
+  timeCount,
   timerStarted,
-  playAudio,
   toggleSound,
 }) => {
   const minutes = ~~(timeCount / 60);
@@ -27,33 +28,37 @@ const Clock = ({
 
   return (
     <>
-      <div id="timer">{timeSpentMeditating}</div>
-      <div id="buttonContainer">
-        {!timerStarted && timeCount > 0 && (
-          <Button outline onClick={startClock} color="secondary">
-            Start Session
-          </Button>
-        )}
-        {timerStarted && (
-          <Button outline onClick={stopClock} color="secondary">
-            End Session
-          </Button>
-        )}
-        {!timerStarted && timeCount === 0 && (
-          <>
-            <Button onClick={saveSession} color="warning">
-              Save Session
-            </Button>
-            <Button outline onClick={resetClock} color="secondary">
-              Reset
-            </Button>
-          </>
-        )}
-      </div>
-      <div id="sound-toggle" onTouchEnd={toggleSound} onClick={toggleSound}>
-        Turn {!playAudio ? "On" : "Off"} Gong
-        <Switch checked={playAudio} onChange={toggleSound} />
-      </div>
+      {duration > 0 && (
+        <>
+          <div id="timer">{timeSpentMeditating}</div>
+          <div id="buttonContainer">
+            {!timerStarted && timeCount > 0 && (
+              <Button outline onClick={startClock} color="secondary">
+                Start Session
+              </Button>
+            )}
+            {timerStarted && (
+              <Button outline onClick={stopClock} color="secondary">
+                End Session
+              </Button>
+            )}
+            {!timerStarted && timeCount === 0 && (
+              <>
+                <Button onClick={saveSession} color="warning">
+                  Save Session
+                </Button>
+                <Button outline onClick={resetClock} color="secondary">
+                  Reset
+                </Button>
+              </>
+            )}
+          </div>
+          <div id="sound-toggle" onTouchEnd={toggleSound} onClick={toggleSound}>
+            Turn {!playAudio ? "On" : "Off"} Gong
+            <Switch checked={playAudio} />
+          </div>
+        </>
+      )}
     </>
   );
 };

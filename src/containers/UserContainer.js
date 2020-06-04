@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import UserInfo from "../components/UserInfo/UserInfo";
 import { connect } from "react-redux";
-import UpdateUserForm from "../components/UpdateUserForm";
+import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import UserInfo from "../components/UserInfo/UserInfo";
+import UpdateUserForm from "../components/UpdateUserForm";
+import SessionDisplay from "../components/SessionDisplay/SessionDisplay";
 
 class UserContainer extends Component {
   constructor(props) {
@@ -14,17 +17,17 @@ class UserContainer extends Component {
     };
   }
 
-  updateMeditationTime = time => {
+  updateMeditationTime = (time) => {
     if (time) {
       this.setState({
-        meditationTime: time.reduce((acc, curr) => acc + curr.duration, 0)
+        meditationTime: time.reduce((acc, curr) => acc + curr.duration, 0),
       });
     }
   };
 
   displayUpdateUser = () => {
     this.setState({
-      displayUpdateUserForm: !this.state.displayUpdateUserForm
+      displayUpdateUserForm: !this.state.displayUpdateUserForm,
     });
   };
 
@@ -36,12 +39,15 @@ class UserContainer extends Component {
     const { user } = this.props;
 
     return (
-      <>
-        <UserInfo
-          user={user}
-          timeMeditated={this.state.meditationTime}
-        />
-        <Button onClick={this.displayUpdateUser}>Update User</Button>
+      <Grid container direction="column">
+        <Button
+          onClick={this.displayUpdateUser}
+          variant="contained"
+          color="primary"
+        >
+          Update Profile
+        </Button>
+        <UserInfo user={user} timeMeditated={this.state.meditationTime} />
         <UpdateUserForm
           currentUser={user}
           updateUser={this.props.updateUser}
@@ -49,14 +55,15 @@ class UserContainer extends Component {
           displayUpdateUserForm={this.state.displayUpdateUserForm}
           displayUpdateUser={this.displayUpdateUser}
         />
-      </>
+        <SessionDisplay currentUser={user} />
+      </Grid>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    sessions: state.meditationSessionsReducer.meditationSessions
+    sessions: state.meditationSessionsReducer.meditationSessions,
   };
 };
 
@@ -67,7 +74,4 @@ const mapStateToProps = state => {
 //   };
 // };
 
-export default connect(
-  mapStateToProps,
-  null
-)(UserContainer);
+export default connect(mapStateToProps, null)(UserContainer);

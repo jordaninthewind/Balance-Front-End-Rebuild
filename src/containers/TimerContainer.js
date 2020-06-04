@@ -4,9 +4,7 @@ import Clock from "../components/Clock/Clock";
 import { SessionModal } from "../components/SessionModal";
 import { saveUserMeditationSession } from "../reducers/meditationSessionsReducer";
 import { AuthUserContext } from "../components/FirebaseSession";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+import TimeSelect from "../components/TimeSelect";
 
 class TimerContainer extends React.Component {
   constructor(props) {
@@ -26,9 +24,9 @@ class TimerContainer extends React.Component {
 
   static contextType = AuthUserContext;
 
-  updateMeditationTime = (e) => {
+  updateMeditationTime = ({ target }) => {
     this.setState({
-      duration: e.target.value,
+      duration: target.value,
     });
   };
 
@@ -73,7 +71,7 @@ class TimerContainer extends React.Component {
     }));
   };
 
-  saveSession = async (e) => {
+  saveSession = async () => {
     if (this.context && this.context.uid) {
       await this.props.saveMeditationSession(
         this.context.uid,
@@ -96,31 +94,21 @@ class TimerContainer extends React.Component {
   render() {
     return (
       <>
-        {this.state.duration > 0 && (
-          <Clock
-            playAudio={this.state.playAudio}
-            resetClock={this.resetClock}
-            saveSession={this.saveSession}
-            startClock={this.startClock}
-            stopClock={this.stopClock}
-            timeCount={this.state.duration}
-            timerStarted={this.state.timerStarted}
-            toggleSound={this.toggleSound}
-          />
-        )}
-        {!this.state.duration && (
-          <InputLabel id="time-select">
-            How long do you want to sit today?
-          </InputLabel>
-        )}
-        <Select labelId="time-select" onChange={this.updateMeditationTime}>
-          <MenuItem value="" selected>
-            Select A Time
-          </MenuItem>
-          {[5, 10, 15, 20, 25, 30, 45, 60].map((num) => {
-            return <MenuItem value={num * 60}>{num} Minutes</MenuItem>;
-          })}
-        </Select>
+        <Clock
+          playAudio={this.state.playAudio}
+          resetClock={this.resetClock}
+          saveSession={this.saveSession}
+          startClock={this.startClock}
+          stopClock={this.stopClock}
+          timeCount={this.state.duration}
+          timerStarted={this.state.timerStarted}
+          toggleSound={this.toggleSound}
+          duration={this.state.duration}
+        />
+        <TimeSelect
+          duration={this.state.duration}
+          updateMeditationTime={this.updateMeditationTime}
+        />
         <SessionModal
           buttonLabel={this.props.errors.errorCta}
           title={this.props.errors.errorTitle}

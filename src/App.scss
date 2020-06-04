@@ -33,26 +33,14 @@ h4 {
 .title {
   color: var(--darker-purple);
   font-size: 3em;
-  text-align: justify;
 }
 
 .subtitle {
   color: var(--middle-purple);
   font-size: 2em;
-  text-align: justify;
   @media screen and (max-width: 415px) {
     font-size: 1.25em;
   }
-}
-
-button {
-  min-width: 50px;
-  padding: 3%;
-}
-
-button:hover {
-  color: var(--middle-purple);
-  background-color: white;  
 }
 
 .inputField {
@@ -70,7 +58,7 @@ button:hover {
     padding: 0 3%;
     font-weight: bolder;
   }
-  
+
   .profilePicture {
     min-width: 200px;
     min-height: 200px;
@@ -111,13 +99,13 @@ button:hover {
     font-size: 2em;
     font-weight: bold;
   }
-/* 
+  /* 
   #header img {
     display: none;
   } */
 
   #navBar {
-    font-size: .8em;
+    font-size: 0.8em;
   }
 
   .title {

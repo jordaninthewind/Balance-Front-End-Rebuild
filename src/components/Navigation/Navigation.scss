@@ -15,14 +15,13 @@ header {
     border-bottom: 5px solid gold;
     z-index: 10;
     height: 15vw;
-    margin-bottom: 5vw;
     max-height: 100px;
     @media screen and (max-width: 415px) {
       border-bottom: 3px solid gold;
     }
     position: sticky;
   }
-  
+
   .navbar-brand {
     margin: 0;
     font-size: 3.5rem;
@@ -33,7 +32,7 @@ header {
       font-size: 2rem;
     }
   }
-  
+
   .logo-img {
     height: 5vh;
     width: 5vh;

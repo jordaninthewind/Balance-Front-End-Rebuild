@@ -1,19 +1,29 @@
 import React from "react";
-import "./UserInfo.css";
+import { makeStyles } from "@material-ui/core/Styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: theme.spacing(4),
+    textAlign: "center",
+  },
+  image: {
+    minWidth: "200px",
+    minHeight: "200px",
+    width: "25vh",
+    height: "25vh",
+    clipPath: "circle(25vh at center)",
+  },
+}));
 
 const UserInfo = ({ user, timeMeditated, photoUrl }) => {
+  const classes = useStyles();
   const minutes = Math.floor(timeMeditated / 60);
   const totalMinutes = minutes % 60;
   const hours = Math.floor(minutes / 60);
   const seconds = timeMeditated % 60;
 
   return (
-    <>
-      <img
-        className="profilePicture"
-        alt="profile"
-        src={photoUrl}
-      />
+    <div className={classes.root}>
       <div className="title">User Name: {user.fullName}</div>
       <div className="subtitle">User E-mail: {user.email}</div>
       <div className="subtitle">
@@ -22,12 +32,13 @@ const UserInfo = ({ user, timeMeditated, photoUrl }) => {
         {seconds < 10 ? "0" + seconds : seconds}
       </div>
       <div className="subtitle">Location: {user.location}</div>
-    </>
+      <img className={classes.image} alt="profile" src={photoUrl} />
+    </div>
   );
 };
 
 UserInfo.defaultProps = {
-  photoUrl: "shambhala sun.png"
+  photoUrl: "shambhala sun.png",
 };
 
 export default UserInfo;
