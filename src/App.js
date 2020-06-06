@@ -1,8 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { Container, Grid, CssBaseline } from "@material-ui/core";
+import { Container, CssBaseline } from "@material-ui/core";
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import { theme } from "./theme";
 
 import Footer from "./components/Footer/Footer";
 import Navigation from "./components/Navigation/Navigation";
@@ -11,6 +10,7 @@ import TimerContainer from "./containers/TimerContainer";
 import UserLoginContainer from "./containers/UserLoginContainer";
 import { withAuth, AuthUserContext } from "./components/FirebaseSession";
 import { Lost } from "./components/Lost";
+import { theme } from "./theme";
 import "./App.scss";
 
 class App extends React.Component {
@@ -22,16 +22,14 @@ class App extends React.Component {
           <Navigation />
           <CssBaseline />
           <Container maxWidth="lg">
-            <Grid container>
-              <Switch>
-                <Route exact path="/" component={UserLoginContainer} />
-                <Route path="/timer" component={TimerContainer} />
-                <Route path="/resources" component={ResourcesContainer} />
-                <Route component={Lost} />
-              </Switch>
-            </Grid>
+            <Switch>
+              <Route exact path="/" component={UserLoginContainer} />
+              <Route path="/timer" component={TimerContainer} />
+              <Route path="/resources" component={ResourcesContainer} />
+              <Route component={Lost} />
+            </Switch>
+            <Footer user={this.context} />
           </Container>
-          <Footer user={this.context} />
         </MuiThemeProvider>
       </>
     );

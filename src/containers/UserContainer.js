@@ -40,14 +40,7 @@ class UserContainer extends Component {
 
     return (
       <Grid container direction="column">
-        <Button
-          onClick={this.displayUpdateUser}
-          variant="contained"
-          color="primary"
-        >
-          Update Profile
-        </Button>
-        <UserInfo user={user} timeMeditated={this.state.meditationTime} />
+        <UserInfo user={user} timeMeditated={this.state.meditationTime} displayUpdateUser={this.displayUpdateUser}/>
         <UpdateUserForm
           currentUser={user}
           updateUser={this.props.updateUser}

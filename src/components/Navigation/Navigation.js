@@ -1,11 +1,13 @@
 import React from "react";
+import AppBar from "@material-ui/core/AppBar"
+import Typography from '@material-ui/core/Typography';
 import "./Navigation.scss";
 
 const Navigation = () => {
   return (
-    <header className="brand-header">
-      <title className="navbar-brand">b a l a n c e</title>
-    </header>
+    <AppBar className="brand-header">
+      <Typography className="navbar-brand">b a l a n c e</Typography>
+    </AppBar>
   );
 };
 

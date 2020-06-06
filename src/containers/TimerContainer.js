@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Grid from "@material-ui/core/Grid";
 import Clock from "../components/Clock/Clock";
 import { SessionModal } from "../components/SessionModal";
 import { saveUserMeditationSession } from "../reducers/meditationSessionsReducer";
@@ -11,7 +12,7 @@ class TimerContainer extends React.Component {
     super(props);
 
     this.state = {
-      duration: 0,
+      duration: null,
       playAudio: true,
       showModal: false,
       timerStarted: false,
@@ -36,10 +37,14 @@ class TimerContainer extends React.Component {
     }));
   };
 
-  startClock = () => {
+  playGong = () => {
     if (this.state.playAudio) {
       this.audio.play();
     }
+  }
+
+  startClock = () => {
+    this.playGong()o;
 
     this.intervalId = setInterval(this.timer.bind(this), 1000);
     this.setState({
@@ -92,30 +97,35 @@ class TimerContainer extends React.Component {
   };
 
   render() {
+    if (this.state.duration === 0) {
+      this.playGong();
+    }
     return (
       <>
-        <Clock
-          playAudio={this.state.playAudio}
-          resetClock={this.resetClock}
-          saveSession={this.saveSession}
-          startClock={this.startClock}
-          stopClock={this.stopClock}
-          timeCount={this.state.duration}
-          timerStarted={this.state.timerStarted}
-          toggleSound={this.toggleSound}
-          duration={this.state.duration}
-        />
-        <TimeSelect
-          duration={this.state.duration}
-          updateMeditationTime={this.updateMeditationTime}
-        />
-        <SessionModal
-          buttonLabel={this.props.errors.errorCta}
-          title={this.props.errors.errorTitle}
-          body={this.props.errors.errorBody}
-          showModal={this.state.showModal}
-          toggle={this.toggleModal}
-        />
+        <Grid container direction="column">
+          <Clock
+            playAudio={this.state.playAudio}
+            resetClock={this.resetClock}
+            saveSession={this.saveSession}
+            startClock={this.startClock}
+            stopClock={this.stopClock}
+            timeCount={this.state.duration}
+            timerStarted={this.state.timerStarted}
+            toggleSound={this.toggleSound}
+            duration={this.state.duration}
+          />
+          <TimeSelect
+            duration={this.state.duration}
+            updateMeditationTime={this.updateMeditationTime}
+          />
+          <SessionModal
+            buttonLabel={this.props.errors.errorCta}
+            title={this.props.errors.errorTitle}
+            body={this.props.errors.errorBody}
+            showModal={this.state.showModal}
+            toggle={this.toggleModal}
+          />
+        </Grid>
       </>
     );
   }
@@ -123,7 +133,6 @@ class TimerContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.usersReducer.currentUser,
     errors: state.meditationSessionsReducer.errors,
   };
 };

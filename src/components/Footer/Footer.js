@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { withFirebase } from "../Firebase";
 import { makeStyles } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import Tab from "@material-ui/core/Tab";
@@ -15,11 +16,12 @@ import * as ROUTES from "../../constants/routes";
 
 const useStyles = makeStyles({
   root: {
-    bottom: "20px",
+    backgroundColor: "transparent",
+    bottom: "10px",
+    margin: "0 auto",
+    maxWidth: "500px",
     minWidth: "max-content",
     position: "fixed",
-    width: "40vw",
-    backgroundColor: "white",
   },
 });
 
@@ -27,35 +29,28 @@ const Footer = (props) => {
   const classes = useStyles();
 
   return (
-    <AppBar className={classes.root} position="static">
-      <Tabs
-        centered
-        variant="scrollable"
-        scrollButtons="on"
-        indicatorColor="primary"
-        textColor="primary"
-        aria-label="scrollable force tabs example"
-      >
-        <Tab
+    <Grid align-items="center" justify="center" container>
+      <BottomNavigation className={classes.root} showLabels>
+        <BottomNavigationAction
           component={Link}
           to={ROUTES.LANDING}
           label={props.user ? "Profile" : "Login"}
           icon={<AccountCircleIcon style={classes.root.icon} />}
         />
-        <Tab
+        <BottomNavigationAction
           component={Link}
           to={ROUTES.TIMER}
           label="Timer"
           icon={<RestoreIcon />}
         />
-        <Tab
+        <BottomNavigationAction
           component={Link}
           to={ROUTES.RESOURCES}
           label="Resources"
           icon={<LibraryBooksIcon />}
         />
         {props.user && (
-          <Tab
+          <BottomNavigationAction
             component={Link}
             to={ROUTES.LANDING}
             onClick={props.firebase.doSignOut}
@@ -63,8 +58,9 @@ const Footer = (props) => {
             icon={<ExitToAppIcon />}
           />
         )}
-      </Tabs>
-    </AppBar>
+        {/* </Tabs> */}
+      </BottomNavigation>
+    </Grid>
   );
 };
 

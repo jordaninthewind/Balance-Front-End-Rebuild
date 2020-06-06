@@ -1,32 +1,36 @@
 header {
   &.brand-header {
-    top: 0;
-    width: 100vw;
-    font-weight: 600;
     background: linear-gradient(
       45deg,
       rgba(194, 190, 255, 1) 0%,
       rgba(100, 20, 255, 0.3) 55%,
       rgba(125, 233, 255, 0.67) 80%
     );
-    display: flex;
-    justify-content: center;
+    border-bottom: 5px solid #ffe500;
     color: white;
-    border-bottom: 5px solid gold;
-    z-index: 10;
+    display: flex;
+    font-weight: 600;
+    justify-content: center;
     height: 15vw;
+    margin-bottom: 15px;
     max-height: 100px;
-    @media screen and (max-width: 415px) {
-      border-bottom: 3px solid gold;
-    }
     position: sticky;
+    top: 0;
+    width: 100vw;
+    z-index: 10;
+    @media screen and (max-width: 500px) {
+      border-bottom: 3px solid gold;
+      margin-bottom: 5px;
+    }
   }
 
   .navbar-brand {
-    margin: 0;
+    font-family: Quicksand;
     font-size: 3.5rem;
+    margin: 0;
     @media screen and (max-width: 500px) {
       font-size: 3rem;
+      font-weight: bolder;
     }
     @media screen and (max-width: 415px) {
       font-size: 2rem;
@@ -35,12 +39,12 @@ header {
 
   .logo-img {
     height: 5vh;
-    width: 5vh;
+    margin: auto;
     max-height: 70px;
     max-width: 70px;
-    z-index: 1;
-    margin: auto;
-    vertical-align: bottom;
     padding: 0 0 20px 10px;
+    vertical-align: bottom;
+    width: 5vh;
+    z-index: 1;
   }
 }
