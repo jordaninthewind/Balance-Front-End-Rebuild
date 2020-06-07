@@ -33,18 +33,18 @@ const Clock = ({
           <div id="timer">{timeSpentMeditating}</div>
           <div id="buttonContainer">
             {!timerStarted && timeCount > 0 && (
-              <Button outline onClick={startClock} color="secondary">
+              <Button onClick={startClock} color="primary" variant="contained">
                 Start Session
               </Button>
             )}
             {timerStarted && (
-              <Button outline onClick={stopClock} color="secondary">
+              <Button onClick={stopClock} color="primary" variant="contained">
                 End Session
               </Button>
             )}
             {!timerStarted && timeCount === 0 && (
               <>
-                <Button onClick={saveSession} color="warning">
+                <Button onClick={saveSession} color="warning" >
                   Save Session
                 </Button>
                 <Button outline onClick={resetClock} color="secondary">
@@ -55,7 +55,7 @@ const Clock = ({
           </div>
           <div id="sound-toggle" onTouchEnd={toggleSound} onClick={toggleSound}>
             Turn {!playAudio ? "On" : "Off"} Gong
-            <Switch checked={playAudio} />
+            <Switch checked={playAudio} color="primary"/>
           </div>
         </>
       )}
