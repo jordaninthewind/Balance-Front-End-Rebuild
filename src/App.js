@@ -23,7 +23,16 @@ class App extends React.Component {
           <CssBaseline />
           <Container maxWidth="lg">
             <Switch>
-              <Route exact path="/" component={UserLoginContainer} />
+              <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <UserLoginContainer
+                    {...props}
+                    currentUser={this.context}
+                  />
+                )}
+              />
               <Route path="/timer" component={TimerContainer} />
               <Route path="/resources" component={ResourcesContainer} />
               <Route component={Lost} />
