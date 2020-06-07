@@ -77,7 +77,7 @@ class UserLoginContainer extends Component {
       );
     }
 
-    return <UserContainer user={user} />
+    return <UserContainer currentUser={user} />
   }
 }
 

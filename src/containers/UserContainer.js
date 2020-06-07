@@ -6,6 +6,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import UserInfo from "../components/UserInfo/UserInfo";
 import UpdateUserForm from "../components/UpdateUserForm";
 import SessionDisplay from "../components/SessionDisplay/SessionDisplay";
+import {
+  getUserMeditationSessions,
+  deleteMeditationSession,
+} from "../reducers/meditationSessionsReducer";
 
 class UserContainer extends Component {
   constructor(props) {
@@ -15,6 +19,13 @@ class UserContainer extends Component {
       displayUpdateUserForm: false,
       meditationTime: null,
     };
+  }
+
+  componentDidMount() {
+    if (this.props.currentUser) {
+      const { uid } = this.props.currentUser;
+      this.props.setUserMeditationSessions(uid);
+    }
   }
 
   updateMeditationTime = (time) => {
@@ -40,7 +51,7 @@ class UserContainer extends Component {
 
     return (
       <Grid container direction="column">
-        <UserInfo user={user} timeMeditated={this.state.meditationTime} displayUpdateUser={this.displayUpdateUser}/>
+        <UserInfo user={user} timeMeditated={this.state.meditationTime} displayUpdateUser={this.displayUpdateUser} />
         <UpdateUserForm
           currentUser={user}
           updateUser={this.props.updateUser}
@@ -48,7 +59,11 @@ class UserContainer extends Component {
           displayUpdateUserForm={this.state.displayUpdateUserForm}
           displayUpdateUser={this.displayUpdateUser}
         />
-        <SessionDisplay currentUser={user} />
+        <SessionDisplay
+          currentUser={user}
+          meditationSessions={this.props.meditationSessions}
+          deleteMeditationSession={this.props.deleteMeditationSession}
+        />
       </Grid>
     );
   }
@@ -56,15 +71,18 @@ class UserContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    sessions: state.meditationSessionsReducer.meditationSessions,
+    meditationSessions: state.meditationSessionsReducer.meditationSessions,
+    loading: state.meditationSessionsReducer.loading,
   };
 };
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     deleteUser: user => dispatch(deleteUser(user)),
-//     updateUser: user => dispatch(updateUser(user)),
-//   };
-// };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUserMeditationSessions: (currentUser) =>
+      dispatch(getUserMeditationSessions(currentUser)),
+    deleteMeditationSession: (session) =>
+      dispatch(deleteMeditationSession(session)),
+  };
+};
 
-export default connect(mapStateToProps, null)(UserContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(UserContainer);

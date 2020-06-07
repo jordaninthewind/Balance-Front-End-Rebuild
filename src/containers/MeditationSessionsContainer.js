@@ -53,4 +53,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(MeditationSessionsContainer);
-// export default MeditationSessionsContainer;
