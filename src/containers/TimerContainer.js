@@ -44,7 +44,7 @@ class TimerContainer extends React.Component {
   }
 
   startClock = () => {
-    this.playGong()o;
+    this.playGong();
 
     this.intervalId = setInterval(this.timer.bind(this), 1000);
     this.setState({
@@ -66,7 +66,7 @@ class TimerContainer extends React.Component {
     this.setState({
       timerStarted: false,
       timeStart: null,
-      duration: 0,
+      duration: null,
     });
   };
 
@@ -99,6 +99,10 @@ class TimerContainer extends React.Component {
   render() {
     if (this.state.duration === 0) {
       this.playGong();
+      this.saveSession();
+      this.setState({
+        duration: null
+      })
     }
     return (
       <>
