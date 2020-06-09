@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import ResourceTile from "../components/ResourceTile/ResourceTile";
 
 class ResourcesContainer extends PureComponent {
@@ -37,9 +38,9 @@ class ResourcesContainer extends PureComponent {
 
   render() {
     return (
-      <Grid>
-        <h1>Relevant Links:</h1>
-        <div className="component">
+      <>
+        <Typography variant="h3">Relevant Links:</Typography>
+        <Grid container spacing="1" direction="row">
           {this.state.resources.map((res, idx) => {
             return (
               <ResourceTile
@@ -50,8 +51,8 @@ class ResourcesContainer extends PureComponent {
               />
             );
           })}
-        </div>
-      </Grid>
+        </Grid>
+      </>
     );
   }
 }
