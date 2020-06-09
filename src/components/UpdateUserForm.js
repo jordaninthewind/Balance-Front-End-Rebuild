@@ -1,134 +1,135 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "reactstrap";
+import { makeStyles } from '@material-ui/core/styles';
+import Backdrop from "@material-ui/core/Backdrop";
 import Button from "@material-ui/core/Button";
+import Fade from '@material-ui/core/Fade';
+import Modal from "@material-ui/core/Modal";
 
-class UpdateUserForm extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      currentUser: props.currentUser,
-    };
-  }
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.updateUser(this.state.currentUser);
-  };
+const UpdateUserForm = (props) => {
+  const classes = useStyles();
 
-  handleChange = (e) => {
-    let inputName = e.target.name;
-    let inputValue = e.target.value;
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   props.updateUser(props.currentUser);
+  // };
 
-    let statusCopy = Object.assign({}, this.state);
-    statusCopy.currentUser[inputName] = inputValue;
+  // handleChange = ({ target }) => {
+  //   let inputName = target.name;
+  //   let inputValue = target.value;
 
-    this.setState(statusCopy);
-  };
+  //   let statusCopy = Object.assign({}, props.;
+  //   statusCopy.currentUser[inputName] = inputValue;
 
-  render() {
-    return (
-      <Modal
-        isOpen={this.props.displayUpdateUserForm}
-        className={"modal-dialog-centered component"}
-      >
-        <ModalHeader>Update User</ModalHeader>
-        <ModalBody>
+  //   setState(statusCopy);
+  // };
+
+  // render() {
+  return (
+    <Modal
+      open={props.displayUpdateUserForm}
+      BackdropComponent={Backdrop}
+      closeAfterTransition
+      BackdropProps={{
+        timeout: 500,
+      }}
+      className={classes.modal}
+    >
+      <Fade in={props.displayUpdateUserForm}>
+        <div>Update User</div>
+        <div>
           <h6>All Fields and Password Required for Valid Update</h6>
-          {/* <form onSubmit={e => this.handleSubmit(e)}> */}
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>First Name</InputGroupText>
-            </InputGroupAddon>
-            <Input
+          {/* <form onSubmit={e => handleSubmit(e)}> */}
+          <div>
+            <label>First Name</label>
+            <input
               placeholder="First Name"
-              onChange={this.handleChange}
+              // onChange={handleChange}
               name="name"
-              value={this.state.currentUser.name}
+              // value={props.currentUser.name}
               required
             />
-          </InputGroup>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Last Name</InputGroupText>
-            </InputGroupAddon>
-            <Input
+          </div>
+          <div>
+            <label>Last Name</label>
+            <input
               placeholder="Last Name"
-              onChange={this.handleChange}
+              // onChange={handleChange}
               name="last_name"
-              value={this.state.currentUser.last_name}
+              // value={props.currentUser.last_name}
               required
             />
-          </InputGroup>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>E-mail</InputGroupText>
-            </InputGroupAddon>
-            <Input
+          </div>
+          <div>
+            <label>E-mail</label>
+
+            <input
               placeholder="E-mail"
-              onChange={this.handleChange}
+              // onChange={handleChange}
               name="email"
-              value={this.state.currentUser.email}
+              // value={props.currentUser.email}
               required
             />
-          </InputGroup>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Location</InputGroupText>
-            </InputGroupAddon>
-            <Input
+          </div>
+          <div>
+            <label>Location</label>
+
+            <input
               placeholder="Location"
-              onChange={this.handleChange}
+              // onChange={handleChange}
               name="name"
-              value={this.state.currentUser.location}
+              // value={props.currentUser.location}
               required
             />
-          </InputGroup>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Password</InputGroupText>
-            </InputGroupAddon>
-            <Input
+          </div>
+          <div>
+            <label>Password</label>
+
+            <input
               placeholder="Password"
-              onChange={this.handleChange}
+              // onChange={handleChange}
               name="password"
-              value={this.state.currentUser.password}
+              // value={props.currentUser.password}
               type="password"
               required
             />
-          </InputGroup>
+          </div>
           <br />
-          <h5>-- Profile Image Should Be Square --</h5>
           <h6>Profile Image Link:</h6>
-          <InputGroup>
-            <Input
+          <div>
+            <input
               placeholder="Link to Profile Image Here"
-              onChange={this.handleChange}
+              // onChange={handleChange}
               name="profile_picture"
-              value={this.state.currentUser.profile_url}
+              // value={props.currentUser.profile_url}
               required
             />
-          </InputGroup>
-        </ModalBody>
-        <ModalFooter style={{ justifyContent: "space-between" }}>
-          <Button color="light" onClick={this.props.displayUpdateUser}>
+          </div>
+        </div>
+        <div style={{ justifyContent: "space-between" }}>
+          <Button color="light" onClick={props.displayUpdateUser}>
             Return To User
           </Button>
           <Button
             outline
             color="secondary"
             type="submit"
-            onClick={(e) => this.handleSubmit(e)}
+          // onClick={(e) => handleSubmit(e)}
           >
             Update User
           </Button>
@@ -137,20 +138,21 @@ class UpdateUserForm extends Component {
             color="danger"
             onClick={() => {
               if (window.confirm("Click to confirm delete"))
-                this.props.deleteUser(this.props.currentUser);
+                props.deleteUser(/** to update */);
             }}
           >
             Delete Account
           </Button>
-        </ModalFooter>
-      </Modal>
-    );
-  }
+        </div>
+      </Fade>
+    </Modal>
+  );
 }
+// }
 
-UpdateUserForm.propTypes = {
-  displayUpdateUser: PropTypes.func,
-  displayUpdateUserForm: PropTypes.bool,
-};
+// UpdateUserForm.propTypes = {
+//   displayUpdateUser: PropTypes.func,
+//   displayUpdateUserForm: PropTypes.bool,
+// };
 
 export default UpdateUserForm;
