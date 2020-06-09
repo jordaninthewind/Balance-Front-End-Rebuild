@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,33 +17,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserInfo = ({ user, timeMeditated, photoUrl, displayUpdateUser }) => {
+const UserInfo = ({ currentUser, photoUrl, displayUpdateUser }) => {
   const classes = useStyles();
-  const minutes = Math.floor(timeMeditated / 60);
-  const totalMinutes = minutes % 60;
-  const hours = Math.floor(minutes / 60);
-  const seconds = timeMeditated % 60;
 
   return (
-    <div className={classes.root}>
-      <div className="title">User Name: {user.fullName}</div>
-      <div className="subtitle">User E-mail: {user.email}</div>
-      <div className="subtitle">
-        Total Time:
-        {" " + hours}:{totalMinutes < 10 ? "0" + totalMinutes : totalMinutes}:
-        {seconds < 10 ? "0" + seconds : seconds}
-      </div>
-      <div className="subtitle">Location: {user.location}</div>
-      <img className={classes.image} alt="profile" src={photoUrl} />
-      <br/>
-      <Button
-          onClick={displayUpdateUser}
+    <Grid container direction="column">
+      <div className={classes.root}>
+        <div className="title">{currentUser.email}</div>
+        <img className={classes.image} alt="profile" src={photoUrl} />
+        <br />
+        {/* <Button
           variant="contained"
           color="secondary"
         >
           Update Profile
-        </Button>
-    </div>
+        </Button> */}
+      </div>
+    </Grid >
   );
 };
 

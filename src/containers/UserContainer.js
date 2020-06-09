@@ -21,48 +21,39 @@ class UserContainer extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentWillMount() {
     if (this.props.currentUser) {
       const { uid } = this.props.currentUser;
-      this.props.setUserMeditationSessions(uid);
+      await this.props.getUserMeditationSessions(uid);
     }
   }
-
-  updateMeditationTime = (time) => {
-    if (time) {
-      this.setState({
-        meditationTime: time.reduce((acc, curr) => acc + curr.duration, 0),
-      });
-    }
-  };
 
   displayUpdateUser = () => {
-    this.setState({
-      displayUpdateUserForm: !this.state.displayUpdateUserForm,
-    });
+    this.setState((prevState) => ({
+      displayUpdateUserForm: !prevState.displayUpdateUserForm,
+    }));
   };
 
-  componentWillMount() {
-    this.updateMeditationTime(this.props.sessions);
-  }
-
   render() {
-    const { user } = this.props;
+    const { currentUser } = this.props;
 
     return (
       <Grid container direction="column">
-        <UserInfo user={user} timeMeditated={this.state.meditationTime} displayUpdateUser={this.displayUpdateUser} />
-        <UpdateUserForm
-          currentUser={user}
-          updateUser={this.props.updateUser}
-          deleteUser={this.props.deleteUser}
-          displayUpdateUserForm={this.state.displayUpdateUserForm}
+        <UserInfo
           displayUpdateUser={this.displayUpdateUser}
+          currentUser={currentUser}
+        />
+        <UpdateUserForm
+          currentUser={currentUser}
+          deleteUser={this.props.deleteUser}
+          displayUpdateUser={this.displayUpdateUser}
+          displayUpdateUserForm={this.state.displayUpdateUserForm}
+          updateUser={this.props.updateUser}
         />
         <SessionDisplay
-          currentUser={user}
-          meditationSessions={this.props.meditationSessions}
+          currentUser={currentUser}
           deleteMeditationSession={this.props.deleteMeditationSession}
+          meditationSessions={this.props.meditationSessions}
         />
       </Grid>
     );
@@ -78,11 +69,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setUserMeditationSessions: (currentUser) =>
+    getUserMeditationSessions: (currentUser) =>
       dispatch(getUserMeditationSessions(currentUser)),
     deleteMeditationSession: (session) =>
       dispatch(deleteMeditationSession(session)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserContainer);
