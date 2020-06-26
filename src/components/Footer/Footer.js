@@ -22,6 +22,7 @@ const useStyles = makeStyles({
     maxWidth: "500px",
     minWidth: "max-content",
     position: "fixed",
+    zIndex: "10000"
   },
 });
 

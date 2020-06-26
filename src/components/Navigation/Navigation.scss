@@ -1,11 +1,6 @@
 header {
   &.brand-header {
-    background: linear-gradient(
-      45deg,
-      rgba(194, 190, 255, 1) 0%,
-      rgba(100, 20, 255, 0.3) 55%,
-      rgba(125, 233, 255, 0.67) 80%
-    );
+    background: #c2beff;
     border-bottom: 5px solid #ffe500;
     color: white;
     display: flex;

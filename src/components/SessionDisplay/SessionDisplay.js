@@ -14,9 +14,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SessionDisplay = ({ loading, meditationSessions, deleteMeditationSession }) => {
+const SessionDisplay = ({
+  loading,
+  meditationSessions,
+  deleteMeditationSession,
+}) => {
   const classes = useStyles();
-  const meditationTime = meditationSessions.reduce((acc, curr) => acc + curr.duration, 0);
+  const meditationTime = meditationSessions.reduce(
+    (acc, curr) => acc + curr.duration,
+    0
+  );
   const minutes = Math.floor(meditationTime / 60);
   const totalMinutes = minutes % 60;
   const hours = Math.floor(minutes / 60);
@@ -27,26 +34,15 @@ const SessionDisplay = ({ loading, meditationSessions, deleteMeditationSession }
 
   return (
     <Grid spacing={3}>
-      <Paper className={classes.paper} >
+      <Paper className={classes.paper}>
         <div className="subtitle">Total Meditation Time:</div>
         <Grid alignContent="space-between" direction="row">
           <div className="title">
-
-            {" " + hours}:{totalMinutes < 10 ? "0" + totalMinutes : totalMinutes}:
-          {seconds < 10 ? "0" + seconds : seconds}
+            {" " + hours}:
+            {totalMinutes < 10 ? "0" + totalMinutes : totalMinutes}:
+            {seconds < 10 ? "0" + seconds : seconds}
           </div>
-          <SessionGraph />
-          {/* { meditationSessions.map(session => {
-              return (
-                <Paper key={Math.random()}>
-                  <SessionCard
-                    session={session}
-                    deleteSession={deleteMeditationSession}
-                  />
-                </Paper>
-              )
-            })
-          } */}
+          <SessionGraph sessions={meditationSessions} />
         </Grid>
       </Paper>
     </Grid>

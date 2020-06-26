@@ -33,6 +33,7 @@ h4 {
 .title {
   color: var(--darker-purple);
   font-size: 3em;
+  margin-bottom: 15px;
 }
 
 .subtitle {
@@ -46,6 +47,10 @@ h4 {
 .inputField {
   color: var(--middle-purple);
   font-size: 1.5em;
+}
+
+.MuiContainer-root {
+  margin-bottom: 100px;
 }
 
 /* Handles landscape mode on most phones*/

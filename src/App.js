@@ -21,7 +21,7 @@ class App extends React.Component {
         <MuiThemeProvider theme={theme}>
           <Navigation />
           <CssBaseline />
-          <Container maxWidth="lg">
+          <Container maxWidth="md">
             <Switch>
               <Route
                 exact
